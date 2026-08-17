@@ -76,6 +76,13 @@ const SITE_BASE_URL='';
 const REPORT_001_SHARE_TITLE='Reading Cinemas Australia | Strategy Lab';
 const REPORT_001_SHARE_TEXT='An independent commercial strategy review of Reading Cinemas Australia by Akash Joel David.';
 const REPORT_001_CANONICAL_HASH='reading-cinemas';
+const STRATEGY_LAB_SUPABASE_URL='https://vymskmbhgajwigrzwlag.supabase.co';
+const STRATEGY_LAB_SUPABASE_KEY='sb_publishable_JkUqreLkHMOItFWswp6wmg_fjtnP_R8';
+const STRATEGY_LAB_SUPABASE_PROJECT_KEY='reading-cinemas';
+const STRATEGY_LAB_VISITOR_ID_KEY='strategy-lab-supabase-visitor-id';
+const STRATEGY_LAB_LIKED_STATE_KEY='strategy-lab-supabase-reading-cinemas-liked';
+const STRATEGY_LAB_VIEW_SESSION_ID_KEY='strategy-lab-supabase-reading-cinemas-view-session-id';
+const STRATEGY_LAB_VIEW_RECORDED_KEY='strategy-lab-supabase-reading-cinemas-view-recorded';
 function isReport001Key(key){
   return REPORT_PAGES.some(p=>p.key===key);
 }
@@ -331,7 +338,7 @@ function reportAtGlance(info){
 }
 
 function siteFooter(){
-  return '<footer class="footer"><span>&copy; 2026 Akash Joel David &middot; Melbourne, Australia</span><span>All analyses use publicly available information &middot; No insider data &middot; No tracking</span><span class="mono">Strategy Lab</span></footer>';
+  return '<footer class="footer"><span>&copy; 2026 Akash Joel David &middot; Melbourne, Australia</span><span>All analyses use publicly available information &middot; No insider data &middot; Anonymous engagement metrics</span><span class="mono">Strategy Lab</span></footer>';
 }
 
 function reportEngagement(info){
@@ -1777,11 +1784,146 @@ function syncHeroCardHeight(){
   card.style.removeProperty('margin-top');
 }
 
-//  VIEWS 
+//  SHARED ENGAGEMENT VIA SUPABASE
+const strategyLabEngagementState={
+  views:0,
+  likes:0,
+  shares:0,
+  comments:[],
+  liked:false,
+  loaded:false
+};
+let strategyLabEngagementPollStarted=false;
+let strategyLabLikeInFlight=false;
+let strategyLabCommentInFlight=false;
+
+function strategyLabRandomId(){
+  if(window.crypto&&typeof window.crypto.randomUUID==='function')return window.crypto.randomUUID();
+  return 'sl-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2)+'-'+Math.random().toString(36).slice(2);
+}
+
+function strategyLabPersistentVisitorId(){
+  try{
+    let id=localStorage.getItem(STRATEGY_LAB_VISITOR_ID_KEY);
+    if(!id){
+      id=strategyLabRandomId();
+      localStorage.setItem(STRATEGY_LAB_VISITOR_ID_KEY,id);
+    }
+    return id;
+  }catch(error){
+    return strategyLabRandomId();
+  }
+}
+
+function strategyLabSessionViewId(){
+  try{
+    let id=sessionStorage.getItem(STRATEGY_LAB_VIEW_SESSION_ID_KEY);
+    if(!id){
+      id=strategyLabRandomId();
+      sessionStorage.setItem(STRATEGY_LAB_VIEW_SESSION_ID_KEY,id);
+    }
+    return id;
+  }catch(error){
+    return strategyLabRandomId();
+  }
+}
+
+function strategyLabApiHeaders(extra={}){
+  return {
+    apikey:STRATEGY_LAB_SUPABASE_KEY,
+    Authorization:'Bearer '+STRATEGY_LAB_SUPABASE_KEY,
+    ...extra
+  };
+}
+
+async function strategyLabApiRequest(path,options={}){
+  const method=options.method||'GET';
+  const request={
+    method,
+    headers:strategyLabApiHeaders({Accept:'application/json',...(options.headers||{})}),
+    cache:'no-store'
+  };
+  if(Object.prototype.hasOwnProperty.call(options,'body')){
+    request.headers['Content-Type']='application/json';
+    request.body=JSON.stringify(options.body);
+  }
+  const response=await fetch(STRATEGY_LAB_SUPABASE_URL+'/rest/v1/'+path,request);
+  const text=await response.text();
+  if(!response.ok){
+    throw new Error('Supabase request failed ('+response.status+'): '+text);
+  }
+  if(!text)return null;
+  try{return JSON.parse(text);}catch(error){return text;}
+}
+
+function strategyLabRpc(name,body){
+  return strategyLabApiRequest('rpc/'+encodeURIComponent(name),{method:'POST',body});
+}
+
+function strategyLabFormatCommentTime(value){
+  try{
+    return new Intl.DateTimeFormat('en-AU',{
+      day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'
+    }).format(new Date(value));
+  }catch(error){
+    return '';
+  }
+}
+
+function strategyLabCommentFromRow(row){
+  return {
+    name:row&&row.author_name?row.author_name:'Anonymous',
+    text:row&&row.comment_text?row.comment_text:'',
+    time:strategyLabFormatCommentTime(row&&row.created_at)
+  };
+}
+
+function strategyLabStoredLikedState(){
+  try{return localStorage.getItem(STRATEGY_LAB_LIKED_STATE_KEY)==='1';}catch(error){return false;}
+}
+
+function strategyLabStoreLikedState(liked){
+  try{localStorage.setItem(STRATEGY_LAB_LIKED_STATE_KEY,liked?'1':'0');}catch(error){}
+}
+
+async function refreshStrategyLabEngagement(){
+  try{
+    const project=encodeURIComponent(STRATEGY_LAB_SUPABASE_PROJECT_KEY);
+    const [statsRows,commentRows]=await Promise.all([
+      strategyLabApiRequest('engagement_stats?select=views,likes,shares&project_key=eq.'+project+'&limit=1'),
+      strategyLabApiRequest('comments?select=author_name,comment_text,created_at&project_key=eq.'+project+'&is_hidden=eq.false&order=created_at.asc')
+    ]);
+    const stats=Array.isArray(statsRows)&&statsRows[0]?statsRows[0]:{views:0,likes:0,shares:0};
+    strategyLabEngagementState.views=Math.max(0,Number(stats.views)||0);
+    strategyLabEngagementState.likes=Math.max(0,Number(stats.likes)||0);
+    strategyLabEngagementState.shares=Math.max(0,Number(stats.shares)||0);
+    strategyLabEngagementState.comments=Array.isArray(commentRows)?commentRows.map(strategyLabCommentFromRow):[];
+    strategyLabEngagementState.liked=strategyLabStoredLikedState();
+    strategyLabEngagementState.loaded=true;
+    updateStrategyLabEngagementUI();
+    return true;
+  }catch(error){
+    console.warn('Strategy Lab engagement could not be loaded.',error);
+    return false;
+  }
+}
+
+function startStrategyLabEngagementPolling(){
+  if(strategyLabEngagementPollStarted)return;
+  strategyLabEngagementPollStarted=true;
+  window.setInterval(()=>{
+    if(document.visibilityState!=='hidden')refreshStrategyLabEngagement();
+  },20000);
+  document.addEventListener('visibilitychange',()=>{
+    if(document.visibilityState==='visible')refreshStrategyLabEngagement();
+  });
+}
+
+//  VIEWS
 function trackPageView(id){
-  seedReport001Engagement();
   if(isReport001Key(id))countReportViewOnce(READING_CINEMAS_REPORT_ID);
-  updateStrategyLabEngagementUI();
+  refreshStrategyLabEngagement();
+  startStrategyLabEngagementPolling();
 }
 
 function reportStorageKey(reportId,metric){
@@ -1789,84 +1931,95 @@ function reportStorageKey(reportId,metric){
 }
 
 function reportMetricKey(reportId,metric){
-  if(reportId===READING_CINEMAS_REPORT_ID){
-    if(metric==='views')return REPORT_001_VIEWS_KEY;
-    if(metric==='likes')return REPORT_001_LIKES_KEY;
-    if(metric==='shares')return REPORT_001_SHARES_KEY;
-  }
   return reportStorageKey(reportId,metric);
 }
 
 function readReportMetric(reportId,metric){
-  let value=0;
-  try{value=parseInt(localStorage.getItem(reportMetricKey(reportId,metric))||'0',10)||0;}catch(e){}
-  return Math.max(0,value);
+  if(reportId!==READING_CINEMAS_REPORT_ID)return 0;
+  if(metric==='views')return strategyLabEngagementState.views;
+  if(metric==='likes')return strategyLabEngagementState.likes;
+  if(metric==='shares')return strategyLabEngagementState.shares;
+  return 0;
 }
 
 function writeReportMetric(reportId,metric,value){
-  try{localStorage.setItem(reportMetricKey(reportId,metric),String(Math.max(0,value||0)));}catch(e){}
+  if(reportId!==READING_CINEMAS_REPORT_ID)return;
+  const safe=Math.max(0,Number(value)||0);
+  if(metric==='views')strategyLabEngagementState.views=safe;
+  if(metric==='likes')strategyLabEngagementState.likes=safe;
+  if(metric==='shares')strategyLabEngagementState.shares=safe;
 }
 
 function reportCommentsKey(reportId){
-  return reportId===READING_CINEMAS_REPORT_ID?REPORT_001_COMMENTS_KEY:reportStorageKey(reportId,'comments');
+  return reportStorageKey(reportId,'comments');
 }
 
 function reportLikedKey(reportId){
-  return reportId===READING_CINEMAS_REPORT_ID?REPORT_001_LIKED_KEY:reportStorageKey(reportId,'liked');
+  return reportStorageKey(reportId,'liked');
 }
 
 function readReportCommentsById(reportId){
-  try{
-    const raw=localStorage.getItem(reportCommentsKey(reportId));
-    if(raw)return JSON.parse(raw);
-  }catch(e){}
-  return reportId===READING_CINEMAS_REPORT_ID?defaultComments():[];
+  return reportId===READING_CINEMAS_REPORT_ID?strategyLabEngagementState.comments:[];
 }
 
-function countReportViewOnce(reportId){
-  const viewedKey=reportStorageKey(reportId,'viewed-this-session');
-  let shouldCount=true;
+async function countReportViewOnce(reportId){
+  if(reportId!==READING_CINEMAS_REPORT_ID)return;
+  let alreadyRecorded=false;
+  try{alreadyRecorded=sessionStorage.getItem(STRATEGY_LAB_VIEW_RECORDED_KEY)==='1';}catch(error){}
+  if(alreadyRecorded)return;
   try{
-    if(sessionStorage.getItem(viewedKey)==='1')shouldCount=false;
-    else sessionStorage.setItem(viewedKey,'1');
-  }catch(e){
-    try{
-      const now=Date.now();
-      const last=parseInt(localStorage.getItem(reportStorageKey(reportId,'last-viewed-at'))||'0',10)||0;
-      if(now-last<30*60*1000)shouldCount=false;
-      else localStorage.setItem(reportStorageKey(reportId,'last-viewed-at'),String(now));
-    }catch(err){}
+    const result=await strategyLabRpc('record_view',{
+      p_project_key:STRATEGY_LAB_SUPABASE_PROJECT_KEY,
+      p_session_id:strategyLabSessionViewId()
+    });
+    const count=Number(result);
+    if(Number.isFinite(count))strategyLabEngagementState.views=Math.max(0,count);
+    try{sessionStorage.setItem(STRATEGY_LAB_VIEW_RECORDED_KEY,'1');}catch(error){}
+    updateStrategyLabEngagementUI();
+  }catch(error){
+    console.warn('Strategy Lab view could not be recorded.',error);
   }
-  if(shouldCount)writeReportMetric(reportId,'views',readReportMetric(reportId,'views')+1);
 }
 
 function aggregateReportMetric(metric){
-  return STRATEGY_REPORTS.reduce((total,reportId)=>total+readReportMetric(reportId,metric),0);
+  return readReportMetric(READING_CINEMAS_REPORT_ID,metric);
 }
 
 function aggregateReportCommentsCount(){
-  return STRATEGY_REPORTS.reduce((total,reportId)=>total+readReportCommentsById(reportId).length,0);
+  return strategyLabEngagementState.comments.length;
 }
 
-//  LIKES 
-function toggleLike(key){
-  if(!isReport001Key(key))return;
-  let liked=false;try{liked=localStorage.getItem(reportLikedKey(READING_CINEMAS_REPORT_ID))==='1';}catch(e){}
-  liked=!liked;
-  let likes=readReportMetric(READING_CINEMAS_REPORT_ID,'likes');
-  likes=Math.max(0,likes+(liked?1:-1));
+//  LIKES
+async function toggleLike(key){
+  if(!isReport001Key(key)||strategyLabLikeInFlight)return;
+  strategyLabLikeInFlight=true;
   try{
-    localStorage.setItem(reportLikedKey(READING_CINEMAS_REPORT_ID),liked?'1':'0');
-    writeReportMetric(READING_CINEMAS_REPORT_ID,'likes',likes);
-  }catch(e){}
-  updateStrategyLabEngagementUI();
+    const result=await strategyLabRpc('toggle_like',{
+      p_project_key:STRATEGY_LAB_SUPABASE_PROJECT_KEY,
+      p_visitor_id:strategyLabPersistentVisitorId()
+    });
+    const row=Array.isArray(result)?result[0]:result;
+    if(row&&typeof row==='object'){
+      strategyLabEngagementState.liked=!!row.liked;
+      strategyLabEngagementState.likes=Math.max(0,Number(row.like_count)||0);
+      strategyLabStoreLikedState(strategyLabEngagementState.liked);
+      updateStrategyLabEngagementUI();
+    }else{
+      await refreshStrategyLabEngagement();
+    }
+  }catch(error){
+    console.warn('Strategy Lab like could not be updated.',error);
+    showReportToast('Like could not be updated');
+  }finally{
+    strategyLabLikeInFlight=false;
+  }
 }
 
 function updateKPIs(){
   updateStrategyLabEngagementUI();
 }
 
-//  SHARE 
+//  SHARE
 const REPORT_SHARE_CONFIGS={
   [READING_CINEMAS_REPORT_ID]:{
     title:REPORT_001_SHARE_TITLE,
@@ -1879,9 +2032,16 @@ let reportShareInProgress=false;
 let lastReportShareAt=0;
 let activeShareMenu=null;
 
-function incrementReportShare(reportId){
-  writeReportMetric(reportId,'shares',readReportMetric(reportId,'shares')+1);
-  updateStrategyLabEngagementUI();
+async function incrementReportShare(reportId){
+  if(reportId!==READING_CINEMAS_REPORT_ID)return;
+  try{
+    const result=await strategyLabRpc('record_share',{p_project_key:STRATEGY_LAB_SUPABASE_PROJECT_KEY});
+    const count=Number(result);
+    if(Number.isFinite(count))strategyLabEngagementState.shares=Math.max(0,count);
+    updateStrategyLabEngagementUI();
+  }catch(error){
+    console.warn('Strategy Lab share could not be recorded.',error);
+  }
 }
 
 function reportShareConfig(reportId){
@@ -2138,21 +2298,36 @@ function shareReportForKey(key){
   shareReport(READING_CINEMAS_REPORT_ID,key);
 }
 
-//  COMMENTS 
-function postComment(key){
-  if(!isReport001Key(key))return;
+//  COMMENTS
+async function postComment(key){
+  if(!isReport001Key(key)||strategyLabCommentInFlight)return;
   const textEl=document.getElementById('disc-text-'+key);
   const nameEl=document.getElementById('disc-name-'+key);
-  if(!textEl||!textEl.value.trim())return;
+  if(!textEl)return;
   const text=textEl.value.trim();
   const name=(nameEl&&nameEl.value.trim())||'Anonymous';
-  textEl.value='';if(nameEl)nameEl.value='';
-  let comments=readReport001Comments();
-  const c={name,text,time:new Date().toLocaleString('en-AU',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'})};
-  comments.push(c);
-  try{localStorage.setItem(reportCommentsKey(READING_CINEMAS_REPORT_ID),JSON.stringify(comments));}catch(e){}
-  renderReport001Comments(comments);
-  updateStrategyLabEngagementUI();
+  if(!text)return;
+  if(text.length>1000){
+    showReportToast('Comment must be 1000 characters or less');
+    return;
+  }
+  strategyLabCommentInFlight=true;
+  try{
+    await strategyLabRpc('add_comment',{
+      p_project_key:STRATEGY_LAB_SUPABASE_PROJECT_KEY,
+      p_author_name:name,
+      p_comment_text:text
+    });
+    textEl.value='';
+    if(nameEl)nameEl.value='';
+    await refreshStrategyLabEngagement();
+    showReportToast('Comment posted');
+  }catch(error){
+    console.warn('Strategy Lab comment could not be posted.',error);
+    showReportToast('Comment could not be posted');
+  }finally{
+    strategyLabCommentInFlight=false;
+  }
 }
 
 function renderComments(key,comments){
@@ -2170,59 +2345,11 @@ function updateCommentBadges(){
 }
 
 function readReport001Comments(){
-  return readReportCommentsById(READING_CINEMAS_REPORT_ID);
+  return strategyLabEngagementState.comments;
 }
 
-function clearReport001CommentsOnce(){
-  try{
-    if(localStorage.getItem(REPORT_001_COMMENTS_CLEAR_KEY)!=='1'){
-      localStorage.setItem(REPORT_001_COMMENTS_KEY,'[]');
-      localStorage.removeItem('report-001-comments');
-      report001Keys().forEach(k=>localStorage.removeItem('ajd_comments_'+k));
-      localStorage.setItem(REPORT_001_COMMENTS_CLEAR_KEY,'1');
-    }
-  }catch(e){}
-}
-
-function seedReport001Engagement(){
-  clearReport001CommentsOnce();
-  try{
-    if(localStorage.getItem(REPORT_001_VIEWS_KEY)===null){
-      let total=parseInt(localStorage.getItem('ajd_views')||'0',10)||0;
-      let pageTotal=0;
-      report001Keys().forEach(k=>{pageTotal+=parseInt(localStorage.getItem('ajd_pv_'+k)||'0',10)||0;});
-      localStorage.setItem(REPORT_001_VIEWS_KEY,String(Math.max(total,pageTotal,0)));
-    }
-    if(localStorage.getItem(REPORT_001_COMMENTS_KEY)===null){
-      let comments=[];
-      try{
-        const oldShared=localStorage.getItem('report-001-comments');
-        if(oldShared)comments=comments.concat(JSON.parse(oldShared));
-      }catch(e){}
-      report001Keys().forEach(k=>{
-        try{
-          const raw=localStorage.getItem('ajd_comments_'+k);
-          if(raw)comments=comments.concat(JSON.parse(raw));
-        }catch(e){}
-      });
-      if(!comments.length)comments=defaultComments();
-      localStorage.setItem(REPORT_001_COMMENTS_KEY,JSON.stringify(comments));
-    }
-    if(localStorage.getItem(REPORT_001_LIKES_KEY)===null){
-      const oldLiked=localStorage.getItem('report-001-liked')==='1';
-      const liked=oldLiked||report001Keys().some(k=>localStorage.getItem('ajd_like_'+k)==='1');
-      const oldLikes=parseInt(localStorage.getItem('report-001-likes')||'0',10)||0;
-      localStorage.setItem(REPORT_001_LIKED_KEY,liked?'1':'0');
-      writeReportMetric(READING_CINEMAS_REPORT_ID,'likes',Math.max(oldLikes,liked?1:0));
-    }
-    if(localStorage.getItem(REPORT_001_SHARES_KEY)===null){
-      const oldShared=parseInt(localStorage.getItem('report-001-shares')||'0',10)||0;
-      let pageTotal=0;
-      report001Keys().forEach(k=>{pageTotal+=parseInt(localStorage.getItem('ajd_shares_'+k)||'0',10)||0;});
-      writeReportMetric(READING_CINEMAS_REPORT_ID,'shares',Math.max(oldShared,pageTotal));
-    }
-  }catch(e){}
-}
+function clearReport001CommentsOnce(){}
+function seedReport001Engagement(){}
 
 function escapeHTML(value){
   return String(value||'').replace(/[&<>"']/g, ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
@@ -2233,24 +2360,22 @@ function renderReport001Comments(comments){
 }
 
 function updateReport001EngagementUI(){
-  seedReport001Engagement();
-  let liked=false,comments=[];
-  try{liked=localStorage.getItem(reportLikedKey(READING_CINEMAS_REPORT_ID))==='1';}catch(e){}
-  const views=readReportMetric(READING_CINEMAS_REPORT_ID,'views');
-  const likes=readReportMetric(READING_CINEMAS_REPORT_ID,'likes');
-  const shares=readReportMetric(READING_CINEMAS_REPORT_ID,'shares');
-  comments=readReport001Comments();
+  const liked=strategyLabEngagementState.liked;
+  const views=strategyLabEngagementState.views;
+  const likes=strategyLabEngagementState.likes;
+  const shares=strategyLabEngagementState.shares;
+  const comments=strategyLabEngagementState.comments;
   report001Keys().forEach(k=>{
     const viewCount=document.getElementById('views-'+k);
     if(viewCount)viewCount.textContent=views.toLocaleString();
     const btn=document.getElementById('like-'+k);
     if(btn)btn.classList.toggle('liked',liked);
     const likeCount=document.getElementById('like-count-'+k);
-    if(likeCount)likeCount.textContent=likes;
+    if(likeCount)likeCount.textContent=likes.toLocaleString();
     const shareCount=document.getElementById('share-count-'+k);
-    if(shareCount)shareCount.textContent=shares;
+    if(shareCount)shareCount.textContent=shares.toLocaleString();
     const commentCount=document.getElementById('comment-count-'+k);
-    if(commentCount)commentCount.textContent=comments.length;
+    if(commentCount)commentCount.textContent=comments.length.toLocaleString();
     const discCount=document.getElementById('disc-count-'+k);
     if(discCount)discCount.textContent='('+comments.length+' comment'+(comments.length!==1?'s':'')+')';
   });
@@ -2258,7 +2383,6 @@ function updateReport001EngagementUI(){
 }
 
 function updateStrategyLabEngagementUI(){
-  seedReport001Engagement();
   updateReport001EngagementUI();
   const totalViews=aggregateReportMetric('views');
   const totalLikes=aggregateReportMetric('likes');
@@ -3766,18 +3890,11 @@ function readingPreviewBindControls(){
 
 //  RESTORE ON LOAD 
 function restoreAll(){
-  seedReport001Engagement();
-  const keys=REPORT_PAGES.map(p=>p.key);
-  const sharedComments=readReport001Comments();
-  keys.forEach(k=>{
-    renderComments(k,sharedComments);
-    let pv=0;try{pv=parseInt(localStorage.getItem('ajd_pv_'+k)||'0',10);}catch(e){}
-    const vel=document.getElementById('views-'+k);if(vel)vel.textContent=pv;
-  });
-  updateReport001EngagementUI();
-  let v=0;try{v=parseInt(localStorage.getItem('ajd_views')||'0',10);}catch(e){}
-  const kpiViews=document.getElementById('kpi-views');if(kpiViews)kpiViews.textContent=v.toLocaleString();
-  const heroViews=document.getElementById('hero-views');if(heroViews)heroViews.textContent='217';
+  strategyLabEngagementState.liked=strategyLabStoredLikedState();
+  renderReport001Comments([]);
+  updateStrategyLabEngagementUI();
+  refreshStrategyLabEngagement();
+  startStrategyLabEngagementPolling();
 }
 
 normalizeReportPages();
