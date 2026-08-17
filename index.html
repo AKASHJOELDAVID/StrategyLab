@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Strategy Lab | Akash Joel David</title>
+<link rel="stylesheet" href="./css/styles.css"/>
+</head>
+<body>
+<div class="page active" id="page-home">
+<nav class="nav">
+<div class="nav-brand">
+<div class="nav-mark" onclick="goHome()">AJD</div><div class="nav-name" onclick="goHome()">Strategy Lab</div><div class="nav-sub">Independent Strategy Reviews</div>
+</div>
+<div class="nav-links">
+<a href="#" onclick="scrollHomeTo('home-reports');return false;">Reports</a>
+<a href="#" onclick="scrollHomeTo('home-about');return false;">About</a>
+</div>
+</nav>
+<section class="hero">
+<div class="hero-eyebrow">Independent Strategy Reviews</div>
+<div class="hero-aligned-row">
+<div class="hero-main">
+<h1 class="hero-headline">Strategic recommendations for real companies, built from public information.</h1>
+<p class="hero-deck">Each report identifies revenue and growth opportunities through structured analysis of operations, competitive position, and market context. The findings are then developed into practical recommendations and ideas worth exploring.</p>
+<div class="hero-actions">
+<button class="btn-primary" onclick="openReadingResearch()">Read latest report →</button>
+<button class="btn-secondary" onclick="scrollHomeTo('home-about')">About this project</button>
+</div>
+</div>
+<div class="featured-card">
+<div class="featured-card-header"><span class="label">Latest · 16 August 2026</span><span class="badge-new">NEW</span></div>
+<div class="featured-title">Reading Cinemas Australia</div>
+<div class="featured-deck">From idle capacity to revenue growth. 9 initiatives and a 36-month roadmap.</div>
+<div class="tags-row"><span class="tag">Pricing</span><span class="tag">Yield</span><span class="tag">Experience</span><span class="tag">Expansion</span><span class="tag">Innovation</span></div>
+<div class="featured-visual">
+<img alt="Reading Cinemas strategy report visual" class="featurette-image" src="./reading-cinemas/AJD_StrategyLab_assets/reading-cinemas-featurette.png"/>
+<img alt="Reading Cinemas" class="featured-logo" src="assets/reading-cinemas-logo.png"/>
+</div>
+<div class="card-footer">
+<div class="card-stat"><span class="card-stat-icon">♥</span><span id="hero-likes">0</span></div>
+<div class="card-stat"><span class="card-stat-icon comment-icon">💬</span><span id="hero-comments">1</span></div>
+<div class="card-stat"><span class="card-stat-icon eye-icon">👁</span><span id="hero-views">217</span></div>
+<button class="btn-open" onclick="openReadingResearch()">View research →</button>
+</div>
+</div>
+</div>
+</section>
+<div class="kpi-strip">
+<div class="kpi-cell"><div class="kpi-label">Reports Published</div><div class="kpi-value">1</div><div class="kpi-sub green">more research coming</div></div>
+<div class="kpi-cell"><div class="kpi-label">Total Page Views</div><div class="kpi-value" id="kpi-views">0</div><div class="kpi-sub">across all reports</div></div>
+<div class="kpi-cell"><div class="kpi-label">Total Likes</div><div class="kpi-value" id="kpi-likes">0</div><div class="kpi-sub">across all reports</div></div>
+<div class="kpi-cell"><div class="kpi-label">Total Shares</div><div class="kpi-value" id="kpi-shares">0</div><div class="kpi-sub">across all reports</div></div>
+</div>
+<div class="reports-head" id="home-reports">
+<div><div class="reports-title">All Reports</div><div class="reports-sub">Sorted by publication date. Most recent first.</div></div>
+</div>
+<div class="table-wrap">
+<div class="table-header">
+<div class="label">No.</div><div class="label">Company and Summary</div><div class="label">Sector</div><div class="label">Date</div><div class="label">Explore</div>
+</div>
+<div class="table-row">
+<div class="table-number">001</div>
+<div class="table-company">
+<div class="table-name">Reading Cinemas Australia</div>
+<div class="table-desc">From idle capacity to revenue growth. 9 initiatives across pricing, experience and audience growth. Strategy report, research, innovation concepts, product designs, and marketing creative.</div>
+<div class="table-tags"><span class="tag">Pricing</span><span class="tag">Yield</span><span class="tag">Experience</span><span class="tag">Expansion</span><span class="tag">Innovation</span></div>
+</div>
+<div class="table-sector"><div class="sector-name">Cinema</div><div class="sector-sub">Entertainment</div><div class="sector-sub">Australia</div></div>
+<div class="table-date">16 August 2026</div>
+<div class="table-files"><button class="file-btn file-btn-open" onclick="openReadingResearch()">View research →</button></div>
+</div>
+<div class="table-placeholder"><span>MORE REPORTS WILL BE ADDED AS NEW RESEARCH IS PUBLISHED</span></div>
+</div>
+<div class="about-strip" id="home-about">
+<div class="about-block">
+<div class="about-analyst-label">ABOUT THE ANALYST</div>
+<div class="about-name">Akash Joel David</div>
+<div class="about-role">Business Analyst · Melbourne, VIC</div>
+<p class="about-bio">I’m a Business Analyst who likes taking a problem, pulling it apart and working out what could be done better. A lot of my work sits across strategy, research, data and technology, but the part I enjoy most is turning an observation or problem into something practical.</p>
+<p class="about-bio">Strategy Lab is also a way for me to put that thinking into practice on companies and industries I find interesting.</p>
+<div class="about-links">
+<a class="about-link email-link" href="mailto:akashjoeldavid@gmail.com">akashjoeldavid@gmail.com</a>
+<a aria-label="Call Akash Joel David" class="about-link phone-link" href="tel:+61493785745">+61 493 785 745</a>
+<a class="about-link highlight" href="https://www.linkedin.com/in/akash-joel-david/" target="_blank">LinkedIn ↗</a>
+<a class="about-link highlight" href="https://akashjoeldavid.github.io/Portfolio/" target="_blank">Portfolio ↗</a>
+</div>
+</div>
+<div class="about-block">
+<div class="about-project-label">ABOUT THIS PROJECT</div>
+<p class="about-project-text">Strategy Lab started from something I already tend to do: notice a business, wonder why something works the way it does, and then start digging into it. For each project, I pick a real company and look at what I can learn from publicly available information, including the business, its customers, competitors and the wider market.</p>
+<p class="about-project-text">The goal is to work through where there could be an opportunity to improve something, grow revenue or try something new. I don’t have access to the company’s internal data, so these are not final answers; they are an outside view of what I think could be worth exploring, supported by the research I can access.</p>
+<div class="about-expansion">
+<div class="about-expansion-label">HOW IT WORKS</div>
+<div class="how-steps">
+<div class="how-step">
+<div class="how-step-title"><span>01</span> — UNDERSTAND</div>
+<p>I start by understanding the business, its customers, competitors and what’s happening around it.</p>
+</div>
+<div class="how-step">
+<div class="how-step-title"><span>02</span> — FIND</div>
+<p>Then I look for where there could be an opportunity to improve something, grow revenue or do something differently.</p>
+</div>
+<div class="how-step">
+<div class="how-step-title"><span>03</span> — DEVELOP</div>
+<p>From there, I work the findings into recommendations and, where it makes sense, concepts or prototypes.</p>
+</div>
+</div>
+</div>
+<div class="about-expansion">
+<div class="about-expansion-label">WHAT IT CAN BECOME</div>
+<div class="become-grid">
+<div class="become-card">
+<div class="become-card-title">STRATEGY REPORTS</div>
+<p>The full thinking, research and recommendations behind the project.</p>
+</div>
+<div class="become-card">
+<div class="become-card-title">SUPPORTING RESEARCH</div>
+<p>A deeper look at a customer, market or opportunity when it needs more digging.</p>
+</div>
+<div class="become-card">
+<div class="become-card-title">PRODUCT CONCEPTS</div>
+<p>Ideas that show what a recommendation could actually look like in practice.</p>
+</div>
+<div class="become-card">
+<div class="become-card-title">PROTOTYPES</div>
+<p>A more tangible version of an idea so it can be seen, clicked through or understood properly.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<footer class="footer">
+<span>© 2026 Akash Joel David · Melbourne, Australia</span>
+<span>All analyses use publicly available information · No insider data · No tracking</span>
+<span class="mono">Strategy Lab</span>
+</footer>
+</div>
+<script src="./js/home.js"></script>
+</body>
+</html>
