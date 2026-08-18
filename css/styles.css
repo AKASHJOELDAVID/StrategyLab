@@ -5695,7 +5695,49 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     border-bottom: none;
   }
   .nav-sub { display: none; }
-  .hero-headline { font-size: 28px; }
+  .hero-headline { font-size: 32px; }
+   .hero-deck {
+  font-size: 17px;
+  line-height: 1.6;
+}
+   .reports-title {
+  font-size: 24px;
+}
+
+.reports-sub {
+  font-size: 15px;
+  line-height: 1.5;
+}
+   .about-project-label,
+.about-analyst-label,
+.about-expansion-label {
+  font-size: 16px;
+}
+
+.about-project-text,
+.about-bio {
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.about-name {
+  font-size: 24px;
+}
+
+.about-role {
+  font-size: 15px;
+}
+
+.how-step-title,
+.become-card-title {
+  font-size: 16px;
+}
+
+.how-step p,
+.become-card p {
+  font-size: 16px;
+  line-height: 1.6;
+}
 }
 
 
@@ -6688,6 +6730,10 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   #page-home .table-row {
     grid-template-columns: 44px minmax(0, 1fr);
   }
+  #page-home .table-header + .table-row {
+  border-top: 1px solid var(--line);
+  border-radius: 6px 6px 0 0;
+}
   #page-home .table-number {
     grid-row: 1 / span 5;
   }
