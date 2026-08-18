@@ -1,13 +1,15 @@
 name: Apply overview mobile typography
 
 on:
-  push:
+  issues:
+    types: [opened]
 
 permissions:
   contents: write
 
 jobs:
   patch-styles:
+    if: github.event.issue.title == '[automation] Apply overview mobile typography'
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
