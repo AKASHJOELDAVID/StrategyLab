@@ -1,5 +1,5 @@
 const REPORT_PAGES=[
-  {id:'rc-main',key:'rcmain',nav:'Overview',title:'Reading Cinemas Australia',deck:'An independent commercial strategy review covering nine strategic initiatives, original research and eight innovation concepts, with selected ideas developed further into product experiences and a digital magazine, alongside original marketing creative. All work was developed from publicly available information.',action:'Explore deliverables &darr;',target:'overview-deliverables'},
+  {id:'rc-main',key:'rcmain',nav:'Overview',title:'Reading Cinemas Australia',deck:'An independent commercial strategy review covering nine strategic initiatives, original research and eight innovation concepts, with selected ideas developed further into product experiences and a digital magazine, alongside original marketing creative. <span class="overview-deck-desktop-extra"> All work was developed from publicly available information.</span>',action:'Explore deliverables &darr;',target:'overview-deliverables'},
   {id:'strategy-report',key:'sr',nav:'01 Strategy Report',title:'Strategy Report: From Idle Capacity to Revenue Growth',deck:'A commercial strategy for Reading Cinemas Australia focused on improving utilisation, growing revenue from existing assets, strengthening customer habits and building a more effective digital and local cinema experience.',action:'View report &darr;',target:'strategy-full-report'},
   {id:'presentation',key:'pres',nav:'02 Presentation',title:'Presentation: From Idle Capacity to Revenue Growth',deck:'An executive presentation summarising the Reading Cinemas commercial case, nine strategic initiatives, implementation roadmap, key risks and directional commercial impact.',action:'View presentation &darr;',target:'presentation-full-deck'},
   {id:'evidence-review',key:'ev',nav:'03 Evidence Review',title:'Evidence Review: Cinema Revenue Growth, Utilisation and Customer Behaviour',deck:'A review of industry evidence, academic research and customer behaviour studies behind the commercial opportunities explored in the Reading Cinemas strategy.',action:'View review &darr;',target:'evidence-full-review'},
@@ -487,7 +487,7 @@ window.addEventListener('resize',()=>{
 });
 
 function discussionBlock(key){
-  return '<div class="comments-section" id="disc-'+key+'"><div class="comments-header"><div class="comments-title">Discussion <span id="disc-count-'+key+'">(0 comments)</span></div><div class="comments-anon">ANONYMOUS &middot; NO ACCOUNT NEEDED</div></div><div class="comment-form"><textarea id="disc-text-'+key+'" class="comment-textarea" placeholder="Share your thoughts on this report..."></textarea><div class="comment-form-row"><input id="disc-name-'+key+'" class="comment-name-input" placeholder="Name or initials (optional)"><button class="comment-submit" onclick="postComment(\''+key+'\')">Post comment &rarr;</button></div></div><div id="disc-list-'+key+'" class="comments-list"></div></div>';
+  return '<div class="comments-section" id="disc-'+key+'"><div class="comments-header"><div class="comments-title">Discussion <span id="disc-count-'+key+'">(0 comments)</span></div></div><div class="comment-form"><textarea id="disc-text-'+key+'" class="comment-textarea" placeholder="Share your thoughts on this report..."></textarea><div class="comment-form-row"><input id="disc-name-'+key+'" class="comment-name-input" placeholder="Name or initials (optional)"><button class="comment-submit" onclick="postComment(\''+key+'\')">Post comment &rarr;</button></div></div><div id="disc-list-'+key+'" class="comments-list"></div></div>';
 }
 
 function readingPulseProductContent(){
@@ -787,7 +787,107 @@ function deliverableCards(){
 }
 
 function overviewContent(){
-  return '<div class="overview-editorial"><div class="overview-section overview-first"><h2>About This Project</h2><p>Being a cinephile, I&rsquo;ve always felt there is so much more that cinema businesses in Australia could be doing. That curiosity led me to Reading Cinemas. The more I looked into the business, the more potential I saw in the brand and in how it could compete more strongly with larger players such as Hoyts and Village Cinemas.</p><p>I began by looking at the commercial side of the cinema experience, including quieter sessions, weekday demand, food and beverage, booking, programming and the audiences around each location. From there, the project expanded into research, innovation concepts, product ideas, audience tools, content and marketing.</p><p>What started as a strategy exercise became a broader exploration of how Reading Cinemas could make better use of its existing assets, improve the customer experience and test new ways to build demand, engagement and revenue.</p></div><div class="overview-section"><h2>The Research Behind It</h2><p>I wanted the recommendations to be grounded in more than ideas, so I also looked at the evidence behind the areas I was focusing on.</p><p><strong>The Evidence Review</strong> looks at cinema utilisation, weekday attendance, food and beverage, booking friction and local audience development.</p><p><strong>The Demographic Research</strong> then goes deeper into Reading Cinemas&rsquo; nine Victorian locations using Census data to understand how the audience around each cinema differs. That highlighted different opportunities for multicultural, language-based, family, mainstream and local programming depending on the location.</p><p><strong>The Movie Research</strong> takes that one step further and looks at films that could be worth testing between July and December 2026, including where they may fit, the audience they could appeal to and how they could be programmed or promoted.</p></div><div class="overview-section"><h2>From Research Into Ideas</h2><p>Once I had worked through the research, I wanted to see what some of the opportunities could actually become. That led to a broader set of innovation concepts around movie discovery, audience intelligence, programming, accessibility, customer engagement and the cinema experience.</p><p>Some of those ideas stayed as concepts, while others were developed further into more detailed product ideas and working prototypes.</p></div><div class="overview-section"><h2>Products and Experiences</h2><p>Four of the ideas are explored in more detail as individual products.</p><p><strong>Reelio</strong> is an AI cinema concierge for helping customers decide what to watch, find suitable sessions and move into the existing Reading Cinemas booking journey.</p><p><strong>Audience Pulse</strong> is a quick in-cinema voting experience that gives Reading Cinemas another signal of customer interest in upcoming films.</p><p><strong>Reading Pulse</strong> is an internal film-intelligence platform for discovering theatrical releases, assessing audience fit and supporting programming decisions.</p><p><strong>PosterScan</strong> is a QR-based experience that turns physical movie posters into interactive paths to trailers, film information, sessions and booking.</p></div><div class="overview-section"><h2>Content and Marketing</h2><p>The project also explores different ways Reading Cinemas could stay visible and communicate with audiences beyond the booking journey.</p><p><strong>The Reading Preview</strong> is a monthly digital cinema magazine built around upcoming releases, international and cultural films, cinema experiences, rewards and other content that could give customers another reason to stay connected with the brand between visits.</p><p><strong>Marketing Ads</strong> takes selected recommendations from the strategy and turns them into campaign ideas, including weekday pricing, online booking and broader Reading Cinemas brand messaging.</p></div><div class="overview-section" id="overview-deliverables"><h2>Explore All Deliverables</h2><p>The project is split into twelve sections. Each one looks at a different part of the work, from the original strategy through to research, products and creative concepts.</p><div class="deliverable-grid">'+deliverableCards()+'</div></div></div>';
+  return `
+    <style>
+      .overview-mobile-only {
+        display: none;
+      }
+
+      @media (max-width: 1040px) {
+        .overview-desktop-only {
+          display: none !important;
+        }
+
+        .overview-mobile-only {
+          display: block;
+        }
+        .overview-deck-desktop-extra {
+  display: none;
+}
+      }
+    </style>
+
+    <div class="overview-editorial">
+
+      <div class="overview-section overview-first overview-desktop-only">
+        <h2>About This Project</h2>
+        <p>Being a cinephile, I&rsquo;ve always felt there is so much more that cinema businesses in Australia could be doing. That curiosity led me to Reading Cinemas. The more I looked into the business, the more potential I saw in the brand and in how it could compete more strongly with larger players such as Hoyts and Village Cinemas.</p>
+        <p>I began by looking at the commercial side of the cinema experience, including quieter sessions, weekday demand, food and beverage, booking, programming and the audiences around each location. From there, the project expanded into research, innovation concepts, product ideas, audience tools, content and marketing.</p>
+        <p>What started as a strategy exercise became a broader exploration of how Reading Cinemas could make better use of its existing assets, improve the customer experience and test new ways to build demand, engagement and revenue.</p>
+      </div>
+
+      <div class="overview-section overview-desktop-only">
+        <h2>The Research Behind It</h2>
+        <p>I wanted the recommendations to be grounded in more than ideas, so I also looked at the evidence behind the areas I was focusing on.</p>
+        <p><strong>The Evidence Review</strong> looks at cinema utilisation, weekday attendance, food and beverage, booking friction and local audience development.</p>
+        <p><strong>The Demographic Research</strong> then goes deeper into Reading Cinemas&rsquo; nine Victorian locations using Census data to understand how the audience around each cinema differs. That highlighted different opportunities for multicultural, language-based, family, mainstream and local programming depending on the location.</p>
+        <p><strong>The Movie Research</strong> takes that one step further and looks at films that could be worth testing between July and December 2026, including where they may fit, the audience they could appeal to and how they could be programmed or promoted.</p>
+      </div>
+
+      <div class="overview-section overview-desktop-only">
+        <h2>From Research Into Ideas</h2>
+        <p>Once I had worked through the research, I wanted to see what some of the opportunities could actually become. That led to a broader set of innovation concepts around movie discovery, audience intelligence, programming, accessibility, customer engagement and the cinema experience.</p>
+        <p>Some of those ideas stayed as concepts, while others were developed further into more detailed product ideas and working prototypes.</p>
+      </div>
+
+      <div class="overview-section overview-desktop-only">
+        <h2>Products and Experiences</h2>
+        <p>Four of the ideas are explored in more detail as individual products.</p>
+        <p><strong>Reelio</strong> is an AI cinema concierge for helping customers decide what to watch, find suitable sessions and move into the existing Reading Cinemas booking journey.</p>
+        <p><strong>Audience Pulse</strong> is a quick in-cinema voting experience that gives Reading Cinemas another signal of customer interest in upcoming films.</p>
+        <p><strong>Reading Pulse</strong> is an internal film-intelligence platform for discovering theatrical releases, assessing audience fit and supporting programming decisions.</p>
+        <p><strong>PosterScan</strong> is a QR-based experience that turns physical movie posters into interactive paths to trailers, film information, sessions and booking.</p>
+      </div>
+
+      <div class="overview-section overview-desktop-only">
+        <h2>Content and Marketing</h2>
+        <p>The project also explores different ways Reading Cinemas could stay visible and communicate with audiences beyond the booking journey.</p>
+        <p><strong>The Reading Preview</strong> is a monthly digital cinema magazine built around upcoming releases, international and cultural films, cinema experiences, rewards and other content that could give customers another reason to stay connected with the brand between visits.</p>
+        <p><strong>Marketing Ads</strong> takes selected recommendations from the strategy and turns them into campaign ideas, including weekday pricing, online booking and broader Reading Cinemas brand messaging.</p>
+      </div>
+
+
+      <div class="overview-section overview-first overview-mobile-only">
+        <h2>About This Project</h2>
+
+        <p>Being a cinephile, I&rsquo;ve always felt there is so much more that cinema businesses in Australia could be doing. That curiosity led me to Reading Cinemas. The more I looked into the business, the more potential I saw in the brand and in how it could compete more strongly with larger players such as Hoyts and Village Cinemas.</p>
+
+        <p>I began by looking at the commercial side of the cinema experience, including quieter sessions, weekday demand, food and beverage, booking and programming. From there, the project grew into research, innovation concepts, product ideas, audience tools, content and marketing.</p>
+      </div>
+
+      <div class="overview-section overview-mobile-only">
+        <h2>The Research Behind It</h2>
+
+        <p>I wanted the recommendations to be grounded in more than ideas, so I looked at the evidence behind the areas I was focusing on, the audiences around Reading Cinemas&rsquo; Victorian locations and the films that could be worth testing. This helped me understand where the opportunities were strongest and where different locations or audiences might need a different approach.</p>
+      </div>
+
+      <div class="overview-section overview-mobile-only">
+        <h2>From Research Into Ideas</h2>
+
+        <p>Once I had worked through the research, I wanted to see what some of the opportunities could actually become. That led to a broader set of innovation concepts around movie discovery, audience intelligence, programming, accessibility, customer engagement and the cinema experience, with some ideas developed further into working product concepts.</p>
+      </div>
+
+      <div class="overview-section overview-mobile-only">
+        <h2>Products and Experiences</h2>
+
+        <p>From those concepts, I took selected ideas further and developed them into more tangible product experiences. The aim was to show how parts of the strategy could move beyond recommendations and become something customers or internal teams could actually use.</p>
+      </div>
+
+      <div class="overview-section overview-mobile-only">
+        <h2>Content and Marketing</h2>
+
+        <p>The project also moved into content and marketing, looking at how Reading Cinemas could stay visible and connected with audiences beyond the booking journey. This included ideas around ongoing cinema content, customer engagement and campaigns tied back to the wider strategy.</p>
+      </div>
+
+
+      <div class="overview-section" id="overview-deliverables">
+        <h2>Explore All Deliverables</h2>
+        <p>The project is split into twelve sections. Each one looks at a different part of the work, from the original strategy through to research, products and creative concepts.</p>
+        <div class="deliverable-grid">${deliverableCards()}</div>
+      </div>
+
+    </div>
+  `;
 }
 
 function strategyReportContent(){
