@@ -1,16 +1,35 @@
 @import url('./styles-base.css');
 
+/* Homepage About: tighten the large vertical gaps on all viewport sizes. */
+#page-home #home-about .about-bio,
+#page-home #home-about .about-project-text {
+  margin-bottom: 14px;
+}
+
+#page-home #home-about .about-expansion,
+#page-home #home-about .about-project-text + .about-expansion {
+  margin-top: 14px;
+}
+
+#page-home #home-about .about-expansion-label {
+  margin-bottom: 16px;
+}
+
+#page-home #home-about .about-links {
+  margin-top: 14px;
+}
+
 /* Reading Cinemas Overview: phone typography only. */
 @media (max-width: 520px) {
   #page-rc-main .overview-section h2 {
-    font-size: 20px;
-    line-height: 1.3;
+    font-size: 22px;
+    line-height: 1.25;
     letter-spacing: .08em;
     margin-bottom: 12px;
   }
 
   #page-rc-main .overview-section p {
     font-size: 17px;
-    line-height: 1.65;
+    line-height: 1.6;
   }
 }
