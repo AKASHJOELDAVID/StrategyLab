@@ -2,8 +2,6 @@ name: Apply overview mobile typography
 
 on:
   push:
-    paths:
-      - '.github/workflows/apply-overview-mobile-typography.yml'
 
 permissions:
   contents: write
