@@ -3,20 +3,20 @@
 /* Homepage About: keep the section compact while leaving a small amount of breathing room. */
 #page-home #home-about .about-bio,
 #page-home #home-about .about-project-text {
-  margin-bottom: 18px;
+  margin-bottom: 22px;
 }
 
 #page-home #home-about .about-expansion,
 #page-home #home-about .about-project-text + .about-expansion {
-  margin-top: 18px;
+  margin-top: 22px;
 }
 
 #page-home #home-about .about-expansion-label {
-  margin-bottom: 18px;
+  margin-bottom: 22px;
 }
 
 #page-home #home-about .about-links {
-  margin-top: 18px;
+  margin-top: 22px;
 }
 
 /* Reading Cinemas Overview: phone typography only. */
