@@ -1,22 +1,27 @@
 @import url('./styles-base.css');
 
-/* Homepage About: keep the section compact while leaving a small amount of breathing room. */
+/* Homepage About: keep the visible spacing around 22px without stacking margins. */
 #page-home #home-about .about-bio,
 #page-home #home-about .about-project-text {
   margin-bottom: 22px;
 }
 
-#page-home #home-about .about-expansion,
-#page-home #home-about .about-project-text + .about-expansion {
+#page-home #home-about .about-expansion {
   margin-top: 22px;
+}
+
+/* The paragraph already supplies the 22px gap, so do not add another 22px above HOW IT WORKS. */
+#page-home #home-about .about-project-text + .about-expansion {
+  margin-top: 0;
 }
 
 #page-home #home-about .about-expansion-label {
   margin-bottom: 22px;
 }
 
+/* The final bio paragraph already supplies the gap before the contact links. */
 #page-home #home-about .about-links {
-  margin-top: 22px;
+  margin-top: 0;
 }
 
 /* Reading Cinemas Overview: phone typography only. */
