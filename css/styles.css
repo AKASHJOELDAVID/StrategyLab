@@ -255,6 +255,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   border-radius: 4px;
   overflow: hidden;
   height: clamp(114px, calc(230px - 6vw), 145px);
+   background: #1f1f1f;
 }
 .featured-visual img.featurette-image {
   width: 100%;
