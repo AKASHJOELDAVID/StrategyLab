@@ -56,3 +56,25 @@
   line-height: 1.55 !important;
 }
 }
+
+/* Homepage: mobile card and KPI typography */
+@media (max-width: 768px) {
+
+  #page-home .featured-deck {
+    font-size: 15px !important;
+    line-height: 1.5 !important;
+  }
+
+  #page-home .table-desc {
+    font-size: 16px !important;
+    line-height: 1.55 !important;
+  }
+
+  #page-home .kpi-label {
+    font-size: 11px !important;
+  }
+
+  #page-home .kpi-sub {
+    font-size: 11px !important;
+  }
+}
