@@ -60,3 +60,54 @@ html.viewer-true-mobile #page-demographic .demographic-insight-card:nth-child(6)
 html.viewer-true-mobile #page-demographic .demographic-insight-card:nth-child(7) .demographic-insight-main::after{content:"Keep mainstream and family programming central while selectively testing South Asian and other community releases."}
 html.viewer-true-mobile #page-demographic .demographic-insight-card:nth-child(8) .demographic-insight-main::after{content:"Prioritise mainstream, family, Australian and mature-audience programming, with international releases tested selectively."}
 html.viewer-true-mobile #page-demographic .demographic-insight-card:nth-child(9) .demographic-insight-main::after{content:"Mainstream and family releases remain central, with youth, event cinema and selected international programming adding variety."}
+
+/* Movie Research: true-mobile content trim only. Desktop and split-screen stay unchanged. */
+html.viewer-true-mobile #page-movie-research .movie-research-summary>.demographic-summary>.demographic-section:first-child>.body-para{display:none!important}
+html.viewer-true-mobile #page-movie-research .movie-research-summary>.demographic-summary>.demographic-section:first-child>.section-label::after{
+content:"The research reviews selected film releases from July to December 2026 and identifies titles worth testing across Reading Cinemas’ nine Victorian locations, considering release timing, country, language, audience fit and local demographics. It is a planning guide rather than a fixed schedule, focused on additional programming opportunities beyond major releases already scheduled by Reading Cinemas and on where selected sessions, targeted promotion and local audience testing may be worthwhile.";
+display:block!important;
+margin-top:12px!important;
+font-family:var(--serif)!important;
+font-size:17px!important;
+line-height:1.6!important;
+font-weight:400!important;
+font-style:normal!important;
+letter-spacing:normal!important;
+text-transform:none!important;
+color:var(--ink)!important
+}
+
+/* Remove methodology and the final usage guidance on true mobile. */
+html.viewer-true-mobile #page-movie-research .movie-research-summary>.movie-research-section:nth-of-type(1),
+html.viewer-true-mobile #page-movie-research .movie-research-summary>.movie-research-section:nth-of-type(4){display:none!important}
+
+/* Keep the July-December cards, but remove the duplicate overview table. */
+html.viewer-true-mobile #page-movie-research .movie-overview-table{display:none!important}
+
+/* Shorter month summaries for mobile. */
+html.viewer-true-mobile #page-movie-research .movie-month-card .movie-card-copy,
+html.viewer-true-mobile #page-movie-research .movie-pattern-card .movie-card-copy{
+font-size:0!important;
+line-height:0!important
+}
+html.viewer-true-mobile #page-movie-research .movie-month-card .movie-card-copy::after,
+html.viewer-true-mobile #page-movie-research .movie-pattern-card .movie-card-copy::after{
+display:block!important;
+font-family:var(--sans)!important;
+font-size:16px!important;
+line-height:1.55!important;
+font-weight:400!important;
+color:var(--ink-soft)!important
+}
+html.viewer-true-mobile #page-movie-research .movie-month-card:nth-child(1) .movie-card-copy::after{content:"The broadest month, with language cinema, international drama, anime and event titles, plus strong South Asian opportunities at Dandenong, Epping and Millers Junction."}
+html.viewer-true-mobile #page-movie-research .movie-month-card:nth-child(2) .movie-card-copy::after{content:"Horror, thrillers and Hindi drama lead August, with South Asian opportunities strongest at Dandenong, Epping and Melton."}
+html.viewer-true-mobile #page-movie-research .movie-month-card:nth-child(3) .movie-card-copy::after{content:"A varied month spanning Australian, Korean and South Asian cinema, supporting both mainstream-adjacent and targeted community tests."}
+html.viewer-true-mobile #page-movie-research .movie-month-card:nth-child(4) .movie-card-copy::after{content:"Halloween genre titles sit alongside premium drama, family animation, gaming-led releases and Tamil cinema."}
+html.viewer-true-mobile #page-movie-research .movie-month-card:nth-child(5) .movie-card-copy::after{content:"Seasonal cinema, adult drama, event titles and major franchises create a mix of targeted and broader commercial opportunities."}
+html.viewer-true-mobile #page-movie-research .movie-month-card:nth-child(6) .movie-card-copy::after{content:"Holiday blockbusters, family films, premium cinema and Hindi programming lead a group-viewing focused month."}
+
+/* Keep recurring location patterns, with tighter descriptions. */
+html.viewer-true-mobile #page-movie-research .movie-pattern-card:nth-child(1) .movie-card-copy::after{content:"South Asian and regional Indian cinema, plus horror, action and younger-adult genre programming."}
+html.viewer-true-mobile #page-movie-research .movie-pattern-card:nth-child(2) .movie-card-copy::after{content:"International drama, historical films, documentaries and premium adult cinema."}
+html.viewer-true-mobile #page-movie-research .movie-pattern-card:nth-child(3) .movie-card-copy::after{content:"Family animation, youth releases, school-holiday programming and group viewing."}
+html.viewer-true-mobile #page-movie-research .movie-pattern-card:nth-child(4) .movie-card-copy::after{content:"Thrillers, anime, Japanese cinema, science fiction and specialised event programming."}
