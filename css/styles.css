@@ -164,3 +164,39 @@ letter-spacing:normal!important;
 text-transform:none!important;
 color:var(--ink)!important
 }
+
+/* Presentation: true-mobile content trim only. Desktop and split-screen retain the full presentation content. */
+html.viewer-true-mobile #page-presentation .presentation-summary>.section-label:first-child+.presentation-editorial,
+html.viewer-true-mobile #page-presentation .presentation-summary>.section-label:first-child+.presentation-editorial+.presentation-editorial{display:none!important}
+html.viewer-true-mobile #page-presentation .presentation-summary>.section-label:first-child::after{
+content:"The presentation condenses the Reading Cinemas strategy into an executive-level narrative, moving from the commercial challenge and market opportunity through the nine strategic initiatives, implementation roadmap, risks and directional commercial impact. It follows a pilot, measure and scale approach, beginning with lower-risk opportunities and using evidence from those pilots to guide larger digital, programming and regional decisions.";
+display:block!important;
+margin-top:12px!important;
+font-family:var(--serif)!important;
+font-size:17px!important;
+line-height:1.6!important;
+font-weight:400!important;
+font-style:normal!important;
+letter-spacing:normal!important;
+text-transform:none!important;
+color:var(--ink)!important
+}
+html.viewer-true-mobile #page-presentation .presentation-principle{display:none!important}
+html.viewer-true-mobile #page-presentation .presentation-executive-message .body-para{display:none!important}
+html.viewer-true-mobile #page-presentation .presentation-executive-message{
+border-left:3px solid var(--accent)!important;
+padding:4px 0 4px 14px!important
+}
+html.viewer-true-mobile #page-presentation .presentation-executive-message::after{
+content:"The presentation makes a simple case: Reading does not need to rely on one large growth bet. The near-term opportunity is to create more value from existing capacity through targeted pricing, a stronger customer experience and better audience activation. Lower-capital initiatives come first, with digital, programming and regional investment progressing only as the evidence strengthens.";
+display:block!important;
+font-family:var(--serif)!important;
+font-size:17px!important;
+line-height:1.6!important;
+font-weight:400!important;
+font-style:normal!important;
+letter-spacing:normal!important;
+text-transform:none!important;
+color:var(--ink)!important
+}
+html.viewer-true-mobile #page-presentation .presentation-arc-copy{font-size:16px!important;line-height:1.55!important}
