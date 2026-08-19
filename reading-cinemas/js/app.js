@@ -53,12 +53,16 @@ document.write('<script src="js/app-base.js"><\/script>');
   style.id='viewer-close-alignment';
   style.textContent=`
     ${closeSelector} {
-      display: inline-flex !important;
+      display: none !important;
       align-items: center !important;
       justify-content: center !important;
       line-height: 1 !important;
       white-space: nowrap !important;
       text-align: center !important;
+    }
+    .is-fullscreen :is(${closeSelector}),
+    :fullscreen :is(${closeSelector}) {
+      display: inline-flex !important;
     }
     @media (max-width: 768px) {
       ${closeSelector} {
