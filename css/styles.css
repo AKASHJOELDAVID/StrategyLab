@@ -200,3 +200,53 @@ text-transform:none!important;
 color:var(--ink)!important
 }
 html.viewer-true-mobile #page-presentation .presentation-arc-copy{font-size:16px!important;line-height:1.55!important}
+
+/* Evidence Review: true-mobile content trim only. Desktop and split-screen retain the full review content. */
+html.viewer-true-mobile #page-evidence-review .evidence-review-summary>.evidence-review-section:first-child>.body-para{display:none!important}
+html.viewer-true-mobile #page-evidence-review .evidence-review-summary>.evidence-review-section:first-child>.section-label::after{
+content:"The Evidence Review examines the research behind five commercial opportunities in the Reading Cinemas strategy: off-peak capacity, weekday attendance, food and beverage revenue, digital booking friction and local audience development. It draws on industry data, academic research and customer behaviour studies to assess where changes could support stronger utilisation, revenue and customer habits.";
+display:block!important;
+margin-top:12px!important;
+font-family:var(--serif)!important;
+font-size:17px!important;
+line-height:1.6!important;
+font-weight:400!important;
+font-style:normal!important;
+letter-spacing:normal!important;
+text-transform:none!important;
+color:var(--ink)!important
+}
+html.viewer-true-mobile #page-evidence-review .evidence-area .evidence-area-copy{display:none!important}
+html.viewer-true-mobile #page-evidence-review .evidence-area-title::after{
+display:block!important;
+margin-top:8px!important;
+font-family:var(--sans)!important;
+font-size:16px!important;
+font-weight:400!important;
+line-height:1.55!important;
+letter-spacing:normal!important;
+text-transform:none!important;
+color:var(--ink-soft)!important
+}
+html.viewer-true-mobile #page-evidence-review .evidence-area:nth-child(1) .evidence-area-title::after{content:"Because cinema exhibition carries high fixed costs, empty seats in quieter sessions represent unused revenue potential. The evidence supports disciplined pricing and demand management to activate lower-demand inventory without weakening stronger sessions."}
+html.viewer-true-mobile #page-evidence-review .evidence-area:nth-child(2) .evidence-area-title::after{content:"Weekday demand is typically weaker than weekends and major release periods. Evidence suggests targeted weekday value offers can create additional attendance rather than simply shift existing customers between days."}
+html.viewer-true-mobile #page-evidence-review .evidence-area:nth-child(3) .evidence-area-title::after{content:"Food and beverage can contribute disproportionately to cinema profitability, so small improvements in spend, attachment rates or basket size can create meaningful venue-level value."}
+html.viewer-true-mobile #page-evidence-review .evidence-area:nth-child(4) .evidence-area-title::after{content:"Added fees and complicated checkout journeys can increase abandonment. A simpler, more transparent booking experience could improve conversion, earlier commitment and first-party customer data."}
+html.viewer-true-mobile #page-evidence-review .evidence-area:nth-child(5) .evidence-area-title::after{content:"Each cinema serves a different local catchment. Local programming, community partnerships, culturally relevant content and targeted events can strengthen relevance and repeat attendance."}
+html.viewer-true-mobile #page-evidence-review .evidence-review-section:has(.evidence-theme-grid){display:none!important}
+html.viewer-true-mobile #page-evidence-review .evidence-review-section:has(+.evidence-review-section.viewer-final-section)>.body-para{display:none!important}
+html.viewer-true-mobile #page-evidence-review .evidence-review-section:has(+.evidence-review-section.viewer-final-section)::after{
+content:"The review supports a broader commercial approach built around better use of existing capacity, stronger quieter-period demand, higher value per visit, reduced booking friction and deeper local audience relationships. The recommendation is to test changes in controlled settings, measure clear performance indicators and scale only where the results demonstrate value.";
+display:block!important;
+margin-top:12px!important;
+border-left:3px solid var(--accent)!important;
+padding:4px 0 4px 14px!important;
+font-family:var(--serif)!important;
+font-size:17px!important;
+line-height:1.6!important;
+font-weight:400!important;
+font-style:normal!important;
+letter-spacing:normal!important;
+text-transform:none!important;
+color:var(--ink)!important
+}
