@@ -52,3 +52,40 @@ color:var(--ink)!important
 /* Keep How It Works and Product Preview; remove the repetitive supporting sections on true mobile. */
 html.viewer-true-mobile #page-posterscan .posterscan-product-page>section:nth-of-type(3),
 html.viewer-true-mobile #page-posterscan .posterscan-product-page>section:nth-of-type(5){display:none!important}
+
+/* Marketing Ads: true-mobile content trim only. Desktop and split-screen stay unchanged. */
+html.viewer-true-mobile #page-marketing-ads .article-deck{
+font-size:0!important;
+line-height:0!important
+}
+html.viewer-true-mobile #page-marketing-ads .article-deck::after{
+content:"Five example campaign concepts showing how ideas from this project could translate into marketing for Reading Cinemas customers. I developed the concepts, messaging and creative direction.";
+display:block!important;
+font-family:var(--serif)!important;
+font-size:17px!important;
+line-height:1.6!important;
+font-weight:400!important;
+font-style:normal!important;
+letter-spacing:normal!important;
+text-transform:none!important;
+color:var(--ink)!important
+}
+
+/* About The Visuals becomes one concise paragraph without the generative-tools wording. */
+html.viewer-true-mobile #page-marketing-ads .marketing-ads-page>section:first-child>.body-para{display:none!important}
+html.viewer-true-mobile #page-marketing-ads .marketing-ads-page>section:first-child>.section-label::after{
+content:"These are example marketing concepts created to show how ideas from this project could translate into audience-facing campaigns for Reading Cinemas. Each concept explores a different way to attract attention, build interest or encourage cinema visits. The concepts, messaging and creative direction were developed by me.";
+display:block!important;
+margin-top:12px!important;
+font-family:var(--serif)!important;
+font-size:17px!important;
+line-height:1.6!important;
+font-weight:400!important;
+font-style:normal!important;
+letter-spacing:normal!important;
+text-transform:none!important;
+color:var(--ink)!important
+}
+
+/* Keep Campaigns 01-05 and their visuals; remove the closing From Ideas To Campaigns section on true mobile. */
+html.viewer-true-mobile #page-marketing-ads .marketing-ads-page>section:last-child{display:none!important}
