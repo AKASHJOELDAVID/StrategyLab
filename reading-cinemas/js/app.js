@@ -46,8 +46,17 @@ document.write('<script src="js/app-base.js"><\/script>');
     '.movie-close','.future-close','.reelio-close','.reading-preview-close'
   ].join(',');
 
+  function isTrueMobileViewer(){
+    return window.matchMedia('(max-width:768px)').matches && window.screen.width<=768;
+  }
+
+  function syncViewerDeviceMode(){
+    document.documentElement.classList.toggle('viewer-true-mobile',isTrueMobileViewer());
+  }
+
   function syncFullscreenLabels(){
-    const mobile=window.matchMedia('(max-width:768px)').matches;
+    syncViewerDeviceMode();
+    const mobile=isTrueMobileViewer();
     document.querySelectorAll(fullSelector).forEach(function(button){
       button.textContent=mobile?'⛶':'FULL SCREEN';
       button.setAttribute('aria-label','Open full screen');
@@ -57,6 +66,7 @@ document.write('<script src="js/app-base.js"><\/script>');
 
   syncFullscreenLabels();
   window.addEventListener('resize',syncFullscreenLabels);
+  window.addEventListener('orientationchange',syncFullscreenLabels);
 
   document.querySelectorAll(closeSelector).forEach(function(button){
     button.textContent='CLOSE X';
@@ -173,13 +183,13 @@ document.write('<script src="js/app-base.js"><\/script>');
         grid-column:auto!important;
       }
 
-      /* Hide the original fullscreen control on mobile. A dedicated mobile
-         trigger is inserted directly after Fit Width below. */
-      ${fullSelector} {
+      /* Hide the original fullscreen control on true mobile only. A dedicated
+         mobile trigger is inserted directly after Fit Width below. */
+      html.viewer-true-mobile :is(${fullSelector}) {
         display:none!important;
       }
 
-      .mobile-fullscreen-trigger {
+      html.viewer-true-mobile .mobile-fullscreen-trigger {
         order:10!important;
         display:inline-flex!important;
         align-items:center!important;
@@ -195,19 +205,28 @@ document.write('<script src="js/app-base.js"><\/script>');
         text-align:center!important;
       }
 
+      /* Split-screen on desktop keeps the same FULL SCREEN control as the
+         normal desktop viewer, with no icon-only button. */
+      html:not(.viewer-true-mobile) :is(${fullSelector}) {
+        display:inline-flex!important;
+      }
+      html:not(.viewer-true-mobile) .mobile-fullscreen-trigger {
+        display:none!important;
+      }
+
       /* Normal mobile view has no Close control. */
       ${closeSelector} {
         order:10!important;
         display:none!important;
       }
 
-      /* In mobile fullscreen, replace the fullscreen icon with CLOSE X. */
-      .is-fullscreen .mobile-fullscreen-trigger,
-      :fullscreen .mobile-fullscreen-trigger {
+      /* In true mobile fullscreen, replace the fullscreen icon with CLOSE X. */
+      html.viewer-true-mobile .is-fullscreen .mobile-fullscreen-trigger,
+      html.viewer-true-mobile :fullscreen .mobile-fullscreen-trigger {
         display:none!important;
       }
-      .is-fullscreen :is(${closeSelector}),
-      :fullscreen :is(${closeSelector}) {
+      html.viewer-true-mobile .is-fullscreen :is(${closeSelector}),
+      html.viewer-true-mobile :fullscreen :is(${closeSelector}) {
         display:inline-flex!important;
         align-items:center!important;
         justify-content:center!important;
@@ -227,13 +246,13 @@ document.write('<script src="js/app-base.js"><\/script>');
       ${toolbarSelector} {
         gap:5px!important;
       }
-      .mobile-fullscreen-trigger {
+      html.viewer-true-mobile .mobile-fullscreen-trigger {
         width:36px!important;
         min-width:36px!important;
         height:36px!important;
       }
-      .is-fullscreen :is(${closeSelector}),
-      :fullscreen :is(${closeSelector}) {
+      html.viewer-true-mobile .is-fullscreen :is(${closeSelector}),
+      html.viewer-true-mobile :fullscreen :is(${closeSelector}) {
         height:36px!important;
         padding:0 9px!important;
       }
