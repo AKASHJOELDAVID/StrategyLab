@@ -76,3 +76,11 @@
 #page-digital-magazine .reading-preview-toolbar>.reading-preview-tool{min-height:34px!important;padding:7px 9px!important;font-size:10px!important;letter-spacing:.08em!important}
 #page-digital-magazine .reading-preview-toolbar>.reading-preview-tool.mobile-fullscreen-trigger{font-size:18px!important}
 }
+
+/* Content variants must use true mobile only. Narrow desktop/split-screen keeps desktop content. */
+html:not(.viewer-true-mobile) #page-rc-main .overview-desktop-only{display:block!important}
+html:not(.viewer-true-mobile) #page-rc-main .overview-mobile-only{display:none!important}
+html:not(.viewer-true-mobile) #page-rc-main .overview-deck-desktop-extra{display:inline!important}
+html.viewer-true-mobile #page-rc-main .overview-desktop-only{display:none!important}
+html.viewer-true-mobile #page-rc-main .overview-mobile-only{display:block!important}
+html.viewer-true-mobile #page-rc-main .overview-deck-desktop-extra{display:none!important}
