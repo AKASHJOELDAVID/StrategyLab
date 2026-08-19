@@ -74,29 +74,57 @@ document.write('<script src="js/app-base.js"><\/script>');
     button.setAttribute('title','Exit full screen');
   });
 
+  function getFitWidthButton(toolbar){
+    return Array.from(toolbar.querySelectorAll('button')).find(function(button){
+      return /^fit width$/i.test(button.textContent.trim());
+    });
+  }
+
+  function copyTypography(source,target){
+    const sourceStyle=window.getComputedStyle(source);
+    [
+      'font-family','font-size','font-weight','font-style','line-height',
+      'letter-spacing','text-transform'
+    ].forEach(function(property){
+      target.style.setProperty(property,sourceStyle.getPropertyValue(property),'important');
+    });
+  }
+
   // Keep the mobile fullscreen Close control typographically identical to
   // the Fit Width button in the same viewer toolbar.
   function syncCloseButtonTypography(){
     document.querySelectorAll(closeSelector).forEach(function(closeButton){
       const toolbar=closeButton.closest(toolbarSelector);
       if(!toolbar)return;
-      const fitButton=Array.from(toolbar.querySelectorAll('button')).find(function(button){
-        return /^fit width$/i.test(button.textContent.trim());
-      });
+      const fitButton=getFitWidthButton(toolbar);
       if(!fitButton)return;
-      const fitStyle=window.getComputedStyle(fitButton);
-      [
-        'font-family','font-size','font-weight','font-style','line-height',
-        'letter-spacing','text-transform'
-      ].forEach(function(property){
-        closeButton.style.setProperty(property,fitStyle.getPropertyValue(property),'important');
-      });
+      copyTypography(fitButton,closeButton);
     });
   }
 
-  syncCloseButtonTypography();
-  window.addEventListener('resize',syncCloseButtonTypography);
-  window.addEventListener('load',syncCloseButtonTypography,{once:true});
+  // On split-screen desktop, FULL SCREEN should look exactly like FIT WIDTH.
+  // Desktop at full width is deliberately left untouched.
+  function syncSplitScreenFullButtonTypography(){
+    const splitScreen=window.matchMedia('(max-width:768px)').matches && !isTrueMobileViewer();
+    if(!splitScreen)return;
+
+    document.querySelectorAll(fullSelector).forEach(function(fullButton){
+      const toolbar=fullButton.closest(toolbarSelector);
+      if(!toolbar)return;
+      const fitButton=getFitWidthButton(toolbar);
+      if(!fitButton)return;
+      copyTypography(fitButton,fullButton);
+    });
+  }
+
+  function syncViewerTypography(){
+    syncCloseButtonTypography();
+    syncSplitScreenFullButtonTypography();
+  }
+
+  syncViewerTypography();
+  window.addEventListener('resize',syncViewerTypography);
+  window.addEventListener('load',syncViewerTypography,{once:true});
 
   // Keep a down arrow on every VIEW action button across all report pages.
   // Run after the page is parsed and also handle any buttons rendered later.
@@ -206,9 +234,15 @@ document.write('<script src="js/app-base.js"><\/script>');
       }
 
       /* Split-screen on desktop keeps the same FULL SCREEN control as the
-         normal desktop viewer, with no icon-only button. */
+         normal desktop viewer. Push it to the far-right edge and match the
+         text alignment/typography of FIT WIDTH. */
       html:not(.viewer-true-mobile) :is(${fullSelector}) {
         display:inline-flex!important;
+        align-items:center!important;
+        justify-content:center!important;
+        margin-left:auto!important;
+        white-space:nowrap!important;
+        text-align:center!important;
       }
       html:not(.viewer-true-mobile) .mobile-fullscreen-trigger {
         display:none!important;
