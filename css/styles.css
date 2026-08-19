@@ -1,26 +1,19 @@
-@import url('./styles-base.css');
-
-/* Homepage About: keep the visible spacing around 22px without stacking margins. */
 /* Homepage About spacing */
-#page-home #home-about .about-bio,
-#page-home #home-about .about-project-text {
-  margin-bottom: 22px;
+#page-home #home-about .about-project-text:last-of-type {
+  margin-bottom: 12px !important;
 }
 
-#page-home #home-about .about-expansion {
-  margin-top: 22px;
+#page-home #home-about .about-project-text:last-of-type + .about-expansion {
+  margin-top: 0 !important;
 }
 
-#page-home #home-about .about-project-text + .about-expansion {
-  margin-top: 0;
-}
-
-#page-home #home-about .about-expansion-label {
-  margin-bottom: 16px;
+#page-home #home-about .about-bio:last-of-type {
+  margin-bottom: 12px !important;
 }
 
 #page-home #home-about .about-links {
-  margin-top: 0;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
 }
 
 /* Reading Cinemas Overview: phone typography only. */
