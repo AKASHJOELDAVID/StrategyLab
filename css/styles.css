@@ -150,3 +150,8 @@ html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.assu
 html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.assumption-note+.metric-strip)+.assumption-note,
 html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.assumption-note+.metric-strip)+.assumption-note+.metric-strip,
 html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.assumption-note+.metric-strip)+.assumption-note+.metric-strip+.regional-focus{display:none!important}
+
+/* Keep mobile replacement body paragraphs in the existing editorial serif style. */
+html.viewer-true-mobile #page-strategy-report .strategy-summary>.strategy-major-section:first-child::after,
+html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.body-para+.cluster-card)::after,
+html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.takeaway-box)+.takeaway-box::after{font-family:var(--serif)!important}
