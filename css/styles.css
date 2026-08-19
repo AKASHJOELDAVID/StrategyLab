@@ -21,24 +21,42 @@ html.viewer-true-mobile #page-demographic .demographic-summary>.demographic-sect
 html.viewer-true-mobile #page-demographic .demographic-summary>.demographic-section:nth-of-type(3),
 html.viewer-true-mobile #page-demographic .demographic-summary>.demographic-section:nth-of-type(6){display:none!important}
 
-/* Keep all nine location cards but make each one concise. */
-html.viewer-true-mobile #page-demographic .demographic-card-copy-grid{display:none!important}
-html.viewer-true-mobile #page-demographic .demographic-metric-grid::after{
+/* Keep all nine location cards concise and easier to scan on true mobile. */
+html.viewer-true-mobile #page-demographic .demographic-card-copy-grid,
+html.viewer-true-mobile #page-demographic .demographic-tag-row{display:none!important}
+
+/* Two stats across, then the third stat full-width underneath. */
+html.viewer-true-mobile #page-demographic .demographic-metric-grid{
+grid-template-columns:repeat(2,minmax(0,1fr))!important;
+margin-bottom:14px!important
+}
+html.viewer-true-mobile #page-demographic .demographic-metric{
+padding:12px 14px!important
+}
+html.viewer-true-mobile #page-demographic .demographic-metric:nth-child(2){border-right:none!important}
+html.viewer-true-mobile #page-demographic .demographic-metric:nth-child(3){
+grid-column:1/-1!important;
+border-top:1px solid var(--line)!important;
+border-right:none!important
+}
+
+/* The programming takeaway sits outside the grey stats box as normal card text. */
+html.viewer-true-mobile #page-demographic .demographic-metric-grid::after{display:none!important;content:none!important}
+html.viewer-true-mobile #page-demographic .demographic-insight-main::after{
 display:block!important;
-grid-column:1/-1;
-margin-top:8px;
+margin:0!important;
 font-family:var(--sans)!important;
 font-size:16px!important;
 line-height:1.55!important;
 font-weight:400!important;
 color:var(--ink-soft)!important
 }
-html.viewer-true-mobile #page-demographic .demographic-insight-card:nth-child(1) .demographic-metric-grid::after{content:"Mainstream, family and premium programming remain strong, with a clear opportunity to test more Mandarin-led Chinese-language releases."}
-html.viewer-true-mobile #page-demographic .demographic-insight-card:nth-child(2) .demographic-metric-grid::after{content:"Keep mainstream, family and mature-audience programming central, with international titles tested selectively."}
-html.viewer-true-mobile #page-demographic .demographic-insight-card:nth-child(3) .demographic-metric-grid::after{content:"A strong multicultural catchment for Vietnamese, Chinese-language and South Asian cinema alongside mainstream and family releases."}
-html.viewer-true-mobile #page-demographic .demographic-insight-card:nth-child(4) .demographic-metric-grid::after{content:"A strong family and multicultural catchment, with opportunities for South Asian and Arabic / Middle Eastern releases."}
-html.viewer-true-mobile #page-demographic .demographic-insight-card:nth-child(5) .demographic-metric-grid::after{content:"Family and mainstream programming remain central, with selected South Asian and community titles worth testing."}
-html.viewer-true-mobile #page-demographic .demographic-insight-card:nth-child(6) .demographic-metric-grid::after{content:"Balance mainstream and premium programming with stronger testing of South Asian, Chinese-language and Vietnamese cinema."}
-html.viewer-true-mobile #page-demographic .demographic-insight-card:nth-child(7) .demographic-metric-grid::after{content:"Keep mainstream and family programming central while selectively testing South Asian and other community releases."}
-html.viewer-true-mobile #page-demographic .demographic-insight-card:nth-child(8) .demographic-metric-grid::after{content:"Prioritise mainstream, family, Australian and mature-audience programming, with international releases tested selectively."}
-html.viewer-true-mobile #page-demographic .demographic-insight-card:nth-child(9) .demographic-metric-grid::after{content:"Mainstream and family releases remain central, with youth, event cinema and selected international programming adding variety."}
+html.viewer-true-mobile #page-demographic .demographic-insight-card:nth-child(1) .demographic-insight-main::after{content:"Mainstream, family and premium programming remain strong, with a clear opportunity to test more Mandarin-led Chinese-language releases."}
+html.viewer-true-mobile #page-demographic .demographic-insight-card:nth-child(2) .demographic-insight-main::after{content:"Keep mainstream, family and mature-audience programming central, with international titles tested selectively."}
+html.viewer-true-mobile #page-demographic .demographic-insight-card:nth-child(3) .demographic-insight-main::after{content:"A strong multicultural catchment for Vietnamese, Chinese-language and South Asian cinema alongside mainstream and family releases."}
+html.viewer-true-mobile #page-demographic .demographic-insight-card:nth-child(4) .demographic-insight-main::after{content:"A strong family and multicultural catchment, with opportunities for South Asian and Arabic / Middle Eastern releases."}
+html.viewer-true-mobile #page-demographic .demographic-insight-card:nth-child(5) .demographic-insight-main::after{content:"Family and mainstream programming remain central, with selected South Asian and community titles worth testing."}
+html.viewer-true-mobile #page-demographic .demographic-insight-card:nth-child(6) .demographic-insight-main::after{content:"Balance mainstream and premium programming with stronger testing of South Asian, Chinese-language and Vietnamese cinema."}
+html.viewer-true-mobile #page-demographic .demographic-insight-card:nth-child(7) .demographic-insight-main::after{content:"Keep mainstream and family programming central while selectively testing South Asian and other community releases."}
+html.viewer-true-mobile #page-demographic .demographic-insight-card:nth-child(8) .demographic-insight-main::after{content:"Prioritise mainstream, family, Australian and mature-audience programming, with international releases tested selectively."}
+html.viewer-true-mobile #page-demographic .demographic-insight-card:nth-child(9) .demographic-insight-main::after{content:"Mainstream and family releases remain central, with youth, event cinema and selected international programming adding variety."}
