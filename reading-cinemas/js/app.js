@@ -64,6 +64,30 @@ document.write('<script src="js/app-base.js"><\/script>');
     button.setAttribute('title','Exit full screen');
   });
 
+  // Keep the mobile fullscreen Close control typographically identical to
+  // the Fit Width button in the same viewer toolbar.
+  function syncCloseButtonTypography(){
+    document.querySelectorAll(closeSelector).forEach(function(closeButton){
+      const toolbar=closeButton.closest(toolbarSelector);
+      if(!toolbar)return;
+      const fitButton=Array.from(toolbar.querySelectorAll('button')).find(function(button){
+        return /^fit width$/i.test(button.textContent.trim());
+      });
+      if(!fitButton)return;
+      const fitStyle=window.getComputedStyle(fitButton);
+      [
+        'font-family','font-size','font-weight','font-style','line-height',
+        'letter-spacing','text-transform'
+      ].forEach(function(property){
+        closeButton.style.setProperty(property,fitStyle.getPropertyValue(property),'important');
+      });
+    });
+  }
+
+  syncCloseButtonTypography();
+  window.addEventListener('resize',syncCloseButtonTypography);
+  window.addEventListener('load',syncCloseButtonTypography,{once:true});
+
   // Keep the requested down arrow on all applicable View buttons.
   document.querySelectorAll('.engage-action').forEach(function(button){
     const text=button.textContent.replace(/\s+/g,' ').trim();
