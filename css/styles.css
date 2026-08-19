@@ -25,13 +25,6 @@
 #page-future-concepts .future-concept-section{min-height:0!important}
 #page-future-concepts .future-concept-copy,#page-future-concepts .future-concept-visual{align-self:start!important}
 
-/* Keep all report viewer controls on one clean row */
-:where(.strategy-pdf-toolbar,.presentation-toolbar,.evidence-toolbar,.demographic-toolbar,.movie-toolbar,.future-toolbar,.reelio-toolbar,.reading-preview-toolbar){flex-wrap:nowrap!important;align-items:center!important}
-:where(.strategy-pdf-full,.presentation-full,.evidence-full,.demographic-full,.movie-full,.future-full,.reelio-full,.reading-preview-full){font-size:0!important;width:38px!important;min-width:38px!important;height:36px!important;padding:0!important;display:inline-flex;align-items:center;justify-content:center}
-:where(.strategy-pdf-full,.presentation-full,.evidence-full,.demographic-full,.movie-full,.future-full,.reelio-full,.reading-preview-full)::before{content:'⛶';font-size:18px!important;line-height:1!important}
-:where(.strategy-pdf-close,.presentation-close,.evidence-close,.demographic-close,.movie-close,.future-close,.reelio-close,.reading-preview-close){font-size:0!important;width:38px!important;min-width:38px!important;height:36px!important;padding:0!important;align-items:center!important;justify-content:center!important;text-align:center!important}
-:where(.strategy-pdf-close,.presentation-close,.evidence-close,.demographic-close,.movie-close,.future-close,.reelio-close,.reading-preview-close)::before{content:'×';font-size:22px!important;line-height:1!important}
-
 @media(max-width:1040px){
 .report-page .article-title{font-size:32px!important;line-height:1.08!important;word-break:normal!important;overflow-wrap:normal!important}
 .report-page .article-deck{font-size:17px!important;line-height:1.6!important}
@@ -43,10 +36,6 @@
 .report-page :where(.card-copy,.evidence-area-copy,.evidence-signal-copy,.movie-card-copy,.demographic-insight-copy,.demographic-group-copy,.future-concept-summary,.reelio-copy-card p,.reelio-capability-card p,.reading-pulse-visual-head p,.audience-pulse-copy,.posterscan-copy,.marketing-ads-campaign-text){font-size:16px!important;line-height:1.55!important}
 .report-page .report-glance-label{font-size:9.5px!important;line-height:1.3!important;letter-spacing:.035em!important;white-space:normal!important}
 .report-page .report-glance-number{white-space:normal!important}
-:where(.strategy-pdf-toolbar,.presentation-toolbar,.evidence-toolbar,.demographic-toolbar,.movie-toolbar,.future-toolbar,.reelio-toolbar,.reading-preview-toolbar){gap:6px!important;padding:8px!important;overflow-x:auto!important;overflow-y:hidden!important;scrollbar-width:none;-webkit-overflow-scrolling:touch}
-:where(.strategy-pdf-toolbar,.presentation-toolbar,.evidence-toolbar,.demographic-toolbar,.movie-toolbar,.future-toolbar,.reelio-toolbar,.reading-preview-toolbar)::-webkit-scrollbar{display:none}
-:where(.strategy-pdf-tool,.presentation-tool,.evidence-tool,.demographic-tool,.movie-tool,.future-tool,.reelio-tool,.reading-preview-tool){flex:0 0 auto!important;white-space:nowrap!important;min-height:34px!important;padding:7px 9px!important;font-size:11px!important}
-:where(.strategy-pdf-page-count,.presentation-slide-count,.evidence-page-count,.demographic-page-count,.movie-page-count,.future-page-count,.reelio-page-count,.reading-preview-page-count,.strategy-pdf-zoom-value,.presentation-zoom-value,.evidence-zoom-value,.demographic-zoom-value,.movie-zoom-value,.future-zoom-value,.reelio-zoom-value,.reading-preview-zoom-value){flex:0 0 auto!important;white-space:nowrap!important;font-size:10px!important}
 #page-future-concepts .future-concept-section{display:flex!important;flex-direction:column!important;gap:16px!important}
 #page-future-concepts .future-concept-copy{order:1!important;width:100%!important}
 #page-future-concepts .future-concept-visual{order:2!important;width:100%!important;transform:none!important;margin-top:0!important}
@@ -57,111 +46,22 @@
 .report-page .report-glance-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 .report-page .report-glance-item{padding-left:8px!important;padding-right:8px!important}
 .report-page .report-glance-label{font-size:9px!important;line-height:1.28!important;letter-spacing:.025em!important;white-space:normal!important}
-#page-digital-magazine .reading-preview-reader{width:100%!important;max-width:100%!important;min-width:0!important;overflow:hidden!important}
-#page-digital-magazine .reading-preview-shell{width:100%!important;min-width:0!important;height:auto!important;min-height:0!important}
-#page-digital-magazine .reading-preview-rail{display:none!important}
-#page-digital-magazine .reading-preview-main{width:100%!important;min-width:0!important}
-#page-digital-magazine .reading-preview-stage{width:100%!important;height:min(72vh,680px)!important;min-height:430px!important;padding:10px 34px!important;box-sizing:border-box!important;overflow:hidden!important}
-#page-digital-magazine .reading-preview-canvas{width:100%!important;height:100%!important;min-width:0!important;overflow:auto!important;-webkit-overflow-scrolling:touch}
-#page-digital-magazine .reading-preview-spread{max-width:none!important;margin:0 auto!important}
-#page-digital-magazine .reading-preview-side-nav{width:30px!important;height:44px!important;min-width:30px!important}
-#page-digital-magazine .reading-preview-drawer-panel{width:min(92vw,380px)!important;max-width:92vw!important}
-:where(.strategy-pdf-full,.presentation-full,.evidence-full,.demographic-full,.movie-full,.future-full,.reelio-full,.reading-preview-full,.strategy-pdf-close,.presentation-close,.evidence-close,.demographic-close,.movie-close,.future-close,.reelio-close,.reading-preview-close){width:34px!important;min-width:34px!important;height:34px!important;padding:0!important}
 .report-page .strategic-close{padding-left:14px!important}
+
+/* Keep the magazine itself centred on mobile; toolbar stays on its original layout. */
+#page-digital-magazine .reading-preview-reader{width:100%!important;max-width:100%!important;min-width:0!important;overflow:hidden!important}
+#page-digital-magazine .reading-preview-shell,#page-digital-magazine .reading-preview-main{width:100%!important;min-width:0!important}
+#page-digital-magazine .reading-preview-rail{display:none!important}
+#page-digital-magazine .reading-preview-stage{position:relative!important;display:block!important;width:100%!important;height:min(72vh,680px)!important;min-height:470px!important;padding:10px 8px!important;overflow:hidden!important}
+#page-digital-magazine .reading-preview-canvas{display:flex!important;align-items:flex-start!important;justify-content:center!important;width:100%!important;height:100%!important;min-width:0!important;margin:0 auto!important;padding:0!important;overflow:auto!important;-webkit-overflow-scrolling:touch}
+#page-digital-magazine .reading-preview-spread{margin:0 auto!important;justify-content:center!important}
+#page-digital-magazine .reading-preview-side-nav{position:absolute!important;top:50%!important;transform:translateY(-50%)!important;z-index:5!important;width:34px!important;min-width:34px!important;height:44px!important;margin:0!important}
+#page-digital-magazine .reading-preview-side-prev{left:8px!important}
+#page-digital-magazine .reading-preview-side-next{right:8px!important}
 }
 
 @media(max-width:520px){
 .report-page .report-glance-label{font-size:8.5px!important;letter-spacing:.015em!important}
 .report-page .article-title{font-size:30px!important}
-:where(.strategy-pdf-toolbar,.presentation-toolbar,.evidence-toolbar,.demographic-toolbar,.movie-toolbar,.future-toolbar,.reelio-toolbar,.reading-preview-toolbar){padding:7px 6px!important;gap:4px!important}
-:where(.strategy-pdf-tool,.presentation-tool,.evidence-tool,.demographic-tool,.movie-tool,.future-tool,.reelio-tool,.reading-preview-tool){padding:6px 8px!important;font-size:10px!important}
-#page-digital-magazine .reading-preview-stage{min-height:390px!important;padding-left:30px!important;padding-right:30px!important}
-}
-
-/* Final mobile viewer polish: force one row and override old grid rules */
-@media(max-width:768px){
-:where(.strategy-pdf-toolbar,.presentation-toolbar,.evidence-toolbar,.demographic-toolbar,.movie-toolbar,.future-toolbar,.reelio-toolbar,.reading-preview-toolbar){
-  display:flex!important;
-  flex-direction:row!important;
-  flex-wrap:nowrap!important;
-  align-items:center!important;
-  justify-content:flex-start!important;
-  width:100%!important;
-  max-width:100%!important;
-  grid-template-columns:none!important;
-  overflow-x:auto!important;
-  overflow-y:hidden!important;
-}
-:where(.strategy-pdf-spacer,.presentation-spacer,.evidence-spacer,.demographic-spacer,.movie-spacer,.future-spacer,.reelio-spacer,.reading-preview-spacer){display:none!important}
-:where(.strategy-pdf-page-count,.presentation-slide-count,.evidence-page-count,.demographic-page-count,.movie-page-count,.future-page-count,.reelio-page-count,.reading-preview-page-count){
-  flex:0 0 auto!important;
-  width:auto!important;
-  min-width:0!important;
-  order:initial!important;
-  grid-column:auto!important;
-  text-align:center!important;
-}
-:where(.strategy-pdf-full,.presentation-full,.evidence-full,.demographic-full,.movie-full,.future-full,.reelio-full,.reading-preview-full){
-  flex:0 0 34px!important;
-  width:34px!important;
-  min-width:34px!important;
-  max-width:34px!important;
-}
-:where(.strategy-pdf-close,.presentation-close,.evidence-close,.demographic-close,.movie-close,.future-close,.reelio-close,.reading-preview-close){
-  flex:0 0 34px!important;
-  width:34px!important;
-  min-width:34px!important;
-  max-width:34px!important;
-}
-
-/* Magazine viewer: keep the actual magazine centred between the arrows */
-#page-digital-magazine .reading-preview-stage{
-  display:grid!important;
-  grid-template-columns:30px minmax(0,1fr) 30px!important;
-  grid-template-rows:minmax(0,1fr)!important;
-  gap:6px!important;
-  padding:12px!important;
-  align-items:center!important;
-}
-#page-digital-magazine .reading-preview-canvas{
-  grid-column:2!important;
-  grid-row:1!important;
-  display:flex!important;
-  align-items:flex-start!important;
-  justify-content:center!important;
-  width:100%!important;
-  max-width:100%!important;
-  margin:0 auto!important;
-  padding:0!important;
-  overflow:auto!important;
-}
-#page-digital-magazine .reading-preview-spread{
-  margin:0 auto!important;
-  flex:0 0 auto!important;
-}
-#page-digital-magazine .reading-preview-side-prev{
-  grid-column:1!important;
-  grid-row:1!important;
-  align-self:center!important;
-  justify-self:center!important;
-  margin:0!important;
-}
-#page-digital-magazine .reading-preview-side-next{
-  grid-column:3!important;
-  grid-row:1!important;
-  align-self:center!important;
-  justify-self:center!important;
-  margin:0!important;
-}
-}
-
-@media(max-width:520px){
-:where(.strategy-pdf-toolbar,.presentation-toolbar,.evidence-toolbar,.demographic-toolbar,.movie-toolbar,.future-toolbar,.reelio-toolbar,.reading-preview-toolbar){gap:3px!important;padding:6px 5px!important}
-:where(.strategy-pdf-tool,.presentation-tool,.evidence-tool,.demographic-tool,.movie-tool,.future-tool,.reelio-tool,.reading-preview-tool){min-height:32px!important;padding:5px 7px!important;font-size:9px!important;letter-spacing:.02em!important}
-:where(.strategy-pdf-page-count,.presentation-slide-count,.evidence-page-count,.demographic-page-count,.movie-page-count,.future-page-count,.reelio-page-count,.reading-preview-page-count,.strategy-pdf-zoom-value,.presentation-zoom-value,.evidence-zoom-value,.demographic-zoom-value,.movie-zoom-value,.future-zoom-value,.reelio-zoom-value,.reading-preview-zoom-value){font-size:9px!important}
-:where(.strategy-pdf-full,.presentation-full,.evidence-full,.demographic-full,.movie-full,.future-full,.reelio-full,.reading-preview-full,.strategy-pdf-close,.presentation-close,.evidence-close,.demographic-close,.movie-close,.future-close,.reelio-close,.reading-preview-close){width:32px!important;min-width:32px!important;max-width:32px!important;height:32px!important;flex-basis:32px!important}
-:where(.strategy-pdf-full,.presentation-full,.evidence-full,.demographic-full,.movie-full,.future-full,.reelio-full,.reading-preview-full)::before{font-size:17px!important}
-:where(.strategy-pdf-close,.presentation-close,.evidence-close,.demographic-close,.movie-close,.future-close,.reelio-close,.reading-preview-close)::before{font-size:21px!important}
-#page-digital-magazine .reading-preview-stage{grid-template-columns:28px minmax(0,1fr) 28px!important;gap:4px!important;padding:10px 6px!important;min-height:390px!important}
-#page-digital-magazine .reading-preview-side-nav{width:28px!important;min-width:28px!important;height:40px!important}
+#page-digital-magazine .reading-preview-stage{min-height:450px!important;padding-left:5px!important;padding-right:5px!important}
 }
