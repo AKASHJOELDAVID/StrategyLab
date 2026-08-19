@@ -111,3 +111,15 @@ html.viewer-true-mobile #page-movie-research .movie-pattern-card:nth-child(1) .m
 html.viewer-true-mobile #page-movie-research .movie-pattern-card:nth-child(2) .movie-card-copy::after{content:"International drama, historical films, documentaries and premium adult cinema."}
 html.viewer-true-mobile #page-movie-research .movie-pattern-card:nth-child(3) .movie-card-copy::after{content:"Family animation, youth releases, school-holiday programming and group viewing."}
 html.viewer-true-mobile #page-movie-research .movie-pattern-card:nth-child(4) .movie-card-copy::after{content:"Thrillers, anime, Japanese cinema, science fiction and specialised event programming."}
+
+/* Movie Research mobile card cleanup: remove repeated keywords and place the month title beside the month code. */
+html.viewer-true-mobile #page-movie-research .movie-month-card .movie-tag-row,
+html.viewer-true-mobile #page-movie-research .movie-pattern-card .movie-tag-row{display:none!important}
+html.viewer-true-mobile #page-movie-research .movie-month-card{
+grid-template-columns:74px minmax(0,1fr)!important;
+gap:14px!important;
+align-items:start!important
+}
+html.viewer-true-mobile #page-movie-research .movie-month-card>.movie-code{width:74px!important;margin:0!important}
+html.viewer-true-mobile #page-movie-research .movie-month-card>div:last-child{min-width:0!important}
+html.viewer-true-mobile #page-movie-research .movie-month-card .movie-card-title{margin-top:0!important}
