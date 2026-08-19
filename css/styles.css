@@ -20,17 +20,15 @@
   padding-top: 0 !important;
 }
 
-/* Reading Cinemas Overview: phone typography only. */
-@media (max-width: 520px) {
-  #page-rc-main .overview-section h2 {
-    font-size: 22px;
-    line-height: 1.25;
-    letter-spacing: .08em;
-    margin-bottom: 12px;
+/* Reading Cinemas Overview: mobile top typography only */
+@media (max-width: 768px) {
+  #page-rc-main .article-title {
+    font-size: 32px !important;
+    line-height: 1.08 !important;
   }
 
-  #page-rc-main .overview-section p {
-    font-size: 17px;
-    line-height: 1.6;
+  #page-rc-main .article-deck {
+    font-size: 17px !important;
+    line-height: 1.6 !important;
   }
 }
