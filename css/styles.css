@@ -1,8 +1,10 @@
 @import url('./styles-base.css');
 
 /* Homepage About spacing */
+
+/* Same gap as between the normal paragraphs */
 #page-home #home-about .about-project-text:last-of-type {
-  margin-bottom: 12px !important;
+  margin-bottom: 22px !important;
 }
 
 #page-home #home-about .about-project-text:last-of-type + .about-expansion {
@@ -10,7 +12,7 @@
 }
 
 #page-home #home-about .about-bio:last-of-type {
-  margin-bottom: 12px !important;
+  margin-bottom: 22px !important;
 }
 
 #page-home #home-about .about-links {
