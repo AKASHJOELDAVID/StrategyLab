@@ -318,3 +318,56 @@ html.viewer-true-mobile #page-digital-magazine .digital-magazine-product-page>se
 
 /* Keep only the three strongest magazine benefits on true mobile. */
 html.viewer-true-mobile #page-digital-magazine .digital-magazine-benefits>.digital-magazine-benefit:nth-child(4){display:none!important}
+
+/* Reading Preview mobile navigation: place Previous / Next below the page instead of over it. */
+html.viewer-true-mobile #page-digital-magazine .reading-preview-stage{
+display:grid!important;
+grid-template-columns:repeat(2,minmax(0,1fr))!important;
+grid-template-rows:minmax(0,1fr) auto!important;
+column-gap:10px!important;
+row-gap:10px!important;
+align-items:stretch!important
+}
+html.viewer-true-mobile #page-digital-magazine .reading-preview-canvas{
+grid-column:1/-1!important;
+grid-row:1!important;
+width:100%!important;
+height:100%!important;
+min-height:0!important
+}
+html.viewer-true-mobile #page-digital-magazine .reading-preview-side-nav{
+position:static!important;
+top:auto!important;
+left:auto!important;
+right:auto!important;
+transform:none!important;
+width:100%!important;
+min-width:0!important;
+height:42px!important;
+margin:0!important;
+padding:0 12px!important;
+border:1px solid var(--line)!important;
+border-radius:4px!important;
+background:var(--bg-soft)!important;
+color:var(--accent)!important;
+font-family:var(--mono)!important;
+font-size:0!important;
+font-weight:500!important;
+letter-spacing:.08em!important;
+text-transform:uppercase!important;
+line-height:1!important
+}
+html.viewer-true-mobile #page-digital-magazine .reading-preview-side-prev{grid-column:1!important;grid-row:2!important}
+html.viewer-true-mobile #page-digital-magazine .reading-preview-side-next{grid-column:2!important;grid-row:2!important}
+html.viewer-true-mobile #page-digital-magazine .reading-preview-side-prev::after{
+content:"← Previous";
+font-size:12px!important
+}
+html.viewer-true-mobile #page-digital-magazine .reading-preview-side-next::after{
+content:"Next →";
+font-size:12px!important
+}
+html.viewer-true-mobile #page-digital-magazine .reading-preview-side-nav:disabled{
+opacity:.35!important;
+cursor:default!important
+}
