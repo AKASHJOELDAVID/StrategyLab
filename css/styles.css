@@ -123,3 +123,56 @@ align-items:start!important
 html.viewer-true-mobile #page-movie-research .movie-month-card>.movie-code{width:74px!important;margin:0!important}
 html.viewer-true-mobile #page-movie-research .movie-month-card>div:last-child{min-width:0!important}
 html.viewer-true-mobile #page-movie-research .movie-month-card .movie-card-title{margin-top:0!important}
+
+/* Future Concepts: true-mobile content trim only. Desktop and split-screen stay unchanged. */
+html.viewer-true-mobile #page-future-concepts .future-concepts-page>.demographic-summary>.demographic-section:first-child>.body-para{display:none!important}
+html.viewer-true-mobile #page-future-concepts .future-concepts-page>.demographic-summary>.demographic-section:first-child>.section-label::after{
+content:"The Future Concepts report turns the wider Reading Cinemas research into eight early-stage ideas spanning social planning, in-cinema support, accessibility, audience engagement, movie discovery and programming intelligence. Each concept shows a possible opportunity and how it could be tested through a smaller pilot before deciding whether it is worth developing further.";
+display:block!important;
+margin-top:12px!important;
+font-family:var(--serif)!important;
+font-size:17px!important;
+line-height:1.6!important;
+font-weight:400!important;
+font-style:normal!important;
+letter-spacing:normal!important;
+text-transform:none!important;
+color:var(--ink)!important
+}
+
+/* On true mobile each concept reads: number/category -> title -> one concise paragraph -> visual. */
+html.viewer-true-mobile #page-future-concepts .future-concept-section{
+display:flex!important;
+flex-direction:column!important;
+gap:16px!important
+}
+html.viewer-true-mobile #page-future-concepts .future-concept-intro{order:1!important;width:100%!important}
+html.viewer-true-mobile #page-future-concepts .future-concept-summary,
+html.viewer-true-mobile #page-future-concepts .future-concept-details{display:none!important}
+html.viewer-true-mobile #page-future-concepts .future-concept-intro::after{
+display:block!important;
+margin-top:10px!important;
+font-family:var(--sans)!important;
+font-size:16px!important;
+line-height:1.55!important;
+font-weight:400!important;
+font-style:normal!important;
+letter-spacing:normal!important;
+text-transform:none!important;
+color:var(--ink-soft)!important
+}
+html.viewer-true-mobile #page-future-concepts #future-concept-01 .future-concept-intro::after{content:"MovieScene adds social planning to the Reading Cinemas website, letting customers create or join a group around a movie, discuss the cinema, date and session, and decide together. It could make group visits easier to organise while giving customers another reason to use the site beyond checking sessions or making an individual booking."}
+html.viewer-true-mobile #page-future-concepts #future-concept-02 .future-concept-intro::after{content:"Reelio Kiosk brings the cinema concierge into the physical venue through a self-service kiosk where customers can ask questions, compare sessions, discover movies and get booking support by touch, text or voice. It could speed up decisions, reduce pressure on staff during busy periods and make assistance easier through multilingual support."}
+html.viewer-true-mobile #page-future-concepts #future-concept-03 .future-concept-intro::after{content:"The Tactile Cinema Device is a lap-based haptic device that synchronises with a film and translates movement, action, environmental effects and changes in intensity into touch patterns. It is designed to complement existing accessibility tools by adding another sensory layer for blind, visually impaired, deaf, hard-of-hearing and deaf-blind customers."}
+html.viewer-true-mobile #page-future-concepts #future-concept-04 .future-concept-intro::after{content:"PosterScan adds a QR-based digital layer to physical movie posters, taking customers from a poster directly to the trailer, film information, sessions and booking. It turns existing poster space into an interactive discovery point and removes the need to remember a title and search for it later."}
+html.viewer-true-mobile #page-future-concepts #future-concept-05 .future-concept-intro::after{content:"Reading StoryCard turns a booking confirmation into a personalised movie-themed digital card that can be delivered by email and saved or shared. It makes the post-booking moment feel more personal while creating a lightweight Reading Cinemas touchpoint before the visit."}
+html.viewer-true-mobile #page-future-concepts #future-concept-06 .future-concept-intro::after{content:"Audience Pulse is a short in-cinema QR voting experience where customers select upcoming films they would be interested in seeing, with responses aggregated by location. It gives Reading Cinemas a direct demand signal that could be especially useful for smaller, international, cultural, re-screening and event titles."}
+html.viewer-true-mobile #page-future-concepts #future-concept-07 .future-concept-intro::after{content:"The Reading Preview is a monthly digital cinema guide featuring upcoming releases, events and cinema experiences, with content linked directly to relevant booking journeys. It gives customers an earlier way to discover what is coming while creating a recurring asset that can be reused across the website, email, social media and in-cinema QR promotion."}
+html.viewer-true-mobile #page-future-concepts #future-concept-08 .future-concept-intro::after{content:"Reading Pulse is an internal film-intelligence dashboard that tracks current and upcoming films, audience signals and local cinema fit to help teams decide what to pursue, test, monitor or shortlist. It could help Reading Cinemas identify promising titles earlier and make more location-aware programming decisions."}
+html.viewer-true-mobile #page-future-concepts .future-concept-visual{
+order:2!important;
+width:100%!important;
+max-width:100%!important;
+margin:0!important;
+transform:none!important
+}
