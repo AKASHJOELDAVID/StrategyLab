@@ -79,3 +79,21 @@
   white-space: nowrap;
 }
 }
+/* Reading Cinemas Overview: additional mobile typography */
+@media (max-width: 768px) {
+
+  /* ← All Reports / Report 001 */
+  #page-rc-main .article-breadcrumb {
+    font-size: 14px !important;
+  }
+
+  /* OVERVIEW / CINEMA · ENTERTAINMENT / AUSTRALIA / DATE */
+  #page-rc-main .article-badges .badge {
+    font-size: 12px !important;
+  }
+
+  /* PROJECT SECTIONS / STRATEGIC INITIATIVES / etc. */
+  #page-rc-main .report-glance-label {
+    font-size: 11px !important;
+  }
+}
