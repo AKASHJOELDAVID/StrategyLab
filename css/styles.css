@@ -116,7 +116,7 @@ html.viewer-true-mobile #page-movie-research .movie-pattern-card:nth-child(4) .m
 html.viewer-true-mobile #page-movie-research .movie-month-card .movie-tag-row,
 html.viewer-true-mobile #page-movie-research .movie-pattern-card .movie-tag-row{display:none!important}
 html.viewer-true-mobile #page-movie-research .movie-month-card{
-grid-template-columns:74px minmax(0,1fr)!important;
+grid-template-columns:74px minmax(0,1fr))!important;
 gap:14px!important;
 align-items:start!important
 }
@@ -237,7 +237,6 @@ gap:10px!important
 html.viewer-true-mobile #page-reelio #reelio-overview .reelio-two-col .reelio-copy-card::after{display:none!important;content:none!important}
 html.viewer-true-mobile #page-reelio #reelio-overview .reelio-two-col .reelio-scope-list li{font-size:16px!important;line-height:1.5!important}
 html.viewer-true-mobile #page-reelio #reelio-overview .reelio-two-col .reelio-example{font-size:16px!important;line-height:1.45!important;padding:11px 12px!important}
-
 /* Match Product Proposal to the other Reelio section headers on true mobile. */
 html.viewer-true-mobile #page-reelio .reelio-kicker{
 font-family:var(--mono)!important;
@@ -419,4 +418,39 @@ position:relative!important;
 z-index:20!important;
 padding:8px 8px calc(10px + env(safe-area-inset-bottom))!important;
 background:#eef3f8!important
+}
+
+/* Safari mobile fullscreen: use the small visual viewport so browser chrome never covers Previous / Next. */
+html.viewer-true-mobile #page-digital-magazine .reading-preview-reader.is-fullscreen,
+html.viewer-true-mobile #page-digital-magazine .reading-preview-reader:fullscreen{
+display:flex!important;
+flex-direction:column!important;
+height:100vh!important;
+height:100svh!important;
+min-height:0!important;
+max-height:100svh!important;
+bottom:auto!important;
+overflow:hidden!important
+}
+html.viewer-true-mobile #page-digital-magazine .reading-preview-reader.is-fullscreen .reading-preview-toolbar,
+html.viewer-true-mobile #page-digital-magazine .reading-preview-reader:fullscreen .reading-preview-toolbar{
+flex:0 0 auto!important
+}
+html.viewer-true-mobile #page-digital-magazine .reading-preview-reader.is-fullscreen .reading-preview-shell,
+html.viewer-true-mobile #page-digital-magazine .reading-preview-reader:fullscreen .reading-preview-shell{
+flex:1 1 auto!important;
+height:auto!important;
+min-height:0!important;
+max-height:none!important;
+overflow:hidden!important
+}
+html.viewer-true-mobile #page-digital-magazine .reading-preview-reader.is-fullscreen .reading-preview-main,
+html.viewer-true-mobile #page-digital-magazine .reading-preview-reader:fullscreen .reading-preview-main{
+height:100%!important;
+min-height:0!important
+}
+html.viewer-true-mobile #page-digital-magazine .reading-preview-reader.is-fullscreen .reading-preview-mobile-nav,
+html.viewer-true-mobile #page-digital-magazine .reading-preview-reader:fullscreen .reading-preview-mobile-nav{
+flex:0 0 auto!important;
+padding:8px 8px max(14px,env(safe-area-inset-bottom))!important
 }
