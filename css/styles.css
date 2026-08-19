@@ -371,3 +371,19 @@ html.viewer-true-mobile #page-digital-magazine .reading-preview-side-nav:disable
 opacity:.35!important;
 cursor:default!important
 }
+
+/* Normal mobile Reading Preview must expand to include the bottom navigation row. */
+html.viewer-true-mobile #page-digital-magazine .reading-preview-reader:not(.is-fullscreen),
+html.viewer-true-mobile #page-digital-magazine .reading-preview-reader:not(.is-fullscreen) .reading-preview-shell,
+html.viewer-true-mobile #page-digital-magazine .reading-preview-reader:not(.is-fullscreen) .reading-preview-main{
+height:auto!important;
+min-height:0!important;
+max-height:none!important
+}
+html.viewer-true-mobile #page-digital-magazine .reading-preview-reader:not(.is-fullscreen) .reading-preview-shell,
+html.viewer-true-mobile #page-digital-magazine .reading-preview-reader:not(.is-fullscreen) .reading-preview-main{
+overflow:visible!important
+}
+html.viewer-true-mobile #page-digital-magazine .reading-preview-reader:not(.is-fullscreen) .reading-preview-mobile-nav{
+padding-bottom:10px!important
+}
