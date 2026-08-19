@@ -387,3 +387,12 @@ overflow:visible!important
 html.viewer-true-mobile #page-digital-magazine .reading-preview-reader:not(.is-fullscreen) .reading-preview-mobile-nav{
 padding-bottom:10px!important
 }
+
+/* Tighten only the normal true-mobile magazine stage so the buttons sit closer to the page. */
+html.viewer-true-mobile #page-digital-magazine .reading-preview-reader:not(.is-fullscreen) .reading-preview-stage{
+height:min(60vh,560px)!important;
+min-height:390px!important
+}
+html.viewer-true-mobile #page-digital-magazine .reading-preview-reader:not(.is-fullscreen) .reading-preview-mobile-nav{
+padding-top:8px!important
+}
