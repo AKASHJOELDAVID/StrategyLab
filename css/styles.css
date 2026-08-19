@@ -89,7 +89,7 @@ html.viewer-true-mobile #page-rc-main .overview-deck-desktop-extra{display:none!
 html.viewer-true-mobile #page-strategy-report .strategy-summary>.strategy-major-section:first-child+.body-para,
 html.viewer-true-mobile #page-strategy-report .strategy-summary>.strategy-major-section:first-child+.body-para+.body-para,
 html.viewer-true-mobile #page-strategy-report .strategy-summary>.strategy-major-section:first-child+.body-para+.body-para+.body-para{display:none!important}
-html.viewer-true-mobile #page-strategy-report .strategy-summary>.strategy-major-section:first-child::after{content:"Reading Cinemas has meaningful underused capacity in quieter sessions. The opportunity is to create more value from the existing network through targeted pricing, a stronger customer experience and audience growth, then pilot, measure and scale what works.";display:block;margin-top:12px;font-family:var(--sans);font-size:17px;font-weight:400;line-height:1.6;letter-spacing:0;text-transform:none;color:var(--ink-soft)}
+html.viewer-true-mobile #page-strategy-report .strategy-summary>.strategy-major-section:first-child::after{content:"Reading Cinemas already has the footprint, screens and customer base to create more value without relying on major expansion. The opportunity is to use quieter capacity more effectively, make the cinema journey easier and give customers stronger reasons to visit more often. The strategy focuses on testing those ideas in small pilots, measuring what works and scaling only where the commercial impact is clear.";display:block;margin-top:12px;font-family:var(--sans);font-size:17px;font-weight:400;line-height:1.6;letter-spacing:0;text-transform:none;color:var(--ink-soft)}
 
 html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.strategy-grid)+.strategy-grid .card-copy{display:none!important}
 html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.strategy-grid)+.strategy-grid .strategy-card::after{display:block;margin-top:8px;font-size:16px;line-height:1.55;color:var(--ink-soft)}
@@ -122,8 +122,9 @@ html.viewer-true-mobile #page-strategy-report .metric-card:nth-child(1)::after{c
 html.viewer-true-mobile #page-strategy-report .metric-card:nth-child(2)::after{content:"Potential increase from a repeatable weekday value offer."}
 html.viewer-true-mobile #page-strategy-report .metric-card:nth-child(3)::after{content:"Potential uplift from small food and beverage improvements."}
 html.viewer-true-mobile #page-strategy-report .metric-card:nth-child(4)::after{content:"Potential improvement from a simpler booking journey."}
+html.viewer-true-mobile #page-strategy-report .regional-focus{row-gap:4px!important}
 html.viewer-true-mobile #page-strategy-report .regional-focus .card-copy{display:none!important}
-html.viewer-true-mobile #page-strategy-report .regional-focus::after{content:"Priority markets for further feasibility testing.";display:block;margin-top:8px;font-size:16px;line-height:1.55;color:var(--ink-soft)}
+html.viewer-true-mobile #page-strategy-report .regional-focus::after{content:"Priority markets for further feasibility testing.";display:block;margin-top:0;font-size:16px;line-height:1.55;color:var(--ink-soft)}
 
 html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.measure-grid),
 html.viewer-true-mobile #page-strategy-report .measure-grid{display:none!important}
@@ -140,5 +141,5 @@ html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.risk
 html.viewer-true-mobile #page-strategy-report .risk-grid{display:none!important}
 
 html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.takeaway-box)+.takeaway-box .body-para{display:none!important}
-html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.takeaway-box)+.takeaway-box{border-left:3px solid #1f5eff!important;padding-left:14px!important}
+html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.takeaway-box)+.takeaway-box{border-left:3px solid var(--accent)!important;padding-left:14px!important}
 html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.takeaway-box)+.takeaway-box::after{content:"Reading Cinemas can create more value from its existing footprint by activating quieter capacity, improving the booking journey, increasing value per visit and giving customers stronger reasons to return. The recommendation is to pilot the lowest-risk ideas first, measure the results and scale only where the evidence supports it.";display:block;font-size:17px;line-height:1.6;color:var(--ink-soft)}
