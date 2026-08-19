@@ -116,7 +116,7 @@ html.viewer-true-mobile #page-movie-research .movie-pattern-card:nth-child(4) .m
 html.viewer-true-mobile #page-movie-research .movie-month-card .movie-tag-row,
 html.viewer-true-mobile #page-movie-research .movie-pattern-card .movie-tag-row{display:none!important}
 html.viewer-true-mobile #page-movie-research .movie-month-card{
-grid-template-columns:74px minmax(0,1fr))!important;
+grid-template-columns:74px minmax(0,1fr)!important;
 gap:14px!important;
 align-items:start!important
 }
