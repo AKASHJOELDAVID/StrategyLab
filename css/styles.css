@@ -74,7 +74,8 @@
     font-size: 11px !important;
   }
 
-  #page-home .kpi-sub {
-    font-size: 11px !important;
-  }
+  #page-home .kpi-label {
+  font-size: 10px !important;
+  white-space: nowrap;
+}
 }
