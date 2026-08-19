@@ -1,3 +1,5 @@
+@import url('./styles-base.css');
+
 /* Homepage About spacing */
 #page-home #home-about .about-project-text:last-of-type {
   margin-bottom: 12px !important;
