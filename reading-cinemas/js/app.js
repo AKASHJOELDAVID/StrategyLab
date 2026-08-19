@@ -18,8 +18,25 @@ document.write('<script src="js/app-base.js"><\/script>');
   });
 })();
 
-// Keep the original viewer toolbar layout. Full Screen is shown as an icon.
+// Viewer toolbar behaviour.
+// Desktop keeps the existing toolbar treatment.
+// Mobile + split-screen use two rows: controls first, page indicator second.
 (function(){
+  const toolbarSelector=[
+    '.strategy-pdf-toolbar','.presentation-toolbar','.evidence-toolbar',
+    '.demographic-toolbar','.movie-toolbar','.future-toolbar',
+    '.reelio-toolbar','.reading-preview-toolbar'
+  ].join(',');
+  const countSelector=[
+    '.strategy-pdf-page-count','.presentation-slide-count','.evidence-page-count',
+    '.demographic-page-count','.movie-page-count','.future-page-count',
+    '.reelio-page-count','.reading-preview-page-count'
+  ].join(',');
+  const spacerSelector=[
+    '.strategy-pdf-spacer','.presentation-spacer','.evidence-spacer',
+    '.demographic-spacer','.movie-spacer','.future-spacer',
+    '.reelio-spacer','.reading-preview-spacer'
+  ].join(',');
   const fullSelector=[
     '.strategy-pdf-full','.presentation-full','.evidence-full','.demographic-full',
     '.movie-full','.future-full','.reelio-full','.reading-preview-full'
@@ -29,14 +46,12 @@ document.write('<script src="js/app-base.js"><\/script>');
     '.movie-close','.future-close','.reelio-close','.reading-preview-close'
   ].join(',');
 
+  // Keep desktop labels intact. Mobile converts FULL SCREEN to an icon with CSS.
   document.querySelectorAll(fullSelector).forEach(function(button){
-    button.textContent='⛶';
+    button.textContent='FULL SCREEN';
     button.setAttribute('aria-label','Open full screen');
     button.setAttribute('title','Open full screen');
   });
-
-  // Desktop close wording uses a normal capital X so it aligns visually
-  // with the rest of the toolbar text.
   document.querySelectorAll(closeSelector).forEach(function(button){
     button.textContent='CLOSE X';
     button.setAttribute('aria-label','Exit full screen');
@@ -50,72 +65,116 @@ document.write('<script src="js/app-base.js"><\/script>');
   });
 
   const style=document.createElement('style');
-  style.id='viewer-close-alignment';
+  style.id='viewer-toolbar-responsive-layout';
   style.textContent=`
+    /* Close is only available while a viewer is actually fullscreen. */
     ${closeSelector} {
-      display: none !important;
-      align-items: center !important;
-      justify-content: center !important;
-      line-height: 1 !important;
-      white-space: nowrap !important;
-      text-align: center !important;
+      display:none!important;
     }
     .is-fullscreen :is(${closeSelector}),
     :fullscreen :is(${closeSelector}) {
-      display: inline-flex !important;
+      display:inline-flex!important;
+      align-items:center!important;
+      justify-content:center!important;
+      white-space:nowrap!important;
+      text-align:center!important;
     }
 
-    /* Mobile + split-screen: never show the close control in normal view. */
-    @media (max-width: 1040px) {
-      body .report-page .strategy-pdf-close,
-      body .report-page .presentation-close,
-      body .report-page .evidence-close,
-      body .report-page .demographic-close,
-      body .report-page .movie-close,
-      body .report-page .future-close,
-      body .report-page .reelio-close,
-      body .report-page .reading-preview-close {
-        display: none !important;
+    @media (max-width:1040px) {
+      ${toolbarSelector} {
+        display:flex!important;
+        flex-direction:row!important;
+        flex-wrap:wrap!important;
+        align-items:center!important;
+        justify-content:flex-start!important;
+        gap:6px!important;
       }
 
-      body .report-page .is-fullscreen .strategy-pdf-close,
-      body .report-page .is-fullscreen .presentation-close,
-      body .report-page .is-fullscreen .evidence-close,
-      body .report-page .is-fullscreen .demographic-close,
-      body .report-page .is-fullscreen .movie-close,
-      body .report-page .is-fullscreen .future-close,
-      body .report-page .is-fullscreen .reelio-close,
-      body .report-page .is-fullscreen .reading-preview-close,
-      body .report-page :fullscreen .strategy-pdf-close,
-      body .report-page :fullscreen .presentation-close,
-      body .report-page :fullscreen .evidence-close,
-      body .report-page :fullscreen .demographic-close,
-      body .report-page :fullscreen .movie-close,
-      body .report-page :fullscreen .future-close,
-      body .report-page :fullscreen .reelio-close,
-      body .report-page :fullscreen .reading-preview-close {
-        display: inline-flex !important;
+      ${toolbarSelector} > button {
+        width:auto!important;
+        flex:0 0 auto!important;
       }
-    }
 
-    @media (max-width: 768px) {
+      ${spacerSelector} {
+        display:none!important;
+      }
+
+      /* Page/slide indicator is the only item on row two. */
+      ${countSelector} {
+        order:20!important;
+        flex:0 0 100%!important;
+        width:100%!important;
+        max-width:100%!important;
+        margin:6px 0 0!important;
+        text-align:left!important;
+        grid-column:auto!important;
+      }
+
+      /* Normal mobile/split view: icon-only fullscreen control beside Fit Width. */
+      ${fullSelector} {
+        order:10!important;
+        display:inline-flex!important;
+        align-items:center!important;
+        justify-content:center!important;
+        width:40px!important;
+        min-width:40px!important;
+        height:40px!important;
+        padding:0!important;
+        font-size:0!important;
+        line-height:1!important;
+      }
+      ${fullSelector}::before {
+        content:'⛶'!important;
+        display:inline-flex!important;
+        align-items:center!important;
+        justify-content:center!important;
+        width:100%!important;
+        height:100%!important;
+        font-size:18px!important;
+        line-height:1!important;
+      }
+
+      /* Normal mobile/split view has no Close control. */
       ${closeSelector} {
-        padding: 0 !important;
-        width: 40px !important;
-        min-width: 40px !important;
-        height: 40px !important;
-        font-size: 0 !important;
+        order:10!important;
+        display:none!important;
       }
-      ${closeSelector}::before {
-        content: 'X' !important;
-        display: inline-flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        width: 100% !important;
-        height: 100% !important;
-        font-size: 18px !important;
-        line-height: 1 !important;
-        text-align: center !important;
+
+      /* Once fullscreen is active, remove the fullscreen icon and place CLOSE X
+         in the same first-row position after Fit Width. */
+      .is-fullscreen :is(${fullSelector}),
+      :fullscreen :is(${fullSelector}) {
+        display:none!important;
+      }
+      .is-fullscreen :is(${closeSelector}),
+      :fullscreen :is(${closeSelector}) {
+        display:inline-flex!important;
+        align-items:center!important;
+        justify-content:center!important;
+        width:auto!important;
+        min-width:0!important;
+        height:40px!important;
+        padding:0 12px!important;
+        font-size:inherit!important;
+        line-height:1!important;
+        white-space:nowrap!important;
+        text-align:center!important;
+      }
+    }
+
+    @media (max-width:520px) {
+      ${toolbarSelector} {
+        gap:5px!important;
+      }
+      ${fullSelector} {
+        width:36px!important;
+        min-width:36px!important;
+        height:36px!important;
+      }
+      .is-fullscreen :is(${closeSelector}),
+      :fullscreen :is(${closeSelector}) {
+        height:36px!important;
+        padding:0 9px!important;
       }
     }
   `;
