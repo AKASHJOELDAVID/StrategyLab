@@ -14,3 +14,9 @@ html.viewer-true-mobile #page-reading-pulse .reading-pulse-product-page>section:
 border-left:0!important;
 padding-left:0!important
 }
+
+/* Strategy Report: remove the blue accent line from Strategic Takeaway on true mobile only. */
+html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.takeaway-box)+.takeaway-box{
+border-left:0!important;
+padding-left:0!important
+}
