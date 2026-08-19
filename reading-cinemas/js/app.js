@@ -116,8 +116,13 @@ document.write('<script src="js/app-base.js"><\/script>');
         grid-column:auto!important;
       }
 
-      /* Normal mobile view: icon-only fullscreen control immediately after Fit Width. */
+      /* Hide the original fullscreen control on mobile. A dedicated mobile
+         trigger is inserted directly after Fit Width below. */
       ${fullSelector} {
+        display:none!important;
+      }
+
+      .mobile-fullscreen-trigger {
         order:10!important;
         display:inline-flex!important;
         align-items:center!important;
@@ -132,11 +137,6 @@ document.write('<script src="js/app-base.js"><\/script>');
         white-space:nowrap!important;
         text-align:center!important;
       }
-      ${fullSelector}::before,
-      ${fullSelector}::after {
-        content:none!important;
-        display:none!important;
-      }
 
       /* Normal mobile view has no Close control. */
       ${closeSelector} {
@@ -145,8 +145,8 @@ document.write('<script src="js/app-base.js"><\/script>');
       }
 
       /* In mobile fullscreen, replace the fullscreen icon with CLOSE X. */
-      .is-fullscreen :is(${fullSelector}),
-      :fullscreen :is(${fullSelector}) {
+      .is-fullscreen .mobile-fullscreen-trigger,
+      :fullscreen .mobile-fullscreen-trigger {
         display:none!important;
       }
       .is-fullscreen :is(${closeSelector}),
@@ -162,6 +162,7 @@ document.write('<script src="js/app-base.js"><\/script>');
         line-height:1!important;
         white-space:nowrap!important;
         text-align:center!important;
+        order:10!important;
       }
     }
 
@@ -169,7 +170,7 @@ document.write('<script src="js/app-base.js"><\/script>');
       ${toolbarSelector} {
         gap:5px!important;
       }
-      ${fullSelector} {
+      .mobile-fullscreen-trigger {
         width:36px!important;
         min-width:36px!important;
         height:36px!important;
@@ -182,6 +183,36 @@ document.write('<script src="js/app-base.js"><\/script>');
     }
   `;
   document.head.appendChild(style);
+
+  function installMobileFullscreenTriggers(){
+    document.querySelectorAll(fullSelector).forEach(function(original){
+      const toolbar=original.closest(toolbarSelector);
+      if(!toolbar||toolbar.querySelector('.mobile-fullscreen-trigger'))return;
+
+      const spacer=original.previousElementSibling;
+      const fitButton=spacer&&spacer.matches(spacerSelector)
+        ? spacer.previousElementSibling
+        : original.previousElementSibling;
+      if(!fitButton)return;
+
+      const mobileButton=document.createElement('button');
+      mobileButton.type='button';
+      mobileButton.className=(original.className||'')+' mobile-fullscreen-trigger';
+      mobileButton.classList.remove(...Array.from(original.classList).filter(function(name){return /-full$/.test(name);}));
+      mobileButton.textContent='⛶';
+      mobileButton.setAttribute('aria-label','Open full screen');
+      mobileButton.setAttribute('title','Open full screen');
+      const onclick=original.getAttribute('onclick');
+      if(onclick)mobileButton.setAttribute('onclick',onclick);
+      fitButton.insertAdjacentElement('afterend',mobileButton);
+    });
+  }
+
+  installMobileFullscreenTriggers();
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',installMobileFullscreenTriggers,{once:true});
+  }
+  window.addEventListener('load',installMobileFullscreenTriggers,{once:true});
 })();
 
 // The Reading Preview stays as two-page spreads on desktop and switches to
