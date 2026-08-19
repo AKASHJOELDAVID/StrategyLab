@@ -18,16 +18,11 @@ document.write('<script src="js/app-base.js"><\/script>');
   });
 })();
 
-// Keep the original viewer toolbar exactly as designed. The only toolbar
-// change is replacing the long Full Screen / Close labels with compact icons.
+// Keep the original viewer toolbar layout. Full Screen is shown as an icon.
 (function(){
   const fullSelector=[
     '.strategy-pdf-full','.presentation-full','.evidence-full','.demographic-full',
     '.movie-full','.future-full','.reelio-full','.reading-preview-full'
-  ].join(',');
-  const closeSelector=[
-    '.strategy-pdf-close','.presentation-close','.evidence-close','.demographic-close',
-    '.movie-close','.future-close','.reelio-close','.reading-preview-close'
   ].join(',');
 
   document.querySelectorAll(fullSelector).forEach(function(button){
@@ -35,17 +30,56 @@ document.write('<script src="js/app-base.js"><\/script>');
     button.setAttribute('aria-label','Open full screen');
     button.setAttribute('title','Open full screen');
   });
-  document.querySelectorAll(closeSelector).forEach(function(button){
-    button.textContent='×';
-    button.setAttribute('aria-label','Exit full screen');
-    button.setAttribute('title','Exit full screen');
-  });
 
   // Keep the requested down arrow on all applicable View buttons.
   document.querySelectorAll('.engage-action').forEach(function(button){
     const text=button.textContent.replace(/\s+/g,' ').trim();
     if(/^view\s/i.test(text)&&!/[↓↧⇩]$/.test(text))button.textContent=text+' ↓';
   });
+})();
+
+// Mobile only: keep the close control in its original position, but show
+// just a centred X. Desktop keeps the original "Close ×" wording.
+(function(){
+  const style=document.createElement('style');
+  style.id='mobile-viewer-close-fix';
+  style.textContent=`
+    @media (max-width: 768px) {
+      .strategy-pdf-close,
+      .presentation-close,
+      .evidence-close,
+      .demographic-close,
+      .movie-close,
+      .future-close,
+      .reelio-close,
+      .reading-preview-close {
+        padding: 0 !important;
+        width: 40px !important;
+        min-width: 40px !important;
+        height: 40px !important;
+        font-size: 0 !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+      }
+      .strategy-pdf-close::before,
+      .presentation-close::before,
+      .evidence-close::before,
+      .demographic-close::before,
+      .movie-close::before,
+      .future-close::before,
+      .reelio-close::before,
+      .reading-preview-close::before {
+        content: '×' !important;
+        display: block !important;
+        width: 100% !important;
+        font-size: 22px !important;
+        line-height: 40px !important;
+        text-align: center !important;
+      }
+    }
+  `;
+  document.head.appendChild(style);
 })();
 
 // The Reading Preview stays as two-page spreads on desktop and switches to
@@ -93,51 +127,3 @@ document.write('<script src="js/app-base.js"><\/script>');
     timer=setTimeout(setMagazineMode,100);
   });
 })();
-
-// Mobile-only fullscreen close control: centre it and show only an X.
-window.addEventListener('load',function(){
-  const closeSelector=[
-    '.strategy-pdf-close','.presentation-close','.evidence-close','.demographic-close',
-    '.movie-close','.future-close','.reelio-close','.reading-preview-close'
-  ].join(',');
-  const toolbarSelector=[
-    '.strategy-pdf-toolbar','.presentation-toolbar','.evidence-toolbar','.demographic-toolbar',
-    '.movie-toolbar','.future-toolbar','.reelio-toolbar','.reading-preview-toolbar'
-  ].join(',');
-
-  document.querySelectorAll(closeSelector).forEach(function(button){
-    button.textContent='×';
-    button.setAttribute('aria-label','Exit full screen');
-    button.setAttribute('title','Exit full screen');
-  });
-
-  const style=document.createElement('style');
-  style.id='mobile-viewer-close-fix';
-  style.textContent=`
-    @media (max-width: 768px) {
-      ${toolbarSelector} {
-        position: relative !important;
-      }
-      ${closeSelector} {
-        position: absolute !important;
-        left: 50% !important;
-        transform: translateX(-50%) !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        width: 44px !important;
-        min-width: 44px !important;
-        height: 40px !important;
-        font-size: 0 !important;
-        align-items: center !important;
-        justify-content: center !important;
-        text-align: center !important;
-      }
-      ${closeSelector}::before {
-        content: '×' !important;
-        font-size: 22px !important;
-        line-height: 1 !important;
-      }
-    }
-  `;
-  document.head.appendChild(style);
-});
