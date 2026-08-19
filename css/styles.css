@@ -8,3 +8,9 @@ height:auto!important;
 margin-left:0!important;
 margin-right:0!important
 }
+
+/* Reading Pulse: keep Why Reading Pulse Matters clean on mobile; CineMatch retains the blue accent treatment. */
+html.viewer-true-mobile #page-reading-pulse .reading-pulse-product-page>section:nth-of-type(9)::after{
+border-left:0!important;
+padding-left:0!important
+}
