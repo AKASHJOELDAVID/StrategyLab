@@ -48,7 +48,7 @@
 .report-page .report-glance-label{font-size:9px!important;line-height:1.28!important;letter-spacing:.025em!important;white-space:normal!important}
 .report-page .strategic-close{padding-left:14px!important}
 
-/* Keep the magazine itself centred on mobile; toolbar stays on its original layout. */
+/* Keep the magazine itself centred on mobile. */
 #page-digital-magazine .reading-preview-reader{width:100%!important;max-width:100%!important;min-width:0!important;overflow:hidden!important}
 #page-digital-magazine .reading-preview-shell,#page-digital-magazine .reading-preview-main{width:100%!important;min-width:0!important}
 #page-digital-magazine .reading-preview-rail{display:none!important}
@@ -58,10 +58,18 @@
 #page-digital-magazine .reading-preview-side-nav{position:absolute!important;top:50%!important;transform:translateY(-50%)!important;z-index:5!important;width:34px!important;min-width:34px!important;height:44px!important;margin:0!important}
 #page-digital-magazine .reading-preview-side-prev{left:8px!important}
 #page-digital-magazine .reading-preview-side-next{right:8px!important}
+
+/* Match The Reading Preview mobile viewer controls to the shared report viewer layout. */
+#page-digital-magazine .reading-preview-toolbar{display:flex!important;flex-direction:row!important;flex-wrap:wrap!important;align-items:center!important;justify-content:flex-start!important;grid-template-columns:none!important;gap:6px!important;column-gap:6px!important;row-gap:6px!important}
+#page-digital-magazine .reading-preview-toolbar>.reading-preview-tool{width:auto!important;min-width:0!important;flex:0 0 auto!important;margin-left:0!important;margin-right:0!important}
+#page-digital-magazine .reading-preview-toolbar>.reading-preview-zoom-value{margin-left:0!important;margin-right:0!important;min-width:48px!important;text-align:center!important}
+#page-digital-magazine .reading-preview-page-count{order:20!important;flex:0 0 100%!important;width:100%!important;max-width:100%!important;grid-column:auto!important;margin:6px 0 0!important;padding:0!important;text-align:left!important}
+#page-digital-magazine .reading-preview-spacer{display:none!important}
 }
 
 @media(max-width:520px){
 .report-page .report-glance-label{font-size:8.5px!important;letter-spacing:.015em!important}
 .report-page .article-title{font-size:30px!important}
 #page-digital-magazine .reading-preview-stage{min-height:450px!important;padding-left:5px!important;padding-right:5px!important}
+#page-digital-magazine .reading-preview-toolbar{gap:5px!important;column-gap:5px!important;row-gap:5px!important}
 }
