@@ -396,3 +396,27 @@ min-height:390px!important
 html.viewer-true-mobile #page-digital-magazine .reading-preview-reader:not(.is-fullscreen) .reading-preview-mobile-nav{
 padding-top:8px!important
 }
+
+/* In true-mobile fullscreen, reserve a dedicated bottom row for Previous / Next so they stay fully visible and tappable. */
+html.viewer-true-mobile #page-digital-magazine .reading-preview-reader.is-fullscreen .reading-preview-main,
+html.viewer-true-mobile #page-digital-magazine .reading-preview-reader:fullscreen .reading-preview-main{
+display:grid!important;
+grid-template-rows:minmax(0,1fr) auto!important;
+height:100%!important;
+min-height:0!important;
+overflow:hidden!important
+}
+html.viewer-true-mobile #page-digital-magazine .reading-preview-reader.is-fullscreen .reading-preview-stage,
+html.viewer-true-mobile #page-digital-magazine .reading-preview-reader:fullscreen .reading-preview-stage{
+grid-row:1!important;
+height:auto!important;
+min-height:0!important
+}
+html.viewer-true-mobile #page-digital-magazine .reading-preview-reader.is-fullscreen .reading-preview-mobile-nav,
+html.viewer-true-mobile #page-digital-magazine .reading-preview-reader:fullscreen .reading-preview-mobile-nav{
+grid-row:2!important;
+position:relative!important;
+z-index:20!important;
+padding:8px 8px calc(10px + env(safe-area-inset-bottom))!important;
+background:#eef3f8!important
+}
