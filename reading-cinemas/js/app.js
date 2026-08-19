@@ -93,3 +93,51 @@ document.write('<script src="js/app-base.js"><\/script>');
     timer=setTimeout(setMagazineMode,100);
   });
 })();
+
+// Mobile-only fullscreen close control: centre it and show only an X.
+window.addEventListener('load',function(){
+  const closeSelector=[
+    '.strategy-pdf-close','.presentation-close','.evidence-close','.demographic-close',
+    '.movie-close','.future-close','.reelio-close','.reading-preview-close'
+  ].join(',');
+  const toolbarSelector=[
+    '.strategy-pdf-toolbar','.presentation-toolbar','.evidence-toolbar','.demographic-toolbar',
+    '.movie-toolbar','.future-toolbar','.reelio-toolbar','.reading-preview-toolbar'
+  ].join(',');
+
+  document.querySelectorAll(closeSelector).forEach(function(button){
+    button.textContent='×';
+    button.setAttribute('aria-label','Exit full screen');
+    button.setAttribute('title','Exit full screen');
+  });
+
+  const style=document.createElement('style');
+  style.id='mobile-viewer-close-fix';
+  style.textContent=`
+    @media (max-width: 768px) {
+      ${toolbarSelector} {
+        position: relative !important;
+      }
+      ${closeSelector} {
+        position: absolute !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 44px !important;
+        min-width: 44px !important;
+        height: 40px !important;
+        font-size: 0 !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+      }
+      ${closeSelector}::before {
+        content: '×' !important;
+        font-size: 22px !important;
+        line-height: 1 !important;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+});
