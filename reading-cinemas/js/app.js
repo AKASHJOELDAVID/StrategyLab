@@ -88,11 +88,38 @@ document.write('<script src="js/app-base.js"><\/script>');
   window.addEventListener('resize',syncCloseButtonTypography);
   window.addEventListener('load',syncCloseButtonTypography,{once:true});
 
-  // Keep the requested down arrow on all applicable View buttons.
-  document.querySelectorAll('.engage-action').forEach(function(button){
-    const text=button.textContent.replace(/\s+/g,' ').trim();
-    if(/^view\s/i.test(text)&&!/[↓↧⇩]$/.test(text))button.textContent=text+' ↓';
+  // Keep a down arrow on every VIEW action button across all report pages.
+  // Run after the page is parsed and also handle any buttons rendered later.
+  function syncViewActionArrows(root){
+    const scope=root&&root.querySelectorAll?root:document;
+    const buttons=[];
+    if(scope.matches&&scope.matches('.engage-action'))buttons.push(scope);
+    scope.querySelectorAll('.engage-action').forEach(function(button){buttons.push(button);});
+
+    buttons.forEach(function(button){
+      const text=button.textContent.replace(/\s+/g,' ').trim();
+      if(/^view\b/i.test(text)&&!/[↓↧⇩]\s*$/.test(text)){
+        button.appendChild(document.createTextNode(' ↓'));
+      }
+    });
+  }
+
+  syncViewActionArrows(document);
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',function(){syncViewActionArrows(document);},{once:true});
+  }else{
+    syncViewActionArrows(document);
+  }
+  window.addEventListener('load',function(){syncViewActionArrows(document);},{once:true});
+
+  const viewActionObserver=new MutationObserver(function(mutations){
+    mutations.forEach(function(mutation){
+      mutation.addedNodes.forEach(function(node){
+        if(node.nodeType===Node.ELEMENT_NODE)syncViewActionArrows(node);
+      });
+    });
   });
+  viewActionObserver.observe(document.documentElement,{childList:true,subtree:true});
 
   const style=document.createElement('style');
   style.id='viewer-toolbar-responsive-layout';
