@@ -26,3 +26,9 @@ html.viewer-true-mobile #page-presentation .presentation-executive-message{
 border-left:0!important;
 padding-left:0!important
 }
+
+/* Evidence Review: remove the blue accent line from How It Supports the Strategy on true mobile only. */
+html.viewer-true-mobile #page-evidence-review .evidence-review-section:has(+.evidence-review-section.viewer-final-section)::after{
+border-left:0!important;
+padding-left:0!important
+}
