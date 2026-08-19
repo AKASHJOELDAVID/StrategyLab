@@ -137,6 +137,12 @@ document.write('<script src="js/app-base.js"><\/script>');
       text-align:center!important;
     }
 
+    /* The icon-only fullscreen trigger is mobile-only. Never show it on
+       desktop or desktop fullscreen; desktop keeps the FULL SCREEN button. */
+    .mobile-fullscreen-trigger {
+      display:none!important;
+    }
+
     @media (max-width:768px) {
       ${toolbarSelector} {
         display:flex!important;
