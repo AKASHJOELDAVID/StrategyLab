@@ -46,12 +46,18 @@ document.write('<script src="js/app-base.js"><\/script>');
     '.movie-close','.future-close','.reelio-close','.reading-preview-close'
   ].join(',');
 
-  // Keep desktop labels intact. Mobile converts FULL SCREEN to an icon with CSS.
-  document.querySelectorAll(fullSelector).forEach(function(button){
-    button.textContent='FULL SCREEN';
-    button.setAttribute('aria-label','Open full screen');
-    button.setAttribute('title','Open full screen');
-  });
+  function syncFullscreenLabels(){
+    const compact=window.matchMedia('(max-width:1040px)').matches;
+    document.querySelectorAll(fullSelector).forEach(function(button){
+      button.textContent=compact?'⛶':'FULL SCREEN';
+      button.setAttribute('aria-label','Open full screen');
+      button.setAttribute('title','Open full screen');
+    });
+  }
+
+  syncFullscreenLabels();
+  window.addEventListener('resize',syncFullscreenLabels);
+
   document.querySelectorAll(closeSelector).forEach(function(button){
     button.textContent='CLOSE X';
     button.setAttribute('aria-label','Exit full screen');
@@ -110,7 +116,7 @@ document.write('<script src="js/app-base.js"><\/script>');
         grid-column:auto!important;
       }
 
-      /* Normal mobile/split view: icon-only fullscreen control beside Fit Width. */
+      /* Normal mobile/split view: the button itself contains only the fullscreen icon. */
       ${fullSelector} {
         order:10!important;
         display:inline-flex!important;
@@ -120,18 +126,16 @@ document.write('<script src="js/app-base.js"><\/script>');
         min-width:40px!important;
         height:40px!important;
         padding:0!important;
-        font-size:0!important;
-        line-height:1!important;
-      }
-      ${fullSelector}::before {
-        content:'⛶'!important;
-        display:inline-flex!important;
-        align-items:center!important;
-        justify-content:center!important;
-        width:100%!important;
-        height:100%!important;
         font-size:18px!important;
         line-height:1!important;
+        overflow:hidden!important;
+        white-space:nowrap!important;
+        text-align:center!important;
+      }
+      ${fullSelector}::before,
+      ${fullSelector}::after {
+        content:none!important;
+        display:none!important;
       }
 
       /* Normal mobile/split view has no Close control. */
