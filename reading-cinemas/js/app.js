@@ -345,48 +345,74 @@ document.write('<script src="js/app-base.js"><\/script>');
   window.addEventListener('load',installMobileFullscreenTriggers,{once:true});
 })();
 
-// The Reading Preview stays as two-page spreads on desktop and switches to
-// one centred page at a time on mobile.
+// The Reading Preview stays as two-page spreads on desktop and split-screen,
+// and switches to one centred page at a time on a true mobile device.
 (function(){
-  if(typeof readingPreviewSpreads==='undefined'||typeof readingPreviewState==='undefined')return;
+  let installed=false;
 
-  const desktopMagazineSpreads=readingPreviewSpreads.map(function(spread){
-    return {label:spread.label,pages:spread.pages.slice()};
-  });
-  let mobileMode=null;
+  function installReadingPreviewResponsiveMode(){
+    if(installed)return true;
+    if(typeof readingPreviewSpreads==='undefined'||
+       typeof readingPreviewState==='undefined'||
+       typeof READING_PREVIEW_TOTAL_PAGES==='undefined'||
+       typeof readingPreviewSpreadForPage!=='function'||
+       typeof readingPreviewRender!=='function'||
+       typeof readingPreviewApplyZoom!=='function')return false;
 
-  readingPreviewIndicatorLabel=function(){
-    const data=readingPreviewSpreads[readingPreviewState.index]||readingPreviewSpreads[0];
-    if(!data||!data.pages.length)return '';
-    if(data.pages.length===1){
-      const page=data.pages[0];
-      if(page===1)return 'COVER · 1 OF 16';
-      if(page===16)return 'BACK COVER · 16 OF 16';
-      return 'PAGE '+page+' OF 16';
+    installed=true;
+    const desktopMagazineSpreads=readingPreviewSpreads.map(function(spread){
+      return {label:spread.label,pages:spread.pages.slice()};
+    });
+    let mobileMode=null;
+
+    function isTrueMobileMagazine(){
+      return window.matchMedia('(max-width:768px)').matches && window.screen.width<=768;
     }
-    return 'PAGES '+data.pages[0]+'–'+data.pages[1]+' OF 16';
-  };
 
-  function setMagazineMode(){
-    const mobile=window.matchMedia('(max-width: 768px)').matches;
-    if(mobileMode===mobile)return;
+    readingPreviewIndicatorLabel=function(){
+      const data=readingPreviewSpreads[readingPreviewState.index]||readingPreviewSpreads[0];
+      if(!data||!data.pages.length)return '';
+      if(data.pages.length===1){
+        const page=data.pages[0];
+        if(page===1)return 'COVER · 1 OF 16';
+        if(page===16)return 'BACK COVER · 16 OF 16';
+        return 'PAGE '+page+' OF 16';
+      }
+      return 'PAGES '+data.pages[0]+'–'+data.pages[1]+' OF 16';
+    };
 
-    const current=(readingPreviewSpreads[readingPreviewState.index]||readingPreviewSpreads[0]||{pages:[1]}).pages[0]||1;
-    const nextSpreads=mobile
-      ? Array.from({length:READING_PREVIEW_TOTAL_PAGES},function(_,i){return {label:'Page '+(i+1),pages:[i+1]};})
-      : desktopMagazineSpreads.map(function(spread){return {label:spread.label,pages:spread.pages.slice()};});
+    function setMagazineMode(){
+      const mobile=isTrueMobileMagazine();
+      if(mobileMode===mobile)return;
 
-    readingPreviewSpreads.splice.apply(readingPreviewSpreads,[0,readingPreviewSpreads.length].concat(nextSpreads));
-    readingPreviewState.index=readingPreviewSpreadForPage(current);
-    mobileMode=mobile;
-    readingPreviewRender();
-    requestAnimationFrame(function(){readingPreviewApplyZoom();});
+      const current=(readingPreviewSpreads[readingPreviewState.index]||readingPreviewSpreads[0]||{pages:[1]}).pages[0]||1;
+      const nextSpreads=mobile
+        ? Array.from({length:READING_PREVIEW_TOTAL_PAGES},function(_,i){return {label:'Page '+(i+1),pages:[i+1]};})
+        : desktopMagazineSpreads.map(function(spread){return {label:spread.label,pages:spread.pages.slice()};});
+
+      readingPreviewSpreads.splice.apply(readingPreviewSpreads,[0,readingPreviewSpreads.length].concat(nextSpreads));
+      readingPreviewState.index=readingPreviewSpreadForPage(current);
+      mobileMode=mobile;
+      readingPreviewRender();
+      requestAnimationFrame(function(){readingPreviewApplyZoom();});
+    }
+
+    setMagazineMode();
+    let timer=null;
+    function queueMagazineMode(){
+      clearTimeout(timer);
+      timer=setTimeout(setMagazineMode,100);
+    }
+    window.addEventListener('resize',queueMagazineMode);
+    window.addEventListener('orientationchange',queueMagazineMode);
+    return true;
   }
 
-  setMagazineMode();
-  let timer=null;
-  window.addEventListener('resize',function(){
-    clearTimeout(timer);
-    timer=setTimeout(setMagazineMode,100);
-  });
+  if(!installReadingPreviewResponsiveMode()){
+    setTimeout(installReadingPreviewResponsiveMode,0);
+    if(document.readyState==='loading'){
+      document.addEventListener('DOMContentLoaded',installReadingPreviewResponsiveMode,{once:true});
+    }
+    window.addEventListener('load',installReadingPreviewResponsiveMode,{once:true});
+  }
 })();
