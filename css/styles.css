@@ -84,3 +84,61 @@ html:not(.viewer-true-mobile) #page-rc-main .overview-deck-desktop-extra{display
 html.viewer-true-mobile #page-rc-main .overview-desktop-only{display:none!important}
 html.viewer-true-mobile #page-rc-main .overview-mobile-only{display:block!important}
 html.viewer-true-mobile #page-rc-main .overview-deck-desktop-extra{display:none!important}
+
+/* Strategy Report: true-mobile content trim only. Desktop and split-screen retain the full source content. */
+html.viewer-true-mobile #page-strategy-report .strategy-summary>.strategy-major-section:first-child+.body-para,
+html.viewer-true-mobile #page-strategy-report .strategy-summary>.strategy-major-section:first-child+.body-para+.body-para,
+html.viewer-true-mobile #page-strategy-report .strategy-summary>.strategy-major-section:first-child+.body-para+.body-para+.body-para{display:none!important}
+html.viewer-true-mobile #page-strategy-report .strategy-summary>.strategy-major-section:first-child::after{content:"Reading Cinemas has meaningful underused capacity in quieter sessions. The opportunity is to create more value from the existing network through targeted pricing, a stronger customer experience and audience growth, then pilot, measure and scale what works.";display:block;margin-top:12px;font-family:var(--sans);font-size:17px;font-weight:400;line-height:1.6;letter-spacing:0;text-transform:none;color:var(--ink-soft)}
+
+html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.strategy-grid)+.strategy-grid .card-copy{display:none!important}
+html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.strategy-grid)+.strategy-grid .strategy-card::after{display:block;margin-top:8px;font-size:16px;line-height:1.55;color:var(--ink-soft)}
+html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.strategy-grid)+.strategy-grid .strategy-card:nth-child(1)::after{content:"Quieter sessions leave a large share of existing seat capacity unused."}
+html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.strategy-grid)+.strategy-grid .strategy-card:nth-child(2)::after{content:"Smaller films can struggle without a clear reason for customers to try them."}
+html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.strategy-grid)+.strategy-grid .strategy-card:nth-child(3)::after{content:"Booking friction and fees can weaken online conversion."}
+html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.strategy-grid)+.strategy-grid .strategy-card:nth-child(4)::after{content:"Selected regional markets may offer future growth if demand is proven."}
+
+html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.opportunity-grid),
+html.viewer-true-mobile #page-strategy-report .opportunity-grid{display:none!important}
+
+html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.body-para+.cluster-card)+.body-para{display:none!important}
+html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.body-para+.cluster-card)::after{content:"Nine initiatives sit across pricing, customer experience and audience growth.";display:block;margin-top:12px;font-family:var(--sans);font-size:17px;font-weight:400;line-height:1.6;letter-spacing:0;text-transform:none;color:var(--ink-soft)}
+html.viewer-true-mobile #page-strategy-report .cluster-copy{display:none!important}
+html.viewer-true-mobile #page-strategy-report .initiative-card .card-copy{display:none!important}
+html.viewer-true-mobile #page-strategy-report .initiative-card::after{display:block;margin-top:8px;font-size:16px;line-height:1.55;color:var(--ink-soft)}
+html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.body-para+.cluster-card)+.body-para+.cluster-card .initiative-card:nth-child(1)::after{content:"Use lower pricing selectively on underused seats while protecting peak yield."}
+html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.body-para+.cluster-card)+.body-para+.cluster-card .initiative-card:nth-child(2)::after{content:"Use value pricing to encourage trial of selected lower-profile films."}
+html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.body-para+.cluster-card)+.body-para+.cluster-card .initiative-card:nth-child(3)::after{content:"Create a simple weekday offer for quieter Monday to Thursday sessions."}
+html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.body-para+.cluster-card)+.body-para+.cluster-card+.cluster-card .initiative-card:nth-child(1)::after{content:"Use distinctive, low-cost food and beverage upgrades to lift spend per visit."}
+html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.body-para+.cluster-card)+.body-para+.cluster-card+.cluster-card .initiative-card:nth-child(2)::after{content:"Make discovery, session selection and booking faster and simpler."}
+html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.body-para+.cluster-card)+.body-para+.cluster-card+.cluster-card .initiative-card:nth-child(3)::after{content:"Reduce booking-fee friction and encourage more customers to book online."}
+html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.body-para+.cluster-card)+.body-para+.cluster-card+.cluster-card+.cluster-card .initiative-card:nth-child(1)::after{content:"Test regional growth only where feasibility and demand support it."}
+html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.body-para+.cluster-card)+.body-para+.cluster-card+.cluster-card+.cluster-card .initiative-card:nth-child(2)::after{content:"Use local audience data to test more relevant films at each cinema."}
+html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.body-para+.cluster-card)+.body-para+.cluster-card+.cluster-card+.cluster-card .initiative-card:nth-child(3)::after{content:"Use classic and cult re-screenings as limited off-peak event experiences."}
+
+html.viewer-true-mobile #page-strategy-report .metric-strip .card-copy{display:none!important}
+html.viewer-true-mobile #page-strategy-report .metric-card::after{display:block;margin-top:8px;font-size:16px;line-height:1.55;color:var(--ink-soft)}
+html.viewer-true-mobile #page-strategy-report .metric-card:nth-child(1)::after{content:"Potential uplift from better use of quieter sessions."}
+html.viewer-true-mobile #page-strategy-report .metric-card:nth-child(2)::after{content:"Potential increase from a repeatable weekday value offer."}
+html.viewer-true-mobile #page-strategy-report .metric-card:nth-child(3)::after{content:"Potential uplift from small food and beverage improvements."}
+html.viewer-true-mobile #page-strategy-report .metric-card:nth-child(4)::after{content:"Potential improvement from a simpler booking journey."}
+html.viewer-true-mobile #page-strategy-report .regional-focus .card-copy{display:none!important}
+html.viewer-true-mobile #page-strategy-report .regional-focus::after{content:"Priority markets for further feasibility testing.";display:block;margin-top:8px;font-size:16px;line-height:1.55;color:var(--ink-soft)}
+
+html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.measure-grid),
+html.viewer-true-mobile #page-strategy-report .measure-grid{display:none!important}
+
+html.viewer-true-mobile #page-strategy-report .roadmap .phase-card ul,
+html.viewer-true-mobile #page-strategy-report .roadmap .phase-note{display:none!important}
+html.viewer-true-mobile #page-strategy-report .roadmap .phase-card::after{display:block;margin-top:10px;font-size:16px;line-height:1.55;color:var(--ink-soft)}
+html.viewer-true-mobile #page-strategy-report .roadmap .phase-card:nth-child(1)::after{content:"Pilot seat, lower-profile film and weekday value pricing, plus small food and beverage upgrades."}
+html.viewer-true-mobile #page-strategy-report .roadmap .phase-card:nth-child(2)::after{content:"Simplify the app, checkout and booking-fee experience."}
+html.viewer-true-mobile #page-strategy-report .roadmap .phase-card:nth-child(3)::after{content:"Test localised programming and curated re-screenings using pilot results."}
+html.viewer-true-mobile #page-strategy-report .roadmap .phase-card:nth-child(4)::after{content:"Assess Bendigo, Ballarat and Geelong before any staged regional rollout."}
+
+html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.risk-grid),
+html.viewer-true-mobile #page-strategy-report .risk-grid{display:none!important}
+
+html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.takeaway-box)+.takeaway-box .body-para{display:none!important}
+html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.takeaway-box)+.takeaway-box{border-left:3px solid #1f5eff!important;padding-left:14px!important}
+html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.takeaway-box)+.takeaway-box::after{content:"Reading Cinemas can create more value from its existing footprint by activating quieter capacity, improving the booking journey, increasing value per visit and giving customers stronger reasons to return. The recommendation is to pilot the lowest-risk ideas first, measure the results and scale only where the evidence supports it.";display:block;font-size:17px;line-height:1.6;color:var(--ink-soft)}
