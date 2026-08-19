@@ -102,7 +102,11 @@ color:var(--ink)!important
 }
 
 /* Keep Campaigns 01-05 and finish with one concise From Ideas To Campaigns paragraph on true mobile. */
-html.viewer-true-mobile #page-marketing-ads .marketing-ads-page>section:last-child{display:block!important}
+html.viewer-true-mobile #page-marketing-ads .marketing-ads-page>section:last-child{
+display:block!important;
+border-top:1px solid var(--line)!important;
+padding-top:28px!important
+}
 html.viewer-true-mobile #page-marketing-ads .marketing-ads-page>section:last-child>.body-para{display:none!important}
 html.viewer-true-mobile #page-marketing-ads .marketing-ads-page>section:last-child>.section-label::after{
 content:"These concepts show how ideas from the wider Reading Cinemas project could be translated into clear audience-facing campaigns, using different angles such as value, convenience, brand personality and the overall cinema experience.";
