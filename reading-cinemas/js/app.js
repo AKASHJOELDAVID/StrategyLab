@@ -416,3 +416,133 @@ document.write('<script src="js/app-base.js"><\/script>');
     window.addEventListener('load',installReadingPreviewResponsiveMode,{once:true});
   }
 })();
+
+// On true mobile, use dedicated Previous / Next buttons underneath the page.
+// Desktop and split-screen keep the original side arrows.
+(function(){
+  let installed=false;
+
+  function installReadingPreviewMobileNavigation(){
+    if(installed)return true;
+    if(typeof readingPreviewMove!=='function'||
+       typeof readingPreviewSyncChrome!=='function'||
+       typeof readingPreviewSpreads==='undefined'||
+       typeof readingPreviewState==='undefined')return false;
+
+    const main=document.querySelector('#page-digital-magazine .reading-preview-main');
+    const stage=document.getElementById('reading-preview-stage');
+    if(!main||!stage)return false;
+
+    installed=true;
+
+    let nav=document.getElementById('reading-preview-mobile-nav');
+    if(!nav){
+      nav=document.createElement('div');
+      nav.id='reading-preview-mobile-nav';
+      nav.className='reading-preview-mobile-nav';
+
+      const previous=document.createElement('button');
+      previous.type='button';
+      previous.className='reading-preview-mobile-nav-button reading-preview-mobile-prev';
+      previous.textContent='← Previous';
+      previous.setAttribute('aria-label','Previous page');
+      previous.addEventListener('click',function(){readingPreviewMove(-1);});
+
+      const next=document.createElement('button');
+      next.type='button';
+      next.className='reading-preview-mobile-nav-button reading-preview-mobile-next';
+      next.textContent='Next →';
+      next.setAttribute('aria-label','Next page');
+      next.addEventListener('click',function(){readingPreviewMove(1);});
+
+      nav.appendChild(previous);
+      nav.appendChild(next);
+      stage.insertAdjacentElement('afterend',nav);
+    }
+
+    function syncMobileNavigation(){
+      const previous=nav.querySelector('.reading-preview-mobile-prev');
+      const next=nav.querySelector('.reading-preview-mobile-next');
+      if(previous)previous.disabled=readingPreviewState.index===0;
+      if(next)next.disabled=readingPreviewState.index===readingPreviewSpreads.length-1;
+    }
+
+    const originalSyncChrome=readingPreviewSyncChrome;
+    readingPreviewSyncChrome=function(){
+      originalSyncChrome();
+      syncMobileNavigation();
+    };
+    syncMobileNavigation();
+
+    if(!document.getElementById('reading-preview-mobile-bottom-nav-style')){
+      const style=document.createElement('style');
+      style.id='reading-preview-mobile-bottom-nav-style';
+      style.textContent=`
+        .reading-preview-mobile-nav{display:none!important}
+        html.viewer-true-mobile #page-digital-magazine .reading-preview-side-nav{display:none!important}
+        html.viewer-true-mobile #page-digital-magazine .reading-preview-stage{
+          display:block!important;
+          position:relative!important;
+          width:100%!important;
+          height:min(72vh,680px)!important;
+          min-height:450px!important;
+          padding:10px 5px!important;
+          overflow:hidden!important
+        }
+        html.viewer-true-mobile #page-digital-magazine .reading-preview-canvas{
+          display:flex!important;
+          align-items:flex-start!important;
+          justify-content:center!important;
+          width:100%!important;
+          height:100%!important;
+          min-height:0!important;
+          margin:0 auto!important;
+          padding:0!important
+        }
+        html.viewer-true-mobile #page-digital-magazine .reading-preview-mobile-nav{
+          display:grid!important;
+          grid-template-columns:repeat(2,minmax(0,1fr))!important;
+          gap:10px!important;
+          width:100%!important;
+          padding:10px 8px 0!important
+        }
+        html.viewer-true-mobile #page-digital-magazine .reading-preview-mobile-nav-button{
+          display:flex!important;
+          align-items:center!important;
+          justify-content:center!important;
+          width:100%!important;
+          min-width:0!important;
+          height:42px!important;
+          margin:0!important;
+          padding:0 12px!important;
+          border:1px solid var(--line)!important;
+          border-radius:4px!important;
+          background:var(--bg-soft)!important;
+          color:var(--accent)!important;
+          font-family:var(--mono)!important;
+          font-size:12px!important;
+          font-weight:500!important;
+          line-height:1!important;
+          letter-spacing:.08em!important;
+          text-transform:uppercase!important;
+          white-space:nowrap!important
+        }
+        html.viewer-true-mobile #page-digital-magazine .reading-preview-mobile-nav-button:disabled{
+          opacity:.35!important;
+          cursor:default!important
+        }
+      `;
+      document.head.appendChild(style);
+    }
+
+    return true;
+  }
+
+  if(!installReadingPreviewMobileNavigation()){
+    setTimeout(installReadingPreviewMobileNavigation,0);
+    if(document.readyState==='loading'){
+      document.addEventListener('DOMContentLoaded',installReadingPreviewMobileNavigation,{once:true});
+    }
+    window.addEventListener('load',installReadingPreviewMobileNavigation,{once:true});
+  }
+})();
