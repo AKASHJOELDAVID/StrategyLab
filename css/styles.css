@@ -49,9 +49,23 @@ text-transform:none!important;
 color:var(--ink)!important
 }
 
-/* Keep How It Works and Product Preview; remove the repetitive supporting sections on true mobile. */
-html.viewer-true-mobile #page-posterscan .posterscan-product-page>section:nth-of-type(3),
-html.viewer-true-mobile #page-posterscan .posterscan-product-page>section:nth-of-type(5){display:none!important}
+/* Keep How It Works, Product Preview and a concise closing section; remove Why It Matters on true mobile. */
+html.viewer-true-mobile #page-posterscan .posterscan-product-page>section:nth-of-type(3){display:none!important}
+html.viewer-true-mobile #page-posterscan .posterscan-product-page>section:nth-of-type(5){display:block!important}
+html.viewer-true-mobile #page-posterscan .posterscan-product-page>section:nth-of-type(5)>.body-para{display:none!important}
+html.viewer-true-mobile #page-posterscan .posterscan-product-page>section:nth-of-type(5)>.section-label::after{
+content:"PosterScan creates a middle layer between physical cinema promotion and Reading Cinemas’ existing booking flow, helping customers move directly from poster discovery to movie information, sessions and booking instead of having to remember a film and search for it later.";
+display:block!important;
+margin-top:12px!important;
+font-family:var(--serif)!important;
+font-size:17px!important;
+line-height:1.6!important;
+font-weight:400!important;
+font-style:normal!important;
+letter-spacing:normal!important;
+text-transform:none!important;
+color:var(--ink)!important
+}
 
 /* Marketing Ads: true-mobile content trim only. Desktop and split-screen stay unchanged. */
 html.viewer-true-mobile #page-marketing-ads .article-deck{
@@ -87,5 +101,19 @@ text-transform:none!important;
 color:var(--ink)!important
 }
 
-/* Keep Campaigns 01-05 and their visuals; remove the closing From Ideas To Campaigns section on true mobile. */
-html.viewer-true-mobile #page-marketing-ads .marketing-ads-page>section:last-child{display:none!important}
+/* Keep Campaigns 01-05 and finish with one concise From Ideas To Campaigns paragraph on true mobile. */
+html.viewer-true-mobile #page-marketing-ads .marketing-ads-page>section:last-child{display:block!important}
+html.viewer-true-mobile #page-marketing-ads .marketing-ads-page>section:last-child>.body-para{display:none!important}
+html.viewer-true-mobile #page-marketing-ads .marketing-ads-page>section:last-child>.section-label::after{
+content:"These concepts show how ideas from the wider Reading Cinemas project could be translated into clear audience-facing campaigns, using different angles such as value, convenience, brand personality and the overall cinema experience.";
+display:block!important;
+margin-top:12px!important;
+font-family:var(--serif)!important;
+font-size:17px!important;
+line-height:1.6!important;
+font-weight:400!important;
+font-style:normal!important;
+letter-spacing:normal!important;
+text-transform:none!important;
+color:var(--ink)!important
+}
