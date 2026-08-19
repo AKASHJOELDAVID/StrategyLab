@@ -32,3 +32,23 @@ html.viewer-true-mobile #page-evidence-review .evidence-review-section:has(+.evi
 border-left:0!important;
 padding-left:0!important
 }
+
+/* PosterScan: true-mobile content trim only. Desktop and split-screen stay unchanged. */
+html.viewer-true-mobile #page-posterscan .posterscan-product-page>section:first-child>.body-para{display:none!important}
+html.viewer-true-mobile #page-posterscan .posterscan-product-page>section:first-child>.section-label::after{
+content:"PosterScan turns a physical movie poster into a direct mobile discovery and booking journey. A customer scans a QR code on or near the poster to access the trailer, movie information, session times and booking options in one mobile-first experience, giving Reading Cinemas a more interactive and measurable link between physical marketing, movie discovery and booking intent.";
+display:block!important;
+margin-top:12px!important;
+font-family:var(--serif)!important;
+font-size:17px!important;
+line-height:1.6!important;
+font-weight:400!important;
+font-style:normal!important;
+letter-spacing:normal!important;
+text-transform:none!important;
+color:var(--ink)!important
+}
+
+/* Keep How It Works and Product Preview; remove the repetitive supporting sections on true mobile. */
+html.viewer-true-mobile #page-posterscan .posterscan-product-page>section:nth-of-type(3),
+html.viewer-true-mobile #page-posterscan .posterscan-product-page>section:nth-of-type(5){display:none!important}
