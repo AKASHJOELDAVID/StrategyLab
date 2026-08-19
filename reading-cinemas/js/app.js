@@ -19,8 +19,8 @@ document.write('<script src="js/app-base.js"><\/script>');
 })();
 
 // Viewer toolbar behaviour.
-// Desktop keeps the existing toolbar treatment.
-// Mobile + split-screen use two rows: controls first, page indicator second.
+// Desktop and split-screen keep the existing toolbar treatment.
+// Mobile only uses two rows: controls first, page indicator second.
 (function(){
   const toolbarSelector=[
     '.strategy-pdf-toolbar','.presentation-toolbar','.evidence-toolbar',
@@ -47,9 +47,9 @@ document.write('<script src="js/app-base.js"><\/script>');
   ].join(',');
 
   function syncFullscreenLabels(){
-    const compact=window.matchMedia('(max-width:1040px)').matches;
+    const mobile=window.matchMedia('(max-width:768px)').matches;
     document.querySelectorAll(fullSelector).forEach(function(button){
-      button.textContent=compact?'⛶':'FULL SCREEN';
+      button.textContent=mobile?'⛶':'FULL SCREEN';
       button.setAttribute('aria-label','Open full screen');
       button.setAttribute('title','Open full screen');
     });
@@ -86,7 +86,7 @@ document.write('<script src="js/app-base.js"><\/script>');
       text-align:center!important;
     }
 
-    @media (max-width:1040px) {
+    @media (max-width:768px) {
       ${toolbarSelector} {
         display:flex!important;
         flex-direction:row!important;
@@ -116,7 +116,7 @@ document.write('<script src="js/app-base.js"><\/script>');
         grid-column:auto!important;
       }
 
-      /* Normal mobile/split view: the button itself contains only the fullscreen icon. */
+      /* Normal mobile view: icon-only fullscreen control immediately after Fit Width. */
       ${fullSelector} {
         order:10!important;
         display:inline-flex!important;
@@ -138,14 +138,13 @@ document.write('<script src="js/app-base.js"><\/script>');
         display:none!important;
       }
 
-      /* Normal mobile/split view has no Close control. */
+      /* Normal mobile view has no Close control. */
       ${closeSelector} {
         order:10!important;
         display:none!important;
       }
 
-      /* Once fullscreen is active, remove the fullscreen icon and place CLOSE X
-         in the same first-row position after Fit Width. */
+      /* In mobile fullscreen, replace the fullscreen icon with CLOSE X. */
       .is-fullscreen :is(${fullSelector}),
       :fullscreen :is(${fullSelector}) {
         display:none!important;
