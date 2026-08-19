@@ -1,106 +1,79 @@
 @import url('./styles-base.css');
 
-/* Homepage About spacing */
-
-/* Same gap as between the normal paragraphs */
-#page-home #home-about .about-project-text:last-of-type {
-  margin-bottom: 22px !important;
+/* Homepage overrides retained */
+#page-home #home-about .about-project-text:last-of-type{margin-bottom:22px!important}
+#page-home #home-about .about-project-text:last-of-type+.about-expansion{margin-top:0!important}
+#page-home #home-about .about-bio:last-of-type{margin-bottom:22px!important}
+#page-home #home-about .about-links{margin-top:0!important;padding-top:0!important}
+@media(max-width:768px){
+#page-home .featured-deck{font-size:15px!important;line-height:1.5!important}
+#page-home .table-desc{font-size:16px!important;line-height:1.55!important}
+#page-home .kpi-label{font-size:10px!important;white-space:nowrap}
+#page-rc-main .deliverable-eyebrow{font-size:12px!important}
+#page-rc-main .deliverable-title{font-size:17px!important;line-height:1.35!important}
+#page-rc-main .deliverable-desc{font-size:16px!important;line-height:1.55!important}
+#page-rc-main .overview-section h2{font-size:18px!important;line-height:1.25!important;margin-bottom:12px!important}
+#page-rc-main .overview-section p{font-size:17px!important;line-height:1.6!important}
 }
 
-#page-home #home-about .about-project-text:last-of-type + .about-expansion {
-  margin-top: 0 !important;
+/* Reading Cinemas shared refinements */
+.report-page .report-glance-number,.report-page .report-glance-label{word-break:normal!important;overflow-wrap:normal!important;hyphens:none!important}
+.report-page .report-glance-item{min-width:0}
+.report-page .strategic-close{border-left:3px solid #1f5eff!important;padding-left:18px!important}
+.report-page .reading-pulse-cinematch-inline{margin:18px 0 0!important;padding:14px 16px!important;border-left:3px solid #1f5eff!important;background:rgba(31,94,255,.045)!important;font-size:15px!important;line-height:1.6!important}
+#page-strategy-report .phase-card ul{margin-bottom:0!important}
+#page-future-concepts .future-concept-section{min-height:0!important}
+#page-future-concepts .future-concept-copy,#page-future-concepts .future-concept-visual{align-self:start!important}
+
+/* Keep all report viewer controls on one clean row */
+:where(.strategy-pdf-toolbar,.presentation-toolbar,.evidence-toolbar,.demographic-toolbar,.movie-toolbar,.future-toolbar,.reelio-toolbar,.reading-preview-toolbar){flex-wrap:nowrap!important;align-items:center!important}
+:where(.strategy-pdf-full,.presentation-full,.evidence-full,.demographic-full,.movie-full,.future-full,.reelio-full,.reading-preview-full){font-size:0!important;width:38px!important;min-width:38px!important;height:36px!important;padding:0!important;display:inline-flex;align-items:center;justify-content:center}
+:where(.strategy-pdf-full,.presentation-full,.evidence-full,.demographic-full,.movie-full,.future-full,.reelio-full,.reading-preview-full)::before{content:'⛶';font-size:18px!important;line-height:1!important}
+:where(.strategy-pdf-close,.presentation-close,.evidence-close,.demographic-close,.movie-close,.future-close,.reelio-close,.reading-preview-close){font-size:0!important;width:38px!important;min-width:38px!important;height:36px!important;padding:0!important;align-items:center!important;justify-content:center!important;text-align:center!important}
+:where(.strategy-pdf-close,.presentation-close,.evidence-close,.demographic-close,.movie-close,.future-close,.reelio-close,.reading-preview-close)::before{content:'×';font-size:22px!important;line-height:1!important}
+
+@media(max-width:1040px){
+.report-page .article-title{font-size:32px!important;line-height:1.08!important;word-break:normal!important;overflow-wrap:normal!important}
+.report-page .article-deck{font-size:17px!important;line-height:1.6!important}
+.report-page .article-breadcrumb{font-size:14px!important}
+.report-page .article-badges .badge{font-size:12px!important;line-height:1.25!important}
+.report-page .section-label,.report-page .strategy-major-section,.report-page .presentation-major-section{font-size:18px!important;line-height:1.25!important;letter-spacing:.06em!important}
+.report-page .body-para,.report-page .presentation-editorial,.report-page .reelio-lede{font-size:17px!important;line-height:1.6!important}
+.report-page :where(.card-title,.presentation-arc-title,.evidence-area-title,.movie-card-title,.movie-pattern-locations,.demographic-insight-title,.demographic-group-title,.future-concept-title,.reelio-card-title,.reelio-step-title,.reading-pulse-card-title,.audience-pulse-card-title,.posterscan-card-title,.digital-magazine-card-title,.marketing-ads-campaign-title){font-size:17px!important;line-height:1.35!important;word-break:normal!important;overflow-wrap:normal!important}
+.report-page :where(.card-copy,.evidence-area-copy,.evidence-signal-copy,.movie-card-copy,.demographic-insight-copy,.demographic-group-copy,.future-concept-summary,.reelio-copy-card p,.reelio-capability-card p,.reading-pulse-visual-head p,.audience-pulse-copy,.posterscan-copy,.marketing-ads-campaign-text){font-size:16px!important;line-height:1.55!important}
+.report-page .report-glance-label{font-size:9.5px!important;line-height:1.3!important;letter-spacing:.035em!important;white-space:normal!important}
+.report-page .report-glance-number{white-space:normal!important}
+:where(.strategy-pdf-toolbar,.presentation-toolbar,.evidence-toolbar,.demographic-toolbar,.movie-toolbar,.future-toolbar,.reelio-toolbar,.reading-preview-toolbar){gap:6px!important;padding:8px!important;overflow-x:auto!important;overflow-y:hidden!important;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+:where(.strategy-pdf-toolbar,.presentation-toolbar,.evidence-toolbar,.demographic-toolbar,.movie-toolbar,.future-toolbar,.reelio-toolbar,.reading-preview-toolbar)::-webkit-scrollbar{display:none}
+:where(.strategy-pdf-tool,.presentation-tool,.evidence-tool,.demographic-tool,.movie-tool,.future-tool,.reelio-tool,.reading-preview-tool){flex:0 0 auto!important;white-space:nowrap!important;min-height:34px!important;padding:7px 9px!important;font-size:11px!important}
+:where(.strategy-pdf-page-count,.presentation-slide-count,.evidence-page-count,.demographic-page-count,.movie-page-count,.future-page-count,.reelio-page-count,.reading-preview-page-count,.strategy-pdf-zoom-value,.presentation-zoom-value,.evidence-zoom-value,.demographic-zoom-value,.movie-zoom-value,.future-zoom-value,.reelio-zoom-value,.reading-preview-zoom-value){flex:0 0 auto!important;white-space:nowrap!important;font-size:10px!important}
+#page-future-concepts .future-concept-section{display:flex!important;flex-direction:column!important;gap:16px!important}
+#page-future-concepts .future-concept-copy{order:1!important;width:100%!important}
+#page-future-concepts .future-concept-visual{order:2!important;width:100%!important;transform:none!important;margin-top:0!important}
+#page-future-concepts .future-concept-visual img{width:100%!important;height:auto!important}
 }
 
-#page-home #home-about .about-bio:last-of-type {
-  margin-bottom: 22px !important;
+@media(max-width:768px){
+.report-page .report-glance-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+.report-page .report-glance-item{padding-left:8px!important;padding-right:8px!important}
+.report-page .report-glance-label{font-size:9px!important;line-height:1.28!important;letter-spacing:.025em!important;white-space:normal!important}
+#page-digital-magazine .reading-preview-reader{width:100%!important;max-width:100%!important;min-width:0!important;overflow:hidden!important}
+#page-digital-magazine .reading-preview-shell{width:100%!important;min-width:0!important;height:auto!important;min-height:0!important}
+#page-digital-magazine .reading-preview-rail{display:none!important}
+#page-digital-magazine .reading-preview-main{width:100%!important;min-width:0!important}
+#page-digital-magazine .reading-preview-stage{width:100%!important;height:min(72vh,680px)!important;min-height:430px!important;padding:10px 34px!important;box-sizing:border-box!important;overflow:hidden!important}
+#page-digital-magazine .reading-preview-canvas{width:100%!important;height:100%!important;min-width:0!important;overflow:auto!important;-webkit-overflow-scrolling:touch}
+#page-digital-magazine .reading-preview-spread{max-width:none!important;margin:0 auto!important}
+#page-digital-magazine .reading-preview-side-nav{width:30px!important;height:44px!important;min-width:30px!important}
+#page-digital-magazine .reading-preview-drawer-panel{width:min(92vw,380px)!important;max-width:92vw!important}
+:where(.strategy-pdf-full,.presentation-full,.evidence-full,.demographic-full,.movie-full,.future-full,.reelio-full,.reading-preview-full,.strategy-pdf-close,.presentation-close,.evidence-close,.demographic-close,.movie-close,.future-close,.reelio-close,.reading-preview-close){width:34px!important;min-width:34px!important;height:34px!important;padding:0!important}
+.report-page .strategic-close{padding-left:14px!important}
 }
 
-#page-home #home-about .about-links {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-}
-
-/* Reading Cinemas Overview: mobile typography */
-@media (max-width: 768px) {
-  #page-rc-main .article-title {
-    font-size: 32px !important;
-    line-height: 1.08 !important;
-  }
-
-  #page-rc-main .article-deck {
-    font-size: 17px !important;
-    line-height: 1.6 !important;
-  }
-
-  #page-rc-main .overview-section h2 {
-    font-size: 18px !important;
-    line-height: 1.25 !important;
-    margin-bottom: 12px !important;
-  }
-
-  #page-rc-main .overview-section p {
-    font-size: 17px !important;
-    line-height: 1.6 !important;
-  }
-  #page-rc-main .deliverable-eyebrow {
-  font-size: 12px !important;
-}
-
-#page-rc-main .deliverable-title {
-  font-size: 17px !important;
-  line-height: 1.35 !important;
-}
-
-#page-rc-main .deliverable-desc {
-  font-size: 16px !important;
-  line-height: 1.55 !important;
-}
-}
-
-/* Homepage: mobile card and KPI typography */
-@media (max-width: 768px) {
-
-  #page-home .featured-deck {
-    font-size: 15px !important;
-    line-height: 1.5 !important;
-  }
-
-  #page-home .table-desc {
-    font-size: 16px !important;
-    line-height: 1.55 !important;
-  }
-
-  #page-home .kpi-label {
-    font-size: 11px !important;
-  }
-
-  #page-home .kpi-label {
-  font-size: 10px !important;
-  white-space: nowrap;
-}
-}
-/* Reading Cinemas Overview: additional mobile typography */
-@media (max-width: 768px) {
-
-  /* ← All Reports / Report 001 */
-  #page-rc-main .article-breadcrumb {
-    font-size: 14px !important;
-  }
-
-  /* OVERVIEW / CINEMA · ENTERTAINMENT / AUSTRALIA / DATE */
-  #page-rc-main .article-badges .badge {
-    font-size: 12px !important;
-  }
-
-  /* PROJECT SECTIONS / STRATEGIC INITIATIVES / etc. */
-  #page-rc-main .report-glance-label {
-  font-size: 9px !important;
-  letter-spacing: .05em !important;
-  white-space: nowrap !important;
-}
-
-/* Allow Victorian Locations Analysed to use two lines */
-#page-rc-main .report-glance-item:nth-child(4) .report-glance-label {
-  white-space: normal !important;
-}
+@media(max-width:520px){
+.report-page .report-glance-label{font-size:8.5px!important;letter-spacing:.015em!important}
+.report-page .article-title{font-size:30px!important}
+:where(.strategy-pdf-toolbar,.presentation-toolbar,.evidence-toolbar,.demographic-toolbar,.movie-toolbar,.future-toolbar,.reelio-toolbar,.reading-preview-toolbar){padding:7px 6px!important;gap:4px!important}
+:where(.strategy-pdf-tool,.presentation-tool,.evidence-tool,.demographic-tool,.movie-tool,.future-tool,.reelio-tool,.reading-preview-tool){padding:6px 8px!important;font-size:10px!important}
+#page-digital-magazine .reading-preview-stage{min-height:390px!important;padding-left:30px!important;padding-right:30px!important}
 }
