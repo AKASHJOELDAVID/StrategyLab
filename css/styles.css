@@ -249,3 +249,38 @@ text-transform:uppercase!important;
 color:var(--accent)!important;
 margin:0 0 12px!important
 }
+
+/* Audience Pulse: true-mobile content trim only. Desktop and split-screen stay unchanged. */
+html.viewer-true-mobile #page-audience-pulse .audience-pulse-product-page>.demographic-summary>.body-para{display:none!important}
+html.viewer-true-mobile #page-audience-pulse .audience-pulse-product-page>.demographic-summary>.section-label::after{
+content:"Audience Pulse is a quick pre-show interaction that asks customers which upcoming films they would be interested in watching at Reading Cinemas. It captures audience interest before future programming decisions are made, giving the team another lightweight signal to use alongside programming judgement, local audience knowledge and actual cinema performance.";
+display:block!important;
+margin-top:12px!important;
+font-family:var(--serif)!important;
+font-size:17px!important;
+line-height:1.6!important;
+font-weight:400!important;
+font-style:normal!important;
+letter-spacing:normal!important;
+text-transform:none!important;
+color:var(--ink)!important
+}
+
+/* Remove How It Works and Why It Matters on true mobile. */
+html.viewer-true-mobile #page-audience-pulse .audience-pulse-product-page>section:nth-of-type(2),
+html.viewer-true-mobile #page-audience-pulse .audience-pulse-product-page>section:nth-of-type(3){display:none!important}
+
+/* Keep Product Preview with a shorter explanation. */
+html.viewer-true-mobile #page-audience-pulse .audience-pulse-product-page>section:nth-of-type(4)>.audience-pulse-copy{
+font-size:0!important;
+line-height:0!important
+}
+html.viewer-true-mobile #page-audience-pulse .audience-pulse-product-page>section:nth-of-type(4)>.audience-pulse-copy::after{
+content:"Customers browse upcoming films, open movie details, select the titles they would watch and submit their choices through a simple Reading Cinemas-branded interface.";
+display:block!important;
+font-family:var(--sans)!important;
+font-size:16px!important;
+line-height:1.55!important;
+font-weight:400!important;
+color:var(--ink-soft)!important
+}
