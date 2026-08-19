@@ -257,3 +257,11 @@ html.viewer-true-mobile #page-evidence-review .evidence-signal{grid-template-col
 html.viewer-true-mobile #page-evidence-review .evidence-signal-copy{display:none!important}
 html.viewer-true-mobile #page-evidence-review .evidence-signal-label,
 html.viewer-true-mobile #page-evidence-review .evidence-signal-value{font-size:16px!important;line-height:1.45!important}
+
+/* Keep concise context inside each Evidence Signal box on true mobile. */
+html.viewer-true-mobile #page-evidence-review .evidence-signal::after{display:block!important;grid-column:1/-1;margin-top:2px;font-family:var(--sans);font-size:16px;line-height:1.55;font-weight:400;color:var(--ink-soft)}
+html.viewer-true-mobile #page-evidence-review .evidence-area:nth-child(1) .evidence-signal::after{content:"Shows the commercial value of filling even a small share of otherwise empty seats."}
+html.viewer-true-mobile #page-evidence-review .evidence-area:nth-child(2) .evidence-signal::after{content:"Discounted weekday pricing can create additional demand, not just shift existing visits."}
+html.viewer-true-mobile #page-evidence-review .evidence-area:nth-child(3) .evidence-signal::after{content:"Small increases in concession spend can have an outsized effect on cinema profitability."}
+html.viewer-true-mobile #page-evidence-review .evidence-area:nth-child(4) .evidence-signal::after{content:"Extra fees are a major source of checkout abandonment, making simpler booking commercially relevant."}
+html.viewer-true-mobile #page-evidence-review .evidence-area:nth-child(5) .evidence-signal::after{content:"Local programming and community relevance can help cinemas build stronger repeat attendance."}
