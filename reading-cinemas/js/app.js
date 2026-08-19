@@ -24,6 +24,10 @@ document.write('<script src="js/app-base.js"><\/script>');
     '.strategy-pdf-full','.presentation-full','.evidence-full','.demographic-full',
     '.movie-full','.future-full','.reelio-full','.reading-preview-full'
   ].join(',');
+  const closeSelector=[
+    '.strategy-pdf-close','.presentation-close','.evidence-close','.demographic-close',
+    '.movie-close','.future-close','.reelio-close','.reading-preview-close'
+  ].join(',');
 
   document.querySelectorAll(fullSelector).forEach(function(button){
     button.textContent='⛶';
@@ -31,50 +35,48 @@ document.write('<script src="js/app-base.js"><\/script>');
     button.setAttribute('title','Open full screen');
   });
 
+  // Desktop close wording uses a normal capital X so it aligns visually
+  // with the rest of the toolbar text.
+  document.querySelectorAll(closeSelector).forEach(function(button){
+    button.textContent='CLOSE X';
+    button.setAttribute('aria-label','Exit full screen');
+    button.setAttribute('title','Exit full screen');
+  });
+
   // Keep the requested down arrow on all applicable View buttons.
   document.querySelectorAll('.engage-action').forEach(function(button){
     const text=button.textContent.replace(/\s+/g,' ').trim();
     if(/^view\s/i.test(text)&&!/[↓↧⇩]$/.test(text))button.textContent=text+' ↓';
   });
-})();
 
-// Mobile only: keep the close control in its original position, but show
-// just a centred X. Desktop keeps the original "Close ×" wording.
-(function(){
   const style=document.createElement('style');
-  style.id='mobile-viewer-close-fix';
+  style.id='viewer-close-alignment';
   style.textContent=`
+    ${closeSelector} {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      line-height: 1 !important;
+      white-space: nowrap !important;
+      text-align: center !important;
+    }
     @media (max-width: 768px) {
-      .strategy-pdf-close,
-      .presentation-close,
-      .evidence-close,
-      .demographic-close,
-      .movie-close,
-      .future-close,
-      .reelio-close,
-      .reading-preview-close {
+      ${closeSelector} {
         padding: 0 !important;
         width: 40px !important;
         min-width: 40px !important;
         height: 40px !important;
         font-size: 0 !important;
+      }
+      ${closeSelector}::before {
+        content: 'X' !important;
+        display: inline-flex !important;
         align-items: center !important;
         justify-content: center !important;
-        text-align: center !important;
-      }
-      .strategy-pdf-close::before,
-      .presentation-close::before,
-      .evidence-close::before,
-      .demographic-close::before,
-      .movie-close::before,
-      .future-close::before,
-      .reelio-close::before,
-      .reading-preview-close::before {
-        content: '×' !important;
-        display: block !important;
         width: 100% !important;
-        font-size: 22px !important;
-        line-height: 40px !important;
+        height: 100% !important;
+        font-size: 18px !important;
+        line-height: 1 !important;
         text-align: center !important;
       }
     }
