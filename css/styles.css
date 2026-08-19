@@ -62,6 +62,7 @@
 /* Make The Reading Preview use the exact same mobile control pattern as the other report viewers. */
 #page-digital-magazine .reading-preview-toolbar{display:flex!important;flex-direction:row!important;flex-wrap:wrap!important;align-items:center!important;justify-content:flex-start!important;grid-template-columns:none!important;gap:6px!important;column-gap:6px!important;row-gap:6px!important}
 #page-digital-magazine .reading-preview-toolbar>.reading-preview-tool{width:auto!important;min-width:0!important;min-height:34px!important;flex:0 0 auto!important;margin-left:0!important;margin-right:0!important;padding:7px 9px!important;font-size:10px!important;letter-spacing:.08em!important}
+#page-digital-magazine .reading-preview-toolbar>.reading-preview-tool.mobile-fullscreen-trigger{font-size:18px!important}
 #page-digital-magazine .reading-preview-toolbar>.reading-preview-zoom-value{margin-left:0!important;margin-right:0!important;min-width:48px!important;text-align:center!important;font-size:10px!important;letter-spacing:.12em!important}
 #page-digital-magazine .reading-preview-page-count{order:20!important;flex:0 0 100%!important;width:100%!important;max-width:100%!important;grid-column:auto!important;margin:6px 0 0!important;padding:0!important;text-align:left!important;font-size:10px!important;letter-spacing:.12em!important}
 #page-digital-magazine .reading-preview-spacer{display:none!important}
@@ -73,4 +74,5 @@
 #page-digital-magazine .reading-preview-stage{min-height:450px!important;padding-left:5px!important;padding-right:5px!important}
 #page-digital-magazine .reading-preview-toolbar{gap:5px!important;column-gap:5px!important;row-gap:5px!important}
 #page-digital-magazine .reading-preview-toolbar>.reading-preview-tool{min-height:34px!important;padding:7px 9px!important;font-size:10px!important;letter-spacing:.08em!important}
+#page-digital-magazine .reading-preview-toolbar>.reading-preview-tool.mobile-fullscreen-trigger{font-size:18px!important}
 }
