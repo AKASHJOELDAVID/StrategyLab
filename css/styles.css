@@ -455,3 +455,59 @@ html.viewer-true-mobile #page-digital-magazine .reading-preview-reader:fullscree
 flex:0 0 auto!important;
 padding:8px 8px max(14px,env(safe-area-inset-bottom))!important
 }
+
+/* Reading Pulse: true-mobile content trim only. Desktop and split-screen stay unchanged. */
+html.viewer-true-mobile #page-reading-pulse .reading-pulse-product-page>section:first-child>.body-para{display:none!important}
+html.viewer-true-mobile #page-reading-pulse .reading-pulse-product-page>section:first-child>.section-label::after{
+content:"Reading Pulse brings theatrical film discovery, audience signals and location intelligence into one internal decision-support platform, helping programming teams identify which titles may be worth pursuing, testing or monitoring and where they may have stronger audience fit across Reading Cinemas’ Victorian locations.";
+display:block!important;
+margin-top:12px!important;
+font-family:var(--serif)!important;
+font-size:17px!important;
+line-height:1.6!important;
+font-weight:400!important;
+font-style:normal!important;
+letter-spacing:normal!important;
+text-transform:none!important;
+color:var(--ink)!important
+}
+
+/* Fold CineMatch into the Movie-to-Location section instead of keeping it as a standalone block. */
+html.viewer-true-mobile #page-reading-pulse .reading-pulse-product-page>section:nth-of-type(5) .reading-pulse-visual-head::after{
+content:"CineMatch compares signals such as audience reviews, current trends and box office performance to highlight which films may be worth a closer look.";
+display:block!important;
+margin-top:14px!important;
+padding:12px 14px!important;
+border-left:3px solid var(--accent)!important;
+background:rgba(31,94,255,.045)!important;
+font-family:var(--sans)!important;
+font-size:15px!important;
+line-height:1.6!important;
+font-weight:400!important;
+color:var(--ink-soft)!important
+}
+
+/* Remove standalone CineMatch, From Signal to Action and Other Product Capabilities on true mobile. */
+html.viewer-true-mobile #page-reading-pulse .reading-pulse-product-page>section:nth-of-type(6),
+html.viewer-true-mobile #page-reading-pulse .reading-pulse-product-page>section:nth-of-type(7),
+html.viewer-true-mobile #page-reading-pulse .reading-pulse-product-page>section:nth-of-type(8){display:none!important}
+
+/* Finish with one concise Why Reading Pulse Matters paragraph and the blue accent line. */
+html.viewer-true-mobile #page-reading-pulse .reading-pulse-product-page>section:nth-of-type(9)>.body-para{display:none!important}
+html.viewer-true-mobile #page-reading-pulse .reading-pulse-product-page>section:nth-of-type(9){
+border-left:3px solid var(--accent)!important;
+padding-left:14px!important
+}
+html.viewer-true-mobile #page-reading-pulse .reading-pulse-product-page>section:nth-of-type(9)>.section-label::after{
+content:"Reading Pulse gives programming teams a more structured way to discover theatrical opportunities, compare films against local audience fit and move from research toward a clear action. By bringing global film discovery and local audience context into one workflow, it helps the team decide what may be worth pursuing, testing, monitoring or passing on.";
+display:block!important;
+margin-top:12px!important;
+font-family:var(--serif)!important;
+font-size:17px!important;
+line-height:1.6!important;
+font-weight:400!important;
+font-style:normal!important;
+letter-spacing:normal!important;
+text-transform:none!important;
+color:var(--ink)!important
+}
