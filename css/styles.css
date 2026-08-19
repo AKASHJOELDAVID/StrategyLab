@@ -42,4 +42,17 @@
     font-size: 17px !important;
     line-height: 1.6 !important;
   }
+  #page-rc-main .deliverable-eyebrow {
+  font-size: 12px !important;
+}
+
+#page-rc-main .deliverable-title {
+  font-size: 17px !important;
+  line-height: 1.35 !important;
+}
+
+#page-rc-main .deliverable-desc {
+  font-size: 16px !important;
+  line-height: 1.55 !important;
+}
 }
