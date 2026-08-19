@@ -116,7 +116,7 @@ html.viewer-true-mobile #page-movie-research .movie-pattern-card:nth-child(4) .m
 html.viewer-true-mobile #page-movie-research .movie-month-card .movie-tag-row,
 html.viewer-true-mobile #page-movie-research .movie-pattern-card .movie-tag-row{display:none!important}
 html.viewer-true-mobile #page-movie-research .movie-month-card{
-grid-template-columns:74px minmax(0,1fr))!important;
+grid-template-columns:74px minmax(0,1fr)!important;
 gap:14px!important;
 align-items:start!important
 }
@@ -237,6 +237,7 @@ gap:10px!important
 html.viewer-true-mobile #page-reelio #reelio-overview .reelio-two-col .reelio-copy-card::after{display:none!important;content:none!important}
 html.viewer-true-mobile #page-reelio #reelio-overview .reelio-two-col .reelio-scope-list li{font-size:16px!important;line-height:1.5!important}
 html.viewer-true-mobile #page-reelio #reelio-overview .reelio-two-col .reelio-example{font-size:16px!important;line-height:1.45!important;padding:11px 12px!important}
+
 /* Match Product Proposal to the other Reelio section headers on true mobile. */
 html.viewer-true-mobile #page-reelio .reelio-kicker{
 font-family:var(--mono)!important;
