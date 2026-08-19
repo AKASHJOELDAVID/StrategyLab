@@ -211,6 +211,21 @@ document.write('<script src="js/app-base.js"><\/script>');
         grid-column:auto!important;
       }
 
+      /* The Reading Preview uses its own viewer styles in the base app.
+         On true mobile, neutralise those extra margins so its controls use
+         exactly the same spacing rhythm as the other report viewers in both
+         normal and fullscreen modes. */
+      html.viewer-true-mobile .reading-preview-toolbar {
+        gap:6px!important;
+        column-gap:6px!important;
+        row-gap:6px!important;
+      }
+      html.viewer-true-mobile .reading-preview-toolbar > button,
+      html.viewer-true-mobile .reading-preview-toolbar > .reading-preview-zoom-value {
+        margin-left:0!important;
+        margin-right:0!important;
+      }
+
       /* Hide the original fullscreen control on true mobile only. A dedicated
          mobile trigger is inserted directly after Fit Width below. */
       html.viewer-true-mobile :is(${fullSelector}) {
@@ -279,6 +294,11 @@ document.write('<script src="js/app-base.js"><\/script>');
     @media (max-width:520px) {
       ${toolbarSelector} {
         gap:5px!important;
+      }
+      html.viewer-true-mobile .reading-preview-toolbar {
+        gap:5px!important;
+        column-gap:5px!important;
+        row-gap:5px!important;
       }
       html.viewer-true-mobile .mobile-fullscreen-trigger {
         width:36px!important;
