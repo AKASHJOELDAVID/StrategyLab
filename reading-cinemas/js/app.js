@@ -64,6 +64,40 @@ document.write('<script src="js/app-base.js"><\/script>');
     :fullscreen :is(${closeSelector}) {
       display: inline-flex !important;
     }
+
+    /* Mobile + split-screen: never show the close control in normal view. */
+    @media (max-width: 1040px) {
+      body .report-page .strategy-pdf-close,
+      body .report-page .presentation-close,
+      body .report-page .evidence-close,
+      body .report-page .demographic-close,
+      body .report-page .movie-close,
+      body .report-page .future-close,
+      body .report-page .reelio-close,
+      body .report-page .reading-preview-close {
+        display: none !important;
+      }
+
+      body .report-page .is-fullscreen .strategy-pdf-close,
+      body .report-page .is-fullscreen .presentation-close,
+      body .report-page .is-fullscreen .evidence-close,
+      body .report-page .is-fullscreen .demographic-close,
+      body .report-page .is-fullscreen .movie-close,
+      body .report-page .is-fullscreen .future-close,
+      body .report-page .is-fullscreen .reelio-close,
+      body .report-page .is-fullscreen .reading-preview-close,
+      body .report-page :fullscreen .strategy-pdf-close,
+      body .report-page :fullscreen .presentation-close,
+      body .report-page :fullscreen .evidence-close,
+      body .report-page :fullscreen .demographic-close,
+      body .report-page :fullscreen .movie-close,
+      body .report-page :fullscreen .future-close,
+      body .report-page :fullscreen .reelio-close,
+      body .report-page :fullscreen .reading-preview-close {
+        display: inline-flex !important;
+      }
+    }
+
     @media (max-width: 768px) {
       ${closeSelector} {
         padding: 0 !important;
