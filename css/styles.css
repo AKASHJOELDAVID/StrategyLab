@@ -258,10 +258,10 @@ html.viewer-true-mobile #page-evidence-review .evidence-signal-copy{display:none
 html.viewer-true-mobile #page-evidence-review .evidence-signal-label,
 html.viewer-true-mobile #page-evidence-review .evidence-signal-value{font-size:16px!important;line-height:1.45!important}
 
-/* Keep concise context inside each Evidence Signal box on true mobile. */
+/* Keep concise referenced context inside each Evidence Signal box on true mobile. */
 html.viewer-true-mobile #page-evidence-review .evidence-signal::after{display:block!important;grid-column:1/-1;margin-top:2px;font-family:var(--sans);font-size:16px;line-height:1.55;font-weight:400;color:var(--ink-soft)}
-html.viewer-true-mobile #page-evidence-review .evidence-area:nth-child(1) .evidence-signal::after{content:"Shows the commercial value of filling even a small share of otherwise empty seats."}
-html.viewer-true-mobile #page-evidence-review .evidence-area:nth-child(2) .evidence-signal::after{content:"Discounted weekday pricing can create additional demand, not just shift existing visits."}
-html.viewer-true-mobile #page-evidence-review .evidence-area:nth-child(3) .evidence-signal::after{content:"Small increases in concession spend can have an outsized effect on cinema profitability."}
-html.viewer-true-mobile #page-evidence-review .evidence-area:nth-child(4) .evidence-signal::after{content:"Extra fees are a major source of checkout abandonment, making simpler booking commercially relevant."}
-html.viewer-true-mobile #page-evidence-review .evidence-area:nth-child(5) .evidence-signal::after{content:"Local programming and community relevance can help cinemas build stronger repeat attendance."}
+html.viewer-true-mobile #page-evidence-review .evidence-area:nth-child(1) .evidence-signal::after{content:"Screen Australia data for 2024 recorded approximately 55.4 million cinema admissions and $951 million in box office revenue. At the reported average ticket revenue, another 10,000 admissions represents roughly $171,700 in ticket revenue before food and beverage."}
+html.viewer-true-mobile #page-evidence-review .evidence-area:nth-child(2) .evidence-signal::after{content:"Research by de Roos and McKenzie found that discounted Tuesday pricing generated additional cinema demand rather than simply shifting existing customers from another day."}
+html.viewer-true-mobile #page-evidence-review .evidence-area:nth-child(3) .evidence-signal::after{content:"Research referenced by Stanford Graduate School of Business found that concessions can account for around 20% of theatre revenue but roughly 40% of theatre profit, showing how strongly food and beverage can contribute to profitability."}
+html.viewer-true-mobile #page-evidence-review .evidence-area:nth-child(4) .evidence-signal::after{content:"Baymard Institute research found that 39% of checkout abandonment was linked to additional costs such as fees, taxes or shipping, showing why added booking fees can create friction late in the purchase journey."}
+html.viewer-true-mobile #page-evidence-review .evidence-area:nth-child(5) .evidence-signal::after{content:"Guidance from the Independent Cinema Office and Screen NSW, together with the Geelong Arts Centre audience strategy documented by Culture Counts, supports programming, partnerships and events that reflect the interests and identity of the local community."}
