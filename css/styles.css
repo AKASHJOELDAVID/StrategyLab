@@ -20,3 +20,9 @@ html.viewer-true-mobile #page-strategy-report .strategy-major-section:has(+.take
 border-left:0!important;
 padding-left:0!important
 }
+
+/* Presentation: remove the blue accent line from Executive Message on true mobile only. */
+html.viewer-true-mobile #page-presentation .presentation-executive-message{
+border-left:0!important;
+padding-left:0!important
+}
