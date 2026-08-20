@@ -208,3 +208,13 @@ color:var(--ink-soft)!important;
 #page-home .table-date::after,
 .report-page .report-meta-pills .badge:last-child::after,
 .report-page .article-byline>span:last-child::after{content:"20 August 2026"}
+
+/* Keep the replacement date centred inside the same Reading Cinemas metadata pill as the other badges on every view. */
+.report-page .report-meta-pills .badge:last-child::after{
+right:0!important;
+bottom:0!important;
+display:flex!important;
+align-items:center!important;
+justify-content:center!important;
+line-height:inherit!important
+}
