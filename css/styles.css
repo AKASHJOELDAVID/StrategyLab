@@ -121,3 +121,63 @@ letter-spacing:normal!important;
 text-transform:none!important;
 color:var(--ink)!important
 }
+
+/* All 13 Reading pages: one true-mobile divider rhythm — 24px before each section line, 20px after. */
+html.viewer-true-mobile #page-rc-main .overview-section:not(.overview-first){
+margin-top:24px!important;
+padding-top:20px!important
+}
+
+html.viewer-true-mobile .report-page .viewer-section-divider{
+margin:24px 0 20px!important
+}
+
+html.viewer-true-mobile #page-strategy-report .strategy-summary>.strategy-major-section:not(:first-child),
+html.viewer-true-mobile #page-presentation .presentation-summary>.presentation-major-section{
+margin-top:24px!important;
+padding-top:20px!important
+}
+
+html.viewer-true-mobile #page-evidence-review .evidence-review-section,
+html.viewer-true-mobile #page-demographic .demographic-section,
+html.viewer-true-mobile #page-movie-research .movie-research-section,
+html.viewer-true-mobile #page-future-concepts .future-concepts-section,
+html.viewer-true-mobile #page-reelio .reelio-section,
+html.viewer-true-mobile #page-audience-pulse .audience-pulse-product-page>section,
+html.viewer-true-mobile #page-posterscan .posterscan-product-page>section,
+html.viewer-true-mobile #page-digital-magazine .digital-magazine-section,
+html.viewer-true-mobile #page-reading-pulse .reading-pulse-product-page>section,
+html.viewer-true-mobile #page-marketing-ads .marketing-ads-section{
+margin-bottom:24px!important
+}
+
+html.viewer-true-mobile #page-evidence-review .evidence-review-summary>.evidence-review-section+.evidence-review-section,
+html.viewer-true-mobile #page-demographic .demographic-summary>.demographic-section+.demographic-section,
+html.viewer-true-mobile #page-movie-research .movie-research-summary>.movie-research-section,
+html.viewer-true-mobile #page-future-concepts .future-concepts-page>.future-concepts-section,
+html.viewer-true-mobile #page-reelio .reelio-product-page>.reelio-section+.reelio-section,
+html.viewer-true-mobile #page-audience-pulse .audience-pulse-product-page>section+section,
+html.viewer-true-mobile #page-posterscan .posterscan-product-page>section+section,
+html.viewer-true-mobile #page-digital-magazine .digital-magazine-product-page>.digital-magazine-section+.digital-magazine-section,
+html.viewer-true-mobile #page-reading-pulse .reading-pulse-product-page>section+section,
+html.viewer-true-mobile #page-marketing-ads .marketing-ads-campaign{
+padding-top:20px!important
+}
+
+/* Future Concepts uses the same 24/20 rhythm between each concept. */
+html.viewer-true-mobile #page-future-concepts .future-concept-section{
+padding-top:20px!important;
+padding-bottom:0!important;
+margin-bottom:24px!important
+}
+
+/* Reelio's Meet Reelio divider follows the same rhythm. */
+html.viewer-true-mobile #page-reelio .reelio-hero>.section-label{
+margin-top:24px!important;
+padding-top:20px!important
+}
+
+/* Marketing Ads closing divider follows the same rhythm. */
+html.viewer-true-mobile #page-marketing-ads .marketing-ads-page>section:last-child{
+padding-top:20px!important
+}
