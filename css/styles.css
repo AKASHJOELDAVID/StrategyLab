@@ -229,9 +229,10 @@ color:var(--accent)!important;
 -webkit-text-fill-color:var(--accent)!important
 }
 
+/* Keep the same desktop keyword typography on split-screen and mobile too. */
 @media(max-width:768px){
 .report-page .report-meta-pills .badge:last-child::after{
-font-size:9px!important;
-letter-spacing:.09em!important
+font-size:10px!important;
+letter-spacing:.12em!important
 }
 }
