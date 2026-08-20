@@ -240,3 +240,8 @@ color:var(--ink-soft)!important;
   color:var(--accent)!important;
   -webkit-text-fill-color:var(--accent)!important;
 }
+
+/* Reelio: reduce gap after Meet Reelio */
+#page-reelio .reelio-product-page > .reelio-hero {
+  margin-bottom: 0 !important;
+}
