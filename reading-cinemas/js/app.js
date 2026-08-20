@@ -1,35 +1,548 @@
+// Safe loader for the original Reading Cinemas application.
+// Kept separate so the live page runs the known-good application code.
+document.write('<script src="js/app-base.js"><\/script>');
+
+// Always start a newly selected Reading Cinemas report page at the top.
 (function(){
-'use strict';
-const n=s=>String(s||'').replace(/\s+/g,' ').trim().toLowerCase();
-const kids=(e,s)=>e?Array.from(e.children).filter(x=>x.matches(s)):[];
-const sec=(r,t)=>{const l=r&&Array.from(r.querySelectorAll('.section-label')).find(x=>n(x.textContent)===n(t));return l?l.closest('section'):null;};
-const dl=(r,t)=>r&&kids(r,'.section-label').find(x=>n(x.textContent)===n(t));
-function rmSec(r,t){const s=sec(r,t);if(s)s.remove();}
-function rmBlock(r,t){let x=dl(r,t);while(x){const y=x.nextElementSibling;x.remove();if(!y||y.classList.contains('section-label'))break;x=y;}}
-function one(s,html){if(!s)return;const p=kids(s,'p');if(!p[0])return;p[0].innerHTML=html;p.slice(1).forEach(x=>x.remove());}
-function blockOne(r,t,html){const l=dl(r,t);if(!l)return;let x=l.nextElementSibling,f=null,a=[];while(x&&!x.classList.contains('section-label')){const y=x.nextElementSibling;if(x.matches('p')){if(!f)f=x;else a.push(x);}x=y;}if(f)f.innerHTML=html;a.forEach(x=>x.remove());}
-function card(r,t,html){const title=r&&Array.from(r.querySelectorAll('.card-title')).find(x=>n(x.textContent)===n(t));const c=title&&title.closest('.strategy-card,.initiative-card,.metric-card,.phase-card,.risk-card,.opportunity-card');const p=c&&c.querySelector('.card-copy');if(p)p.innerHTML=html;}
-const blue=e=>{if(e)e.classList.add('strategic-close');};
-function buttons(){document.querySelectorAll('.report-page .engage-action').forEach(b=>{const t=b.textContent.replace(/\s*↓\s*$/,'').trim();if(/^view\s/i.test(t))b.textContent=t+' ↓';});}
-function topPatch(){if(typeof window.showPage!=='function'||window.showPage.__top)return;const o=window.showPage;function p(id,opt){const r=o(id,opt);requestAnimationFrame(()=>scrollTo({top:0,left:0,behavior:'auto'}));return r;}p.__top=1;window.showPage=p;}
-function strategy(){const r=document.querySelector('#page-strategy-report .strategy-summary');if(!r)return;
-blockOne(r,'The Strategy In Short','Reading Cinemas operates in a high fixed-cost business where meaningful existing capacity remains underused during weekdays, off-peak sessions and lower-profile films. The strategy focuses on creating more value from that existing network through targeted pricing, a stronger customer experience and audience growth, with each initiative designed to be piloted, measured and scaled only where commercial impact is demonstrated.');
-[['Off-Peak Underutilisation','Weekday and off-peak sessions carry the same fixed operating costs as busier periods, but often have unused seat capacity that could be activated through clearer value-led pricing.'],['Lower-Profile Film Occupancy','Lower-profile films can struggle to fill sessions without blockbuster-level demand. Targeted value pricing can lower the barrier to trial and improve occupancy.'],['Digital Friction and Booking Fees','A cumbersome booking journey and online booking fees can suppress digital conversion and delay customer commitment.'],['Regional Market Opportunity','High-population regional centres may offer a growth path where competitive intensity is lower, subject to feasibility and local demand.']].forEach(x=>card(r,...x));
-rmBlock(r,'Five Commercial Opportunities');const l=dl(r,'The Nine Initiatives');if(l&&l.nextElementSibling?.matches('p'))l.nextElementSibling.textContent='Nine initiatives across pricing, customer experience and audience growth.';r.querySelectorAll('.cluster-copy').forEach(x=>x.remove());
-[['Differentiated Seat Pricing','Use seat location and session demand to lower prices only where capacity underperforms, while protecting peak-session yield.'],['Value Pricing for Lower-Profile Titles','Use targeted pricing to encourage trial, improve occupancy and build word of mouth around selected films.'],['Weekday Value Pricing','Create a simple, repeatable weekday value offer that gives customers a reason to attend during quieter periods.'],['Food and Beverage Differentiation','Introduce low-cost upgrades and more distinctive snack options to increase perceived value and spend per visit.'],['Digital Experience Redesign','Simplify discovery, session selection and booking so customers can move faster from intent to purchase.'],['Remove Online Booking Fees','Reduce a visible source of friction, encourage digital booking and strengthen customer data capture.'],['Regional Expansion','Assess high-population regional markets through feasibility, demand analysis and staged development.'],['Localised Programming','Use local audience evidence to test a small number of culturally or locally relevant titles.'],['Curated Re-Screenings','Use selected classic and cult films in limited off-peak sessions to create event-style cinema experiences.']].forEach(x=>card(r,...x));
-const a=r.querySelector('.assumption-note');if(a)a.textContent='Directional assumptions used to illustrate the scale of the opportunity, not financial forecasts.';[['Off-Peak Utilisation','Potential uplift from activating low-fill seats and sessions.'],['Weekday Attendance','Potential increase from a consistent weekday value offer.'],['F&B Spend Per Visit','Potential uplift through low-cost product improvements and greater variety.'],['Online Conversion','Potential improvement from reducing booking friction.']].forEach(x=>card(r,...x));const rc=r.querySelector('.regional-focus .card-copy');if(rc)rc.textContent='Priority markets for further feasibility assessment and staged expansion.';
-rmBlock(r,'How Success Would Be Measured');rmBlock(r,'What Needs To Be Managed');const lists=[['Pilot differentiated seat pricing.','Test value pricing for lower-profile films.','Launch weekday value pricing.','Trial low-cost F&B upgrades.'],['Redesign the booking journey.','Reduce online checkout friction.','Pilot removal or reduction of booking fees.'],['Introduce localised programming trials.','Run curated classic and cult re-screenings.','Refine pricing and yield using pilot results.'],['Conduct feasibility studies in priority regional markets.','Progress selective pilot sites where benchmarks are met.','Prioritise Bendigo, Ballarat and Geelong.']];r.querySelectorAll('.roadmap .phase-card').forEach((c,i)=>{const u=c.querySelector('ul');if(u)u.innerHTML=lists[i].map(v=>'<li>'+v+'</li>').join('');c.querySelector('.phase-note')?.remove();});const t=r.querySelector('.takeaway-box');if(t){t.innerHTML='<p class="body-para">The strongest opportunity is not any single initiative, but the way pricing, customer experience and audience growth work together. Reading Cinemas can create more value from its existing footprint by activating quieter capacity, improving the booking journey and increasing value per visit, then pilot the lowest-risk initiatives first and scale only where the evidence supports it.</p>';blue(t);}}
-function presentation(){const r=document.querySelector('#page-presentation .presentation-summary');if(!r)return;blockOne(r,'About The Presentation','The presentation condenses the Reading Cinemas strategy into an executive-level narrative, moving from the commercial challenge and market opportunity through the nine strategic initiatives, implementation roadmap, risk framework and directional commercial impact, following the same pilot, measure and scale logic as the full report.');r.querySelector('.presentation-principle')?.remove();const e=r.querySelector('.presentation-executive-message');if(e){e.innerHTML='<p class="body-para">Reading does not need to rely on one large growth bet. The near-term opportunity is to create more value from existing capacity through targeted pricing, a stronger customer experience and better audience activation, then use evidence from those pilots to guide larger digital, programming and regional investments. The approach is deliberately phased, with lower-capital initiatives first and regional expansion considered only once the metropolitan model has demonstrated sufficient evidence.</p>';blue(e);}}
-function evidence(){const r=document.querySelector('#page-evidence-review .evidence-review-summary');if(!r)return;one(sec(r,'About The Evidence Review'),'The Evidence Review examines the research behind five commercial opportunities in the Reading Cinemas strategy: off-peak capacity utilisation, weekday attendance, food and beverage revenue, digital booking friction and local audience development. It brings together industry data, academic research, customer behaviour studies and examples from cinema and arts organisations to understand where changes could support stronger utilisation, revenue and customer habits.');const m={'Off-Peak Capacity Utilisation':'Cinema exhibition has high fixed operating costs, so an empty seat generates no revenue once the session is running. The evidence supports disciplined pricing and demand management to activate lower-demand inventory without weakening stronger-session pricing.','Weekday Attendance':'Monday to Thursday sessions are more likely to experience lower occupancy. Targeted weekday value offers can generate incremental demand rather than simply moving existing customers from one day to another.','Food And Beverage Revenue':'Food and beverage is a high-margin commercial lever, so relatively small increases in spend, attachment or basket size can create meaningful venue-level impact.','Digital Booking Friction':'Additional fees and complicated checkout journeys can increase abandonment. A simpler, more transparent booking experience may support conversion, earlier commitment and stronger first-party data.','Local Audience Development':'Cinema catchments differ, so local programming, partnerships, culturally relevant content and targeted events can strengthen relevance and repeat attendance.'};r.querySelectorAll('.evidence-area').forEach(a=>{const k=a.querySelector('.evidence-area-title')?.textContent.trim(),p=a.querySelectorAll('.evidence-area-copy');if(m[k]&&p[0]){p[0].textContent=m[k];Array.from(p).slice(1).forEach(x=>x.remove());}});rmSec(r,'What The Evidence Supports');const s=sec(r,'How It Supports The Strategy');one(s,'The research does not suggest that any single initiative guarantees revenue growth. Taken together, the evidence supports better use of existing capacity, stronger quieter-period demand, higher value per visit, reduced booking friction and deeper local audience relevance, using the same pilot, measure and scale principle throughout the strategy.');blue(s);}
-function demographic(){const r=document.querySelector('#page-demographic .demographic-summary');if(!r)return;one(sec(r,'About The Research'),'The research compares the local audience catchments surrounding Reading Cinemas’ nine Victorian locations using 2021 Census data to understand how differences in population, age, household structure, cultural background and language may affect programming relevance. The aim is not to predict individual behaviour, but to identify where mainstream, family, language, youth, premium, community and event programming may be more relevant and worth testing.');rmSec(r,'How The Analysis Works');rmSec(r,'Locations And Catchments');rmSec(r,'How To Use The Research');const m={BUR:['Large inner-eastern catchment with families, older residents, young adults and strong cultural diversity. Mandarin is the clearest non-English language signal.','Keep mainstream, family and premium programming central while deliberately testing selected Chinese-language titles.'],CHI:['Established outer-eastern catchment with a strong family, Australian-born and English-speaking audience base.','Keep mainstream, family and mature-audience programming central, with selective international tests.'],DAN:['One of the network’s most culturally and linguistically diverse catchments, with a large overseas-born and multilingual population.','Prioritise Vietnamese, Chinese-language and South Asian tests alongside mainstream and family programming.'],EPP:['Large northern growth-corridor catchment with young families, working-age audiences and substantial multicultural communities.','Keep mainstream and family strong while testing South Asian and Arabic / Middle Eastern releases more deliberately.'],MEL:['Young, family-heavy western growth-corridor catchment with expanding multicultural diversity.','Keep family and mainstream central while testing selected South Asian and community programming.'],MJ:['Diverse inner-west and western catchment combining families, multicultural communities and lifestyle-oriented audiences.','Balance mainstream and premium programming with South Asian, Chinese-language and Vietnamese tests.'],SUN:['Family-focused north-western catchment with a strong mainstream base and growing multicultural diversity.','Keep mainstream and family central while selectively testing South Asian and community releases.'],TRA:['Regional Gippsland catchment with a stronger Australian-born profile and relatively high older-resident share.','Prioritise mainstream, family, Australian and mature-audience programming, with selective international releases.'],WP:['Regional-city catchment serving Geelong and the Surf Coast, with families, young adults and mature audiences.','Keep mainstream and family central while using youth, event cinema and selected international programming to broaden the offer.']};r.querySelectorAll('.demographic-insight-card').forEach(c=>{const v=m[c.querySelector('.demographic-code')?.textContent.trim()],p=c.querySelectorAll('.demographic-insight-copy');if(v){if(p[0])p[0].textContent=v[0];if(p[1])p[1].textContent=v[1];}});}
-function movie(){const r=document.querySelector('#page-movie-research .movie-research-summary');if(!r)return;one(sec(r,'About The Research'),'The research reviews selected film releases from July to December 2026 and identifies titles that may be worth testing across Reading Cinemas’ nine Victorian locations. Rather than assuming every film suits every cinema, the analysis considers release timing, country, language, audience fit and local demographics, using the recommendations as a planning guide rather than a fixed programming schedule.');rmSec(r,'How The Recommendations Work');rmSec(r,'How To Use The Recommendations');const o=sec(r,'Six-Month Programming Outlook');o?.querySelector('.movie-overview-table')?.remove();const p=o&&kids(o,'p')[0];if(p)p.textContent='The 66-film shortlist shifts across the six-month window, with each month bringing a different mix of genres, languages and audience opportunities.';}
-function future(){const r=document.querySelector('#page-future-concepts .future-concepts-page');if(!r)return;one(sec(r,'About The Concepts'),'The Future Concepts report develops the wider Reading Cinemas research into eight early-stage ideas spanning social planning, in-cinema support, accessibility, programming intelligence, customer engagement and movie discovery. Each concept shows what an opportunity could look like and where a smaller pilot could test whether it creates enough value to take further.');const m={'01':'MovieScene adds a social planning layer to the Reading Cinemas website. Customers could create or join groups around a movie, discuss the plan and agree on the cinema, date and session together, making group visits easier to organise and giving Reading another reason to engage customers before booking.','02':'Reelio Kiosk brings the Reelio assistant into the physical cinema. Customers could ask questions by touch, text or voice, compare movies and sessions and get support before booking, helping them make decisions faster while reducing pressure on staff during busy periods.','03':'The Tactile Cinema Device is a lap-based haptic concept that translates parts of a film into touch patterns, adding another sensory channel that could complement existing accessibility tools and broaden the cinema experience.','04':'Reading PosterScan adds a QR-based digital layer to physical movie posters, taking customers directly to trailers, film information, sessions and booking while shortening the path from interest to action.','05':'Reading StoryCard turns the booking confirmation into a personalised movie-themed digital card, making the confirmation more memorable and creating a lightweight branded keepsake customers may choose to save or share.','06':'Audience Pulse is a short in-cinema QR voting experience that asks which upcoming films interest customers, creating a lightweight location-level audience signal that could support programming decisions.','07':'The Reading Preview is a monthly digital cinema guide bringing releases, events and cinema experiences into one browseable issue, helping customers discover what is coming earlier while giving Reading a recurring marketing asset.','08':'Reading Pulse is an internal film-intelligence platform that tracks theatrical releases, audience signals and local cinema fit, helping programming teams identify promising titles and decide whether to pursue, test, monitor or shortlist them.'};r.querySelectorAll('.future-concept-section').forEach(s=>{const k=s.querySelector('.future-concept-kicker')?.textContent.match(/\d{2}/)?.[0];if(m[k])s.querySelector('.future-concept-summary').textContent=m[k];s.querySelector('.future-concept-details')?.remove();});}
-function reelio(){const r=document.querySelector('#page-reelio .reelio-product-page');if(!r)return;const l=r.querySelector('.reelio-lede');if(l)l.textContent='Reelio is a conversational discovery layer designed to help Reading Cinemas customers find movies, sessions, locations and cinema information using everyday language, supporting discovery and decision-making before directing customers into the existing booking flow.';r.querySelector('.reelio-important')?.remove();rmSec(r,'How Reelio Works');rmSec(r,'Why Reelio Matters');rmSec(r,'Start Focused. Grow Over Time.');const s=sec(r,'More Than Movie Recommendations');s&&s.querySelectorAll('.reelio-capability-card').forEach((c,i)=>{if(i>3)c.remove();});}
-function audience(){const r=document.querySelector('#page-audience-pulse .audience-pulse-product-page');if(!r)return;one(sec(r,'About Audience Pulse'),'Audience Pulse is a quick pre-show interaction that asks customers which upcoming films they would be interested in watching at Reading Cinemas. Rather than predicting demand on its own, it provides a lightweight audience-interest signal that can sit alongside programming judgement, local audience knowledge and actual cinema performance.');rmSec(r,'How It Works');rmSec(r,'Why It Matters');}
-function magazine(){const r=document.querySelector('#page-digital-magazine .digital-magazine-product-page');if(!r)return;one(sec(r,'A Monthly Cinema Guide'),'The Reading Preview gives Reading Cinemas a dedicated monthly editorial space to bring films, experiences, rewards and events into one browseable edition, creating a recurring way to spotlight upcoming releases and give customers another reason to return each month.');rmSec(r,'Inside The August Issue');const s=sec(r,'What The Magazine Adds'),c=s&&s.querySelectorAll('.digital-magazine-benefit');if(c?.[3])c[3].remove();}
-function pulse(){const r=document.querySelector('#page-reading-pulse .reading-pulse-product-page');if(!r)return;one(sec(r,'About Reading Pulse'),'Reading Pulse brings theatrical film discovery, audience signals and location intelligence into one internal decision-support platform, helping programming teams identify which titles may be worth pursuing, testing or monitoring and where they may have stronger local relevance.');const c=sec(r,'CineMatch'),m=sec(r,'Match the Film to the Right Cinema');if(c&&m){const p=c.querySelector('.reading-pulse-cinematch,p'),q=document.createElement('p');q.className='reading-pulse-cinematch-inline';q.innerHTML='<strong>CineMatch:</strong> '+(p?p.textContent:'Reading Pulse compares film signals to highlight titles worth a closer look.');m.appendChild(q);c.remove();}rmSec(r,'From Signal to Action');rmSec(r,'Other Product Capabilities');const w=sec(r,'Why Reading Pulse Matters');one(w,'Reading Pulse gives programming teams a more structured way to discover theatrical opportunities, compare films against local audience fit and move from research toward a clear programming action. By combining global film discovery with local audience context in one workflow, it helps the team decide what may be worth pursuing, testing, monitoring or passing on.');blue(w);}
-function poster(){const r=document.querySelector('#page-posterscan .posterscan-product-page');if(!r)return;one(sec(r,'About PosterScan'),'PosterScan connects physical poster discovery to the existing Reading Cinemas booking flow. When a customer scans a QR code on or near a movie poster, they move into a mobile-first experience with film details, trailers, session times and relevant highlights before choosing a session to book, turning static poster space into a more interactive and measurable discovery point.');rmSec(r,'Why It Matters');rmSec(r,'From Poster To Booking');}
-function ads(){const r=document.querySelector('#page-marketing-ads .marketing-ads-page');if(!r)return;one(sec(r,'About The Visuals'),'These are example marketing concepts showing how ideas from the Reading Cinemas project could translate into audience-facing campaigns. Each explores a different way to attract attention, build interest or encourage cinema visits, with the concepts, messaging and creative direction developed by me.');rmSec(r,'From Ideas To Campaigns');}
-function apply(){try{strategy();presentation();evidence();demographic();movie();future();reelio();audience();magazine();pulse();poster();ads();buttons();topPatch();requestAnimationFrame(()=>{if(typeof window.alignFutureConceptHeroImages==='function')window.alignFutureConceptHeroImages();scrollTo({top:0,left:0,behavior:'auto'});});}catch(e){console.error('Strategy Lab refinements failed.',e);}}
-const s=document.createElement('script');s.src='js/app-base.js';s.async=false;s.onload=apply;s.onerror=()=>console.error('Strategy Lab base app failed to load.');document.head.appendChild(s);
+  function forceReportPageTop(){
+    document.documentElement.scrollTop=0;
+    document.body.scrollTop=0;
+    window.scrollTo({top:0,left:0,behavior:'auto'});
+  }
+
+  document.addEventListener('click',function(event){
+    const reportLink=event.target.closest('.ans-link, .deliverable-card');
+    if(!reportLink)return;
+    requestAnimationFrame(function(){requestAnimationFrame(forceReportPageTop);});
+    setTimeout(forceReportPageTop,80);
+  });
+})();
+
+// Viewer toolbar behaviour.
+// Desktop and split-screen keep the existing toolbar treatment.
+// Mobile only uses two rows: controls first, page indicator second.
+(function(){
+  const toolbarSelector=[
+    '.strategy-pdf-toolbar','.presentation-toolbar','.evidence-toolbar',
+    '.demographic-toolbar','.movie-toolbar','.future-toolbar',
+    '.reelio-toolbar','.reading-preview-toolbar'
+  ].join(',');
+  const countSelector=[
+    '.strategy-pdf-page-count','.presentation-slide-count','.evidence-page-count',
+    '.demographic-page-count','.movie-page-count','.future-page-count',
+    '.reelio-page-count','.reading-preview-page-count'
+  ].join(',');
+  const spacerSelector=[
+    '.strategy-pdf-spacer','.presentation-spacer','.evidence-spacer',
+    '.demographic-spacer','.movie-spacer','.future-spacer',
+    '.reelio-spacer','.reading-preview-spacer'
+  ].join(',');
+  const fullSelector=[
+    '.strategy-pdf-full','.presentation-full','.evidence-full','.demographic-full',
+    '.movie-full','.future-full','.reelio-full','.reading-preview-full'
+  ].join(',');
+  const closeSelector=[
+    '.strategy-pdf-close','.presentation-close','.evidence-close','.demographic-close',
+    '.movie-close','.future-close','.reelio-close','.reading-preview-close'
+  ].join(',');
+
+  function isTrueMobileViewer(){
+    return window.matchMedia('(max-width:768px)').matches && window.screen.width<=768;
+  }
+
+  function syncViewerDeviceMode(){
+    document.documentElement.classList.toggle('viewer-true-mobile',isTrueMobileViewer());
+  }
+
+  function syncFullscreenLabels(){
+    syncViewerDeviceMode();
+    const mobile=isTrueMobileViewer();
+    document.querySelectorAll(fullSelector).forEach(function(button){
+      button.textContent=mobile?'⛶':'FULL SCREEN';
+      button.setAttribute('aria-label','Open full screen');
+      button.setAttribute('title','Open full screen');
+    });
+  }
+
+  syncFullscreenLabels();
+  window.addEventListener('resize',syncFullscreenLabels);
+  window.addEventListener('orientationchange',syncFullscreenLabels);
+
+  document.querySelectorAll(closeSelector).forEach(function(button){
+    button.textContent='CLOSE X';
+    button.setAttribute('aria-label','Exit full screen');
+    button.setAttribute('title','Exit full screen');
+  });
+
+  function getFitWidthButton(toolbar){
+    return Array.from(toolbar.querySelectorAll('button')).find(function(button){
+      return /^fit width$/i.test(button.textContent.trim());
+    });
+  }
+
+  function copyTypography(source,target){
+    const sourceStyle=window.getComputedStyle(source);
+    [
+      'font-family','font-size','font-weight','font-style','line-height',
+      'letter-spacing','text-transform'
+    ].forEach(function(property){
+      target.style.setProperty(property,sourceStyle.getPropertyValue(property),'important');
+    });
+  }
+
+  // Keep the mobile fullscreen Close control typographically identical to
+  // the Fit Width button in the same viewer toolbar.
+  function syncCloseButtonTypography(){
+    document.querySelectorAll(closeSelector).forEach(function(closeButton){
+      const toolbar=closeButton.closest(toolbarSelector);
+      if(!toolbar)return;
+      const fitButton=getFitWidthButton(toolbar);
+      if(!fitButton)return;
+      copyTypography(fitButton,closeButton);
+    });
+  }
+
+  // On split-screen desktop, FULL SCREEN should look exactly like FIT WIDTH.
+  // Desktop at full width is deliberately left untouched.
+  function syncSplitScreenFullButtonTypography(){
+    const splitScreen=window.matchMedia('(max-width:768px)').matches && !isTrueMobileViewer();
+    if(!splitScreen)return;
+
+    document.querySelectorAll(fullSelector).forEach(function(fullButton){
+      const toolbar=fullButton.closest(toolbarSelector);
+      if(!toolbar)return;
+      const fitButton=getFitWidthButton(toolbar);
+      if(!fitButton)return;
+      copyTypography(fitButton,fullButton);
+    });
+  }
+
+  function syncViewerTypography(){
+    syncCloseButtonTypography();
+    syncSplitScreenFullButtonTypography();
+  }
+
+  syncViewerTypography();
+  window.addEventListener('resize',syncViewerTypography);
+  window.addEventListener('load',syncViewerTypography,{once:true});
+
+  // Keep a down arrow on every VIEW action button across all report pages.
+  // Run after the page is parsed and also handle any buttons rendered later.
+  function syncViewActionArrows(root){
+    const scope=root&&root.querySelectorAll?root:document;
+    const buttons=[];
+    if(scope.matches&&scope.matches('.engage-action'))buttons.push(scope);
+    scope.querySelectorAll('.engage-action').forEach(function(button){buttons.push(button);});
+
+    buttons.forEach(function(button){
+      const text=button.textContent.replace(/\s+/g,' ').trim();
+      if(/^view\b/i.test(text)&&!/[↓↧⇩]\s*$/.test(text)){
+        button.appendChild(document.createTextNode(' ↓'));
+      }
+    });
+  }
+
+  syncViewActionArrows(document);
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',function(){syncViewActionArrows(document);},{once:true});
+  }else{
+    syncViewActionArrows(document);
+  }
+  window.addEventListener('load',function(){syncViewActionArrows(document);},{once:true});
+
+  const viewActionObserver=new MutationObserver(function(mutations){
+    mutations.forEach(function(mutation){
+      mutation.addedNodes.forEach(function(node){
+        if(node.nodeType===Node.ELEMENT_NODE)syncViewActionArrows(node);
+      });
+    });
+  });
+  viewActionObserver.observe(document.documentElement,{childList:true,subtree:true});
+
+  const style=document.createElement('style');
+  style.id='viewer-toolbar-responsive-layout';
+  style.textContent=`
+    /* Close is only available while a viewer is actually fullscreen. */
+    ${closeSelector} {
+      display:none!important;
+    }
+    .is-fullscreen :is(${closeSelector}),
+    :fullscreen :is(${closeSelector}) {
+      display:inline-flex!important;
+      align-items:center!important;
+      justify-content:center!important;
+      white-space:nowrap!important;
+      text-align:center!important;
+    }
+
+    /* The icon-only fullscreen trigger is mobile-only. Never show it on
+       desktop or desktop fullscreen; desktop keeps the FULL SCREEN button. */
+    .mobile-fullscreen-trigger {
+      display:none!important;
+    }
+
+    @media (max-width:768px) {
+      ${toolbarSelector} {
+        display:flex!important;
+        flex-direction:row!important;
+        flex-wrap:wrap!important;
+        align-items:center!important;
+        justify-content:flex-start!important;
+        gap:6px!important;
+      }
+
+      ${toolbarSelector} > button {
+        width:auto!important;
+        flex:0 0 auto!important;
+      }
+
+      ${spacerSelector} {
+        display:none!important;
+      }
+
+      /* Page/slide indicator is the only item on row two. */
+      ${countSelector} {
+        order:20!important;
+        flex:0 0 100%!important;
+        width:100%!important;
+        max-width:100%!important;
+        margin:6px 0 0!important;
+        text-align:left!important;
+        grid-column:auto!important;
+      }
+
+      /* The Reading Preview uses its own viewer styles in the base app.
+         On true mobile, neutralise those extra margins so its controls use
+         exactly the same spacing rhythm as the other report viewers in both
+         normal and fullscreen modes. */
+      html.viewer-true-mobile .reading-preview-toolbar {
+        gap:6px!important;
+        column-gap:6px!important;
+        row-gap:6px!important;
+      }
+      html.viewer-true-mobile .reading-preview-toolbar > button,
+      html.viewer-true-mobile .reading-preview-toolbar > .reading-preview-zoom-value {
+        margin-left:0!important;
+        margin-right:0!important;
+      }
+
+      /* Hide the original fullscreen control on true mobile only. A dedicated
+         mobile trigger is inserted directly after Fit Width below. */
+      html.viewer-true-mobile :is(${fullSelector}) {
+        display:none!important;
+      }
+
+      html.viewer-true-mobile .mobile-fullscreen-trigger {
+        order:10!important;
+        display:inline-flex!important;
+        align-items:center!important;
+        justify-content:center!important;
+        width:40px!important;
+        min-width:40px!important;
+        height:40px!important;
+        padding:0!important;
+        font-size:18px!important;
+        line-height:1!important;
+        overflow:hidden!important;
+        white-space:nowrap!important;
+        text-align:center!important;
+      }
+
+      /* Split-screen on desktop keeps the same FULL SCREEN control as the
+         normal desktop viewer. Push it to the far-right edge and match the
+         text alignment/typography of FIT WIDTH. */
+      html:not(.viewer-true-mobile) :is(${fullSelector}) {
+        display:inline-flex!important;
+        align-items:center!important;
+        justify-content:center!important;
+        margin-left:auto!important;
+        white-space:nowrap!important;
+        text-align:center!important;
+      }
+      html:not(.viewer-true-mobile) .mobile-fullscreen-trigger {
+        display:none!important;
+      }
+
+      /* Normal mobile view has no Close control. */
+      ${closeSelector} {
+        order:10!important;
+        display:none!important;
+      }
+
+      /* In true mobile fullscreen, replace the fullscreen icon with CLOSE X. */
+      html.viewer-true-mobile .is-fullscreen .mobile-fullscreen-trigger,
+      html.viewer-true-mobile :fullscreen .mobile-fullscreen-trigger {
+        display:none!important;
+      }
+      html.viewer-true-mobile .is-fullscreen :is(${closeSelector}),
+      html.viewer-true-mobile :fullscreen :is(${closeSelector}) {
+        display:inline-flex!important;
+        align-items:center!important;
+        justify-content:center!important;
+        width:auto!important;
+        min-width:0!important;
+        height:40px!important;
+        padding:0 12px!important;
+        font-size:inherit!important;
+        line-height:1!important;
+        white-space:nowrap!important;
+        text-align:center!important;
+        order:10!important;
+      }
+    }
+
+    @media (max-width:520px) {
+      ${toolbarSelector} {
+        gap:5px!important;
+      }
+      html.viewer-true-mobile .reading-preview-toolbar {
+        gap:5px!important;
+        column-gap:5px!important;
+        row-gap:5px!important;
+      }
+      html.viewer-true-mobile .mobile-fullscreen-trigger {
+        width:36px!important;
+        min-width:36px!important;
+        height:36px!important;
+      }
+      html.viewer-true-mobile .is-fullscreen :is(${closeSelector}),
+      html.viewer-true-mobile :fullscreen :is(${closeSelector}) {
+        height:36px!important;
+        padding:0 9px!important;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+
+  function installMobileFullscreenTriggers(){
+    document.querySelectorAll(fullSelector).forEach(function(original){
+      const toolbar=original.closest(toolbarSelector);
+      if(!toolbar||toolbar.querySelector('.mobile-fullscreen-trigger'))return;
+
+      const spacer=original.previousElementSibling;
+      const fitButton=spacer&&spacer.matches(spacerSelector)
+        ? spacer.previousElementSibling
+        : original.previousElementSibling;
+      if(!fitButton)return;
+
+      const mobileButton=document.createElement('button');
+      mobileButton.type='button';
+      mobileButton.className=(original.className||'')+' mobile-fullscreen-trigger';
+      mobileButton.classList.remove(...Array.from(original.classList).filter(function(name){return /-full$/.test(name);}));
+      mobileButton.textContent='⛶';
+      mobileButton.setAttribute('aria-label','Open full screen');
+      mobileButton.setAttribute('title','Open full screen');
+      const onclick=original.getAttribute('onclick');
+      if(onclick)mobileButton.setAttribute('onclick',onclick);
+      fitButton.insertAdjacentElement('afterend',mobileButton);
+    });
+  }
+
+  installMobileFullscreenTriggers();
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',installMobileFullscreenTriggers,{once:true});
+  }
+  window.addEventListener('load',installMobileFullscreenTriggers,{once:true});
+})();
+
+// The Reading Preview stays as two-page spreads on desktop and split-screen,
+// and switches to one centred page at a time on a true mobile device.
+(function(){
+  let installed=false;
+
+  function installReadingPreviewResponsiveMode(){
+    if(installed)return true;
+    if(typeof readingPreviewSpreads==='undefined'||
+       typeof readingPreviewState==='undefined'||
+       typeof READING_PREVIEW_TOTAL_PAGES==='undefined'||
+       typeof readingPreviewSpreadForPage!=='function'||
+       typeof readingPreviewRender!=='function'||
+       typeof readingPreviewApplyZoom!=='function')return false;
+
+    installed=true;
+    const desktopMagazineSpreads=readingPreviewSpreads.map(function(spread){
+      return {label:spread.label,pages:spread.pages.slice()};
+    });
+    let mobileMode=null;
+
+    function isTrueMobileMagazine(){
+      return window.matchMedia('(max-width:768px)').matches && window.screen.width<=768;
+    }
+
+    readingPreviewIndicatorLabel=function(){
+      const data=readingPreviewSpreads[readingPreviewState.index]||readingPreviewSpreads[0];
+      if(!data||!data.pages.length)return '';
+      if(data.pages.length===1){
+        const page=data.pages[0];
+        if(page===1)return 'COVER · 1 OF 16';
+        if(page===16)return 'BACK COVER · 16 OF 16';
+        return 'PAGE '+page+' OF 16';
+      }
+      return 'PAGES '+data.pages[0]+'–'+data.pages[1]+' OF 16';
+    };
+
+    function setMagazineMode(){
+      const mobile=isTrueMobileMagazine();
+      if(mobileMode===mobile)return;
+
+      const current=(readingPreviewSpreads[readingPreviewState.index]||readingPreviewSpreads[0]||{pages:[1]}).pages[0]||1;
+      const nextSpreads=mobile
+        ? Array.from({length:READING_PREVIEW_TOTAL_PAGES},function(_,i){return {label:'Page '+(i+1),pages:[i+1]};})
+        : desktopMagazineSpreads.map(function(spread){return {label:spread.label,pages:spread.pages.slice()};});
+
+      readingPreviewSpreads.splice.apply(readingPreviewSpreads,[0,readingPreviewSpreads.length].concat(nextSpreads));
+      readingPreviewState.index=readingPreviewSpreadForPage(current);
+      mobileMode=mobile;
+      readingPreviewRender();
+      requestAnimationFrame(function(){readingPreviewApplyZoom();});
+    }
+
+    setMagazineMode();
+    let timer=null;
+    function queueMagazineMode(){
+      clearTimeout(timer);
+      timer=setTimeout(setMagazineMode,100);
+    }
+    window.addEventListener('resize',queueMagazineMode);
+    window.addEventListener('orientationchange',queueMagazineMode);
+    return true;
+  }
+
+  if(!installReadingPreviewResponsiveMode()){
+    setTimeout(installReadingPreviewResponsiveMode,0);
+    if(document.readyState==='loading'){
+      document.addEventListener('DOMContentLoaded',installReadingPreviewResponsiveMode,{once:true});
+    }
+    window.addEventListener('load',installReadingPreviewResponsiveMode,{once:true});
+  }
+})();
+
+// On true mobile, use dedicated Previous / Next buttons underneath the page.
+// Desktop and split-screen keep the original side arrows.
+(function(){
+  let installed=false;
+
+  function installReadingPreviewMobileNavigation(){
+    if(installed)return true;
+    if(typeof readingPreviewMove!=='function'||
+       typeof readingPreviewSyncChrome!=='function'||
+       typeof readingPreviewSpreads==='undefined'||
+       typeof readingPreviewState==='undefined')return false;
+
+    const main=document.querySelector('#page-digital-magazine .reading-preview-main');
+    const stage=document.getElementById('reading-preview-stage');
+    if(!main||!stage)return false;
+
+    installed=true;
+
+    let nav=document.getElementById('reading-preview-mobile-nav');
+    if(!nav){
+      nav=document.createElement('div');
+      nav.id='reading-preview-mobile-nav';
+      nav.className='reading-preview-mobile-nav';
+
+      const previous=document.createElement('button');
+      previous.type='button';
+      previous.className='reading-preview-mobile-nav-button reading-preview-mobile-prev';
+      previous.textContent='← Previous';
+      previous.setAttribute('aria-label','Previous page');
+      previous.addEventListener('click',function(){readingPreviewMove(-1);});
+
+      const next=document.createElement('button');
+      next.type='button';
+      next.className='reading-preview-mobile-nav-button reading-preview-mobile-next';
+      next.textContent='Next →';
+      next.setAttribute('aria-label','Next page');
+      next.addEventListener('click',function(){readingPreviewMove(1);});
+
+      nav.appendChild(previous);
+      nav.appendChild(next);
+      stage.insertAdjacentElement('afterend',nav);
+    }
+
+    function syncMobileNavigation(){
+      const previous=nav.querySelector('.reading-preview-mobile-prev');
+      const next=nav.querySelector('.reading-preview-mobile-next');
+      if(previous)previous.disabled=readingPreviewState.index===0;
+      if(next)next.disabled=readingPreviewState.index===readingPreviewSpreads.length-1;
+    }
+
+    const originalSyncChrome=readingPreviewSyncChrome;
+    readingPreviewSyncChrome=function(){
+      originalSyncChrome();
+      syncMobileNavigation();
+    };
+    syncMobileNavigation();
+
+    if(!document.getElementById('reading-preview-mobile-bottom-nav-style')){
+      const style=document.createElement('style');
+      style.id='reading-preview-mobile-bottom-nav-style';
+      style.textContent=`
+        .reading-preview-mobile-nav{display:none!important}
+        html.viewer-true-mobile #page-digital-magazine .reading-preview-side-nav{display:none!important}
+        html.viewer-true-mobile #page-digital-magazine .reading-preview-stage{
+          display:block!important;
+          position:relative!important;
+          width:100%!important;
+          height:min(72vh,680px)!important;
+          min-height:450px!important;
+          padding:10px 5px!important;
+          overflow:hidden!important
+        }
+        html.viewer-true-mobile #page-digital-magazine .reading-preview-canvas{
+          display:flex!important;
+          align-items:flex-start!important;
+          justify-content:center!important;
+          width:100%!important;
+          height:100%!important;
+          min-height:0!important;
+          margin:0 auto!important;
+          padding:0!important
+        }
+        html.viewer-true-mobile #page-digital-magazine .reading-preview-mobile-nav{
+          display:grid!important;
+          grid-template-columns:repeat(2,minmax(0,1fr))!important;
+          gap:10px!important;
+          width:100%!important;
+          padding:10px 8px 0!important
+        }
+        html.viewer-true-mobile #page-digital-magazine .reading-preview-mobile-nav-button{
+          display:flex!important;
+          align-items:center!important;
+          justify-content:center!important;
+          width:100%!important;
+          min-width:0!important;
+          height:42px!important;
+          margin:0!important;
+          padding:0 12px!important;
+          border:1px solid var(--line)!important;
+          border-radius:4px!important;
+          background:var(--bg-soft)!important;
+          color:var(--accent)!important;
+          font-family:var(--mono)!important;
+          font-size:12px!important;
+          font-weight:500!important;
+          line-height:1!important;
+          letter-spacing:.08em!important;
+          text-transform:uppercase!important;
+          white-space:nowrap!important
+        }
+        html.viewer-true-mobile #page-digital-magazine .reading-preview-mobile-nav-button:disabled{
+          opacity:.35!important;
+          cursor:default!important
+        }
+      `;
+      document.head.appendChild(style);
+    }
+
+    return true;
+  }
+
+  if(!installReadingPreviewMobileNavigation()){
+    setTimeout(installReadingPreviewMobileNavigation,0);
+    if(document.readyState==='loading'){
+      document.addEventListener('DOMContentLoaded',installReadingPreviewMobileNavigation,{once:true});
+    }
+    window.addEventListener('load',installReadingPreviewMobileNavigation,{once:true});
+  }
 })();
