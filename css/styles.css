@@ -217,12 +217,12 @@ letter-spacing:0!important
 .report-page .report-meta-pills .badge:last-child::after{
 content:"August 2026"!important;
 position:static!important;
-display:block!important;
+display:inline!important;
 font-family:var(--mono)!important;
 font-size:10px!important;
 font-weight:400!important;
 font-style:normal!important;
-line-height:1.25!important;
+line-height:inherit!important;
 letter-spacing:.12em!important;
 text-transform:uppercase!important;
 color:var(--accent)!important;
