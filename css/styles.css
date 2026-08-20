@@ -221,8 +221,14 @@ font-family:inherit!important;
 font-size:inherit!important;
 font-weight:inherit!important;
 font-style:inherit!important;
-letter-spacing:inherit!important;
+letter-spacing:.12em!important;
 text-transform:inherit!important;
 color:var(--accent)!important;
 -webkit-text-fill-color:var(--accent)!important
+}
+
+@media(max-width:768px){
+.report-page .report-meta-pills .badge:last-child::after{
+letter-spacing:.09em!important
+}
 }
