@@ -208,31 +208,35 @@ color:var(--ink-soft)!important;
 #page-home .table-date::after,
 .report-page .article-byline>span:last-child::after{content:"20 August 2026"}
 
-/* Top report metadata uses month + year only; exact date remains in the byline below. */
+/* Keep top report keywords identical to desktop in every view. */
+.report-page .report-meta-pills .badge{
+  font-family:var(--mono)!important;
+  font-size:10px!important;
+  font-weight:400!important;
+  font-style:normal!important;
+  letter-spacing:.12em!important;
+  text-transform:uppercase!important;
+  line-height:1.25!important;
+  padding:5px 10px!important;
+}
+
+/* Show month and year only in the final keyword. */
 .report-page .report-meta-pills .badge:last-child{
-font-size:0!important;
-letter-spacing:0!important
+  font-size:0!important;
+  letter-spacing:0!important;
 }
 
 .report-page .report-meta-pills .badge:last-child::after{
-content:"August 2026"!important;
-position:static!important;
-display:inline!important;
-font-family:var(--mono)!important;
-font-size:10px!important;
-font-weight:400!important;
-font-style:normal!important;
-line-height:inherit!important;
-letter-spacing:.12em!important;
-text-transform:uppercase!important;
-color:var(--accent)!important;
--webkit-text-fill-color:var(--accent)!important
-}
-
-/* Keep the same desktop keyword typography on split-screen and mobile too. */
-@media(max-width:768px){
-.report-page .report-meta-pills .badge:last-child::after{
-font-size:10px!important;
-letter-spacing:.12em!important
-}
+  content:"AUGUST 2026"!important;
+  position:static!important;
+  display:inline!important;
+  font-family:var(--mono)!important;
+  font-size:10px!important;
+  font-weight:400!important;
+  font-style:normal!important;
+  letter-spacing:.12em!important;
+  text-transform:uppercase!important;
+  line-height:1.25!important;
+  color:var(--accent)!important;
+  -webkit-text-fill-color:var(--accent)!important;
 }
