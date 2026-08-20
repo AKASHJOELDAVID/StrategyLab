@@ -181,3 +181,30 @@ padding-top:20px!important
 html.viewer-true-mobile #page-marketing-ads .marketing-ads-page>section:last-child{
 padding-top:20px!important
 }
+
+/* Publication date: show 20 August 2026 everywhere, across homepage and all report views. */
+#page-home .featured-card-header .label,
+#page-home .table-date,
+.report-page .report-meta-pills .badge:last-child,
+.report-page .article-byline>span:last-child{
+position:relative!important;
+color:transparent!important;
+-webkit-text-fill-color:transparent!important
+}
+
+#page-home .featured-card-header .label::after,
+#page-home .table-date::after,
+.report-page .report-meta-pills .badge:last-child::after,
+.report-page .article-byline>span:last-child::after{
+position:absolute!important;
+left:0!important;
+top:0!important;
+white-space:nowrap!important;
+color:var(--ink-soft)!important;
+-webkit-text-fill-color:var(--ink-soft)!important
+}
+
+#page-home .featured-card-header .label::after{content:"Latest · 20 August 2026"}
+#page-home .table-date::after,
+.report-page .report-meta-pills .badge:last-child::after,
+.report-page .article-byline>span:last-child::after{content:"20 August 2026"}
