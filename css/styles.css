@@ -241,7 +241,7 @@ color:var(--ink-soft)!important;
   -webkit-text-fill-color:var(--accent)!important;
 }
 
-/* Reelio: reduce gap after Meet Reelio */
-#page-reelio .reelio-product-page > .reelio-hero {
-  margin-bottom: 0 !important;
+/* Reelio: tighten the transition from Meet Reelio to From Browsing to a Conversation. */
+#page-reelio .reelio-product-page .reelio-hero > .body-para + .section-label {
+  margin-top: 0 !important;
 }
