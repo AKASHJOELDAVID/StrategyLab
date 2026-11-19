@@ -76,9 +76,6 @@ const SITE_BASE_URL='';
 const REPORT_001_SHARE_TITLE='Reading Cinemas Australia | Strategy Lab';
 const REPORT_001_SHARE_TEXT='An independent commercial strategy review of Reading Cinemas Australia by Akash Joel David.';
 const REPORT_001_CANONICAL_HASH='reading-cinemas';
-const STRATEGY_LAB_SUPABASE_URL='https://vymskmbhgajwigrzwlag.supabase.co';
-const STRATEGY_LAB_SUPABASE_KEY='sb_publishable_JkUqreLkHMOItFWswp6wmg_fjtnP_R8';
-const STRATEGY_LAB_SUPABASE_PROJECT_KEY='reading-cinemas';
 const STRATEGY_LAB_VISITOR_ID_KEY='strategy-lab-supabase-visitor-id';
 const STRATEGY_LAB_LIKED_STATE_KEY='strategy-lab-supabase-reading-cinemas-liked';
 const STRATEGY_LAB_VIEW_SESSION_ID_KEY='strategy-lab-supabase-reading-cinemas-view-session-id';
@@ -1928,36 +1925,29 @@ function strategyLabSessionViewId(){
   }
 }
 
-function strategyLabApiHeaders(extra={}){
-  return {
-    apikey:STRATEGY_LAB_SUPABASE_KEY,
-    Authorization:'Bearer '+STRATEGY_LAB_SUPABASE_KEY,
-    ...extra
+async function strategyLabRpc(name, body) {
+  const actions = {
+    record_view: { action: 'view', sessionId: body.p_session_id },
+    toggle_like: { action: 'like', visitorId: body.p_visitor_id },
+    record_share: { action: 'share' },
+    add_comment: {
+      action: 'comment',
+      authorName: body.p_author_name,
+      commentText: body.p_comment_text,
+    },
   };
-}
 
-async function strategyLabApiRequest(path,options={}){
-  const method=options.method||'GET';
-  const request={
-    method,
-    headers:strategyLabApiHeaders({Accept:'application/json',...(options.headers||{})}),
-    cache:'no-store'
-  };
-  if(Object.prototype.hasOwnProperty.call(options,'body')){
-    request.headers['Content-Type']='application/json';
-    request.body=JSON.stringify(options.body);
-  }
-  const response=await fetch(STRATEGY_LAB_SUPABASE_URL+'/rest/v1/'+path,request);
-  const text=await response.text();
-  if(!response.ok){
-    throw new Error('Supabase request failed ('+response.status+'): '+text);
-  }
-  if(!text)return null;
-  try{return JSON.parse(text);}catch(error){return text;}
-}
+  const response = await fetch('/api/engagement-action', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(actions[name]),
+  });
+  if (!response.ok) throw new Error('Engagement action failed: ' + response.status);
 
-function strategyLabRpc(name,body){
-  return strategyLabApiRequest('rpc/'+encodeURIComponent(name),{method:'POST',body});
+  const result = await response.json();
+  if (name === 'record_view') return result.views;
+  if (name === 'record_share') return result.shares;
+  return result;
 }
 
 function strategyLabFormatCommentTime(value){
@@ -1988,12 +1978,9 @@ function strategyLabStoreLikedState(liked){
 
 async function refreshStrategyLabEngagement(){
   try{
-    const project=encodeURIComponent(STRATEGY_LAB_SUPABASE_PROJECT_KEY);
-    const [statsRows,commentRows]=await Promise.all([
-      strategyLabApiRequest('engagement_stats?select=views,likes,shares&project_key=eq.'+project+'&limit=1'),
-      strategyLabApiRequest('comments?select=author_name,comment_text,created_at&project_key=eq.'+project+'&is_hidden=eq.false&order=created_at.asc')
-    ]);
-    const stats=Array.isArray(statsRows)&&statsRows[0]?statsRows[0]:{views:0,likes:0,shares:0};
+    const response = await fetch('/api/engagement', { cache: 'no-store' });
+    if (!response.ok) throw new Error('Engagement request failed: ' + response.status);
+    const { stats, comments: commentRows } = await response.json();
     strategyLabEngagementState.views=Math.max(0,Number(stats.views)||0);
     strategyLabEngagementState.likes=Math.max(0,Number(stats.likes)||0);
     strategyLabEngagementState.shares=Math.max(0,Number(stats.shares)||0);
@@ -2069,7 +2056,6 @@ async function countReportViewOnce(reportId){
   if(alreadyRecorded)return;
   try{
     const result=await strategyLabRpc('record_view',{
-      p_project_key:STRATEGY_LAB_SUPABASE_PROJECT_KEY,
       p_session_id:strategyLabSessionViewId()
     });
     const count=Number(result);
@@ -2095,7 +2081,6 @@ async function toggleLike(key){
   strategyLabLikeInFlight=true;
   try{
     const result=await strategyLabRpc('toggle_like',{
-      p_project_key:STRATEGY_LAB_SUPABASE_PROJECT_KEY,
       p_visitor_id:strategyLabPersistentVisitorId()
     });
     const row=Array.isArray(result)?result[0]:result;
@@ -2135,7 +2120,7 @@ let activeShareMenu=null;
 async function incrementReportShare(reportId){
   if(reportId!==READING_CINEMAS_REPORT_ID)return;
   try{
-    const result=await strategyLabRpc('record_share',{p_project_key:STRATEGY_LAB_SUPABASE_PROJECT_KEY});
+    const result=await strategyLabRpc('record_share',{});
     const count=Number(result);
     if(Number.isFinite(count))strategyLabEngagementState.shares=Math.max(0,count);
     updateStrategyLabEngagementUI();
@@ -2414,7 +2399,6 @@ async function postComment(key){
   strategyLabCommentInFlight=true;
   try{
     await strategyLabRpc('add_comment',{
-      p_project_key:STRATEGY_LAB_SUPABASE_PROJECT_KEY,
       p_author_name:name,
       p_comment_text:text
     });
