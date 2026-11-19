@@ -1,0 +1,7 @@
+{
+  "name": "strategy-lab",
+  "private": true,
+  "dependencies": {
+    "@neondatabase/serverless": "^1.0.0"
+  }
+}
