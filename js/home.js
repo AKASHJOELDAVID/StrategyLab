@@ -40,13 +40,9 @@ function setHomepageNumber(id,value){
 
 async function syncHomepageEngagement(){
   try{
-    const project=encodeURIComponent(STRATEGY_LAB_PROJECT_KEY);
-    const [statsRows,comments]=await Promise.all([
-      strategyLabApiGet('engagement_stats?select=views,likes,shares&project_key=eq.'+project+'&limit=1'),
-      strategyLabApiGet('comments?select=id&project_key=eq.'+project+'&is_hidden=eq.false')
-    ]);
-    const stats=Array.isArray(statsRows)&&statsRows[0]?statsRows[0]:{views:0,likes:0,shares:0};
-    const commentCount=Array.isArray(comments)?comments.length:0;
+    const response = await fetch('/api/engagement', { cache: 'no-store' });
+    if (!response.ok) throw new Error('Engagement request failed: ' + response.status);
+    const { stats, commentCount } = await response.json();
 
     setHomepageNumber('hero-views',stats.views);
     setHomepageNumber('hero-likes',stats.likes);
