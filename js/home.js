@@ -1,7 +1,3 @@
-const STRATEGY_LAB_SUPABASE_URL='https://vymskmbhgajwigrzwlag.supabase.co';
-const STRATEGY_LAB_SUPABASE_KEY='sb_publishable_JkUqreLkHMOItFWswp6wmg_fjtnP_R8';
-const STRATEGY_LAB_PROJECT_KEY='reading-cinemas';
-
 function goHome(){
   window.scrollTo({top:0,left:0,behavior:'smooth'});
 }
@@ -13,24 +9,6 @@ function scrollHomeTo(anchorId){
 
 function openReadingResearch(){
   window.location.href='./reading-cinemas/';
-}
-
-function strategyLabApiHeaders(extra={}){
-  return {
-    apikey:STRATEGY_LAB_SUPABASE_KEY,
-    Authorization:'Bearer '+STRATEGY_LAB_SUPABASE_KEY,
-    ...extra
-  };
-}
-
-async function strategyLabApiGet(path){
-  const response=await fetch(STRATEGY_LAB_SUPABASE_URL+'/rest/v1/'+path,{
-    method:'GET',
-    headers:strategyLabApiHeaders({Accept:'application/json'}),
-    cache:'no-store'
-  });
-  if(!response.ok)throw new Error('Supabase request failed: '+response.status);
-  return response.json();
 }
 
 function setHomepageNumber(id,value){
